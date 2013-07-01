@@ -1,0 +1,87 @@
+﻿@* Views\Configure *@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="SHORTCUT ICON" href="@Url.Content("~/Images/favicon.ico")"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+@*    @Styles.Render("~/css/bootstrap")    @Styles.Render("~/css/bootstrap-responsive") *@
+    @Styles.Render("~/css/bootstrap-cust")
+    @Styles.Render("~/css/font-awesome")
+    @Styles.Render("~/css/jquery/jqueryuicust")
+@*    @Scripts.Render("~/bundles/modernizr")   *@
+    @RenderSection("styles", required: false)   
+</head>
+
+<body ng-app="configure">
+    
+    
+    <section class="cc-selector" >
+        <div id="configure-cont" class="container" ng-controller="ConfigureCtrl">
+
+            <div id="logo-top" class="container">
+                <div class="pull-left">
+                    <a href="https://www.roadwire.com">
+                        <img src="@Url.Content("~/Images/Linkout/roadwire_cc.png")" alt="Roadwire.com"/>
+                    </a>
+                </div>
+                <div class="pull-right">
+                    <a href="https://www.costco.com">
+                        <img src="@Url.Content("~/Images/Linkout/cc_logo.gif")" alt="Costco.com"/>
+                    </a>
+                </div>
+            </div>
+
+            <div id="navbar-cont">
+                <div class="navbar">
+                  <div class="navbar-inner">
+
+                      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                      <a class="brand" href ng-click="routeMenu()">Menu</a>
+                      <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li ng-class="{active: title=='cars'}"> <a href ng-click="routeCars()">Cars</a></li>
+                            <li ng-class="{active: title=='other'}"> <a href">Other</a> </li>
+                        </ul>
+                   
+                        <div class="nav pull-right">
+                            <div>User: @User.Identity.Name</div>
+                        </div>
+                   
+                        @*<div class="nav pull-right">
+                            <button type="button" class="btn" >
+                                <i class="icon-shopping-cart icon-large"></i>
+                            </button>
+                        </div>*@
+
+                      </div> 
+
+                  </div>
+                </div>
+            </div> 
+        
+       
+            @RenderBody()
+
+        </div> 
+    </section>
+    
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryuicust")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angular-resource")
+    @Scripts.Render("~/bundles/bootstrapjs")
+    @Scripts.Render("~/bundles/configure")
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
+

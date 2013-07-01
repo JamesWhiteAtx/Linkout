@@ -1,0 +1,21 @@
+﻿@* Views\Linkout *@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="SHORTCUT ICON" href="@Url.Content("~/Images/favicon.ico")"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    
+@*    @Scripts.Render("~/bundles/modernizr")   *@
+    @RenderSection("styles", required: false)   
+</head>
+
+<body>
+    @RenderBody()
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
+

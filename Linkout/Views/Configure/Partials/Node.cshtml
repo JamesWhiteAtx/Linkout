@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Include";
+}
+
+    <div>
+        <i class="icon-plus-sign" title="expand" ng-show="node.canExpand()" ng-click="node.expand()"></i>
+        
+        <i class="icon-minus-sign" title="collapse" ng-show="node.canCollapse()" ng-click="node.collapse()"></i>
+
+        {{node.name}} showing:{{node.showing()}} expanded:{{node.expanded}}
+
+    </div>
+
+    <ul class="tree">
+        <li ng-repeat="node in node.kids" ng-show="node.showing()"  ng-include src="'Configure/Partials/Node'">
+        </li>
+    </ul>
+
+@*    <button class="btn btn-primary" ng-click="node.addKid('kiddy')">Add child to {{node.name}}</button>
+*@

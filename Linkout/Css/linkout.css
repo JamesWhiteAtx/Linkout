@@ -1,0 +1,396 @@
+
+#linkout-cont
+{
+    min-height: 600px;
+}
+
+#logo-top 
+{
+    margin-top: 5px;
+}
+
+.navbar 
+{
+    margin-bottom: 5px;
+}
+
+div.hero-unit.red-banner{
+    background-image: url(/Images/Linkout/leather_seats.png);
+}
+
+div.thin-banner 
+{
+    min-height: 50px;
+    background-image: url(/Images/Linkout/banner.jpg);
+}
+
+#footer 
+{
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #e2e2e2;
+}
+
+#footer small
+{
+    font-size: 8px;
+}
+
+ul.breadcrumb.lo-crumbs 
+{
+    background-color: #e5e5e5;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.lo-crumbs li {
+    padding-left: 18px;
+    padding-right: 5px;
+    margin-right: 1px;
+    position: relative;
+    display: inline-block;
+    list-style: none;
+}
+
+.lo-crumbs li:before {
+    width: 0;
+    height: 0;
+    border-top: 10px inset transparent;
+    border-bottom: 10px inset transparent;
+    border-left: 12px solid #f5f5f5;
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+}
+.lo-crumbs li:after {
+    width: 0;
+    height: 0;
+    border-top: 10px inset transparent;
+    border-bottom: 10px inset transparent;
+    border-left: 18px solid #e5e5e5;
+    position: absolute;
+    content: "";
+    top: 0;
+    right: -12px;
+    z-index: 2;
+}
+
+.lo-crumbs li.active 
+{
+    background-color: #ccc; 
+    color: #333333;
+}
+.lo-crumbs li.active:after 
+{
+    border-left: 12px solid #ccc;
+}
+
+.lo-crumbs li:first-child
+{
+    padding-left: 5px;
+}
+.lo-crumbs li:last-child
+{
+    padding-right: 10px;
+}
+
+.lo-crumbs li:first-child:before,
+.lo-crumbs li:last-child:after {
+    border: none;
+}
+
+.lo-crumbs li:first-child {
+    -webkit-border-radius: 4px 0 0 4px;
+       -moz-border-radius: 4px 0 0 4px;
+            border-radius: 4px 0 0 4px;
+}
+.lo-crumbs li:last-child {
+    -webkit-border-radius: 0 4px 4px 0;
+       -moz-border-radius: 0 4px 4px 0;
+            border-radius: 0 4px 4px 0;
+}
+
+/* carousel */
+.inner-item {
+    text-align: center;
+    background-color: #000;
+}
+.inner-item img {
+    margin: 0 auto;
+}    
+
+.carousel-caption {
+    padding-bottom: 25px;
+    padding-left: 30px;
+    padding-right: 40px;
+}
+
+.carousel-indicators.middle {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 5px;
+    text-align: center;
+}
+.carousel-indicators.middle li {
+    float: none;
+    display: inline-block;
+}
+
+div.select-box 
+{
+    cursor: pointer;
+    min-width: 130px;
+    min-height: 135px;
+    float: left;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+    border: 1px solid rgba(157, 180, 197, 0.56);
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: #E8;
+    background-color: rgb(245, 245, 245);
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    
+    -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.05);
+    
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#F1F1F1', endColorstr='#B8B8B8');/*For IE7-8-9*/ 
+    height: 1%;/*For IE7*/     
+}
+div.select-box:hover
+{
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));    
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#B8B8B8', endColorstr='#F1F1F1');/*For IE7-8-9*/ 
+    height: 1%;/*For IE7*/     
+}
+
+div.select-box div
+{
+    text-align: center;
+}
+
+div.select-box.selected
+{
+    /*color:#0185C5; */
+    border:1px solid Black;
+    box-shadow: 3px 3px 5px 5px #38668F;
+}
+
+div.select-box div.box-descr
+{
+    font-weight: bold;
+}
+div.select-box img
+{
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+}
+
+li.checkout
+{
+    cursor: pointer;
+}
+
+/* types */
+
+#type-page div.type-selection
+{
+    cursor: pointer;
+}
+
+/* seat heaters */
+
+#sel-heater div.select-box
+{
+    padding: 15px 15px 15px 15px;
+}
+
+#sel-heater div.select-box.span4 
+{
+    width: 250px;
+}
+
+#sel-heater div#btn-next
+{
+    margin: 5px 10px 0 5px; /*100px 0 0 5px;*/    
+}
+
+div#btn-next button
+{
+    margin-top: 20px;
+}
+
+div#btn-next table
+{
+    width: 100%;
+}
+
+div#btn-next td {
+    padding-right: 10px;
+}
+
+/* leather car selector */
+
+div#sel-leather 
+{
+    min-height: 500px;
+}
+
+.loading
+{
+    background:url('/Images/Linkout/loading.gif') no-repeat center center;
+}
+.loading-large
+{
+    background:url('/Images/Linkout/loading-large.gif') no-repeat center center;
+}
+
+div.sel-select 
+{
+    width: 150px;
+}
+
+div.sel-select select 
+{
+    width: 145px;
+}
+
+#slct-int-cols /*#slct-cars, */
+{
+    width: auto;
+    min-width: 200px;
+}
+
+div.ptrn-info
+{
+    /*width: 220px;
+    float:left;*/
+    cursor: pointer;
+    min-height: 20px;
+    margin: 0 0 5px 10px;
+    margin: 5px 5px 5px 5px;
+    padding: 2px 5px 2px 5px;
+    border: 1px solid rgba(157, 180, 197, 0.56);
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: #E8;
+    background-color: rgb(245, 245, 245);
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#F1F1F1', endColorstr='#B8B8B8');/*For IE7-8-9*/ 
+    height: 1%;/*For IE7*/     
+}
+div.ptrn-info:hover
+{
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));    
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#B8B8B8', endColorstr='#F1F1F1');/*For IE7-8-9*/ 
+    height: 1%;/*For IE7*/     
+}
+div.ptrn-info.selected 
+{
+    font-weight: bold;
+    color: #38668F;
+    border: 1px solid Black;
+    box-shadow: 3px 3px 5px 5px #38668F;
+}
+
+/*div.ptrn-info table 
+{
+    width: 100%;
+}
+div.ptrn-info caption {
+    caption-side:top;
+    text-align: left;
+    font-weight: bold;
+}*/
+
+div.ptrn-info div.ptrn-descr
+{
+    font-weight: bold;
+}
+div.ptrn-info th
+{
+    text-align: right;
+    padding-right: 5px;
+}
+div.ptrn-info th:after
+{
+    content:":";
+}
+
+div.ptrn-info td
+{
+    text-align:left
+}
+
+div.sel-select div.loading
+{
+    width: 145px;
+    height: 25px;
+    background-position: right center;
+}
+
+.lea-color-header label.radio.inline
+{
+    padding-top: 0px;
+    font-size: 17.5px;
+    padding-bottom: 5px;
+}
+div.lea-colors .loading-large
+{
+    width: 145px;
+    height: 40px;
+}
+
+div#sel-col div#btn-next
+{
+    margin: 20px 20px 20px 20px;    
+}
+
+div.schedule .form-horizontal .control-label
+{    
+    width: 110px;
+}
+
+div.schedule .form-horizontal .controls
+{
+    margin-left: 120px;
+}
+
+div.schedule tr.selected label
+{
+    color: Red;
+    font-weight:bold;
+}
+
+div.schedule .ui-state-active
+{
+    font-weight:bold;
+}
+
+div.schedule #inptDt
+{
+    font-weight:bold;
+}

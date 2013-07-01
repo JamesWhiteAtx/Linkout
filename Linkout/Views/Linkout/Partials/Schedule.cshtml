@@ -1,0 +1,110 @@
+﻿
+<div class="schedule">
+
+    <div ng-hide="pickedProduct()" >
+        <button class="btn btn-large btn-primary" type="button" ng-click="routeType()">
+            <i class="icon-arrow-left icon-white"></i>
+            Please select your product first
+        </button>
+    </div>
+
+    <div class="prod-schedule" ng-show="pickedProduct()" >
+
+        <div id="products-section">
+            id: {{leather.leaCol.id}} leather: {{leather.leaCol.name}}
+        </div>
+
+        <div id="zip-section">
+            <form ng-submit="loadInstallers()" name="zipForm" class="form-inline" novalidate="novalidate">
+                
+                <label class="control-label" for="inputIcon"><strong>Enter Your Zipcode</strong></label>
+                
+                <div class="input-append">
+                    <input type="text" name="locZip" id="locZip" class="span2" ng-model="zipcode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
+                    <button class="btn" type="submit" ng-disabled="zipForm.locZip.$error.pattern || zipForm.locZip.$error.required">
+                        Find Locations <i class="icon-search"></i>
+                    </button> 
+                </div>
+
+                <span class="text-warning" ng-show="zipForm.locZip.$error.pattern || zipForm.locZip.$error.required"> Enter a valid zipcode </span>
+
+            </form>
+        </div>
+
+        <div id="opts-section" class="row">
+            <div id="inst-block" class="span4">
+                <div id="installers-list" class="well">
+                    <h4>Select your preferred installation location</h4>
+                    <div ng-show="installer.isLoading" class="loading">loading Installers...</div>
+                    <table ng-hide="installer.isLoading" class="table table-condensed table-striped" >
+                        <tr>
+                            <th></th>
+                            <th>Miles</th>
+                            <th>City</th>
+                        </tr>
+                        <tr ng-repeat="i in installers " ng-class="{selected: installer.id == i.id}">
+                                <td><input type="radio" name="installers" id="instRdo{{i.id}}" ng-model="installer.id" value="{{i.id}}"/></td>
+                                <td><label for="instRdo{{i.id}}">{{i.miles | number:2}}</label></td>
+                                <td><label for="instRdo{{i.id}}">{{i.descr}}</label></td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+            <div id="dt-info-btn-block" class="span8" ng-show="installerPicked()">
+                <div id="dt-info-block" class="row">
+                    <div id="dates" class="span4">
+                        <div id="date" class="well">
+                            <h4>Select your preferred installation date</h4>
+                            <div id="dateDiv" jq-datepicker ng-model="$parent.schedDate" class="pagination-centered"></div> @*select="updateDate(date)" *@
+                        </div>
+                    </div>
+                    <div id="infos" class="span4" ng-show="installerPicked() && schedDate">
+                        <div id="info" class="well">
+                            <h4>Installation Details</h4>
+ 
+                            <div class="control-group">
+                            <label class="control-label" for="inptDt">Preferred Date</label>
+                            <div class="controls">
+                                <input type="text" id="inptDt" placeholder="Date" readonly ng-model="schedDate"/>
+                            </div>
+                            </div>
+  
+                            <div class="control-group">
+                            <label class="control-label" for="inptNote">Additional Note</label>
+                            <div class="controls">
+                                <textarea id="inptNote" rows="3" placeholder="Note" ng-model="note"></textarea>
+                            </div>
+                            </div>
+
+                            <div class="control-group">
+                            <label class="control-label" for="rdoTOD">Preferred Time of Day</label>
+                            <div class="controls">
+                                <label><input type="radio" name="rdoTOD" value="Morning" ng-model="tod"/> Morning</label>
+                                <label><input type="radio" name="rdoTOD" value="Afternoon" ng-model="tod"/> Afternoon</label>
+                                <label><input type="radio" name="rdoTOD" value="Either" ng-model="tod"/> Either</label>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="btn-block" class="row" ng-show="installerPicked() && schedDate">
+                    <div id="buttons" class="span8">
+                        <div class="well">
+                            <div class="row">
+                                <div class="pull-right">
+                                    <button class="btn btn-large btn-primary" type="button" ng-click="confirmOrder()">
+                                        Confirm Order <i class="icon-arrow-right icon-white"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

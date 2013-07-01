@@ -1,0 +1,64 @@
+﻿<div id="sel-heater" class="row">
+
+    <div class="span12">
+        <h4>Select Your Seat Heater Options</h4>
+        
+        <div class="row">
+
+            <div class="span4">
+                <div class="span4 select-box" ng-class="{selected: driver}" ng-click="toggleDriver()">
+                        
+                        <div class="pull-left"><i class="seat-checked icon-2x" ng-class="{'icon-check': driver, 'icon-check-empty': !driver}"></i></div>
+                        <div class="box-descr">
+                            {{driverDescr}}
+                        </div>
+                        
+                        <div class="row">
+                            <img alt="Seat Heaters" src="@Url.Content("~/Images/Linkout/RW-SH4P.png")" class="img-rounded"/>
+                        </div>
+
+                </div>
+            </div>
+
+            <div class="span4">
+                <div class="span4 select-box" ng-class="{selected: passenger}" ng-click="togglePassenger()">
+                    <div class="">
+                        
+                        <div class="pull-left"><i class="icon-2x" ng-class="{'icon-check': passenger, 'icon-check-empty': !passenger}"></i></div>
+                        <div class="box-descr">
+                            {{passengerDescr}}
+                        </div>
+                        <div class="row">
+                            <img alt="Seat Heaters" src="@Url.Content("~/Images/Linkout/RW-SH4P.png")" class="img-rounded"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="span4">
+                <div id="btn-next" ng-show="driver || passenger" class="pull-right">
+                    <table>
+                        <tr ng-show="driver"><td>{{driverDescr}}</td><td>{{heaterPrice | currency}}</td></tr>
+                        <tr ng-show="passenger"><td>{{passengerDescr}}</td><td>{{heaterPrice | currency}}</td></tr>
+                    </table>
+                    <button class="btn btn-large btn-primary" type="button" ng-click="schedInstall()">
+                        Schedule Installation
+                    <i class="icon-arrow-right icon-white"></i></button>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="row">
+            <div class="span12">
+                <div class="well">
+                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+<div class="hero-unit red-banner"></div>

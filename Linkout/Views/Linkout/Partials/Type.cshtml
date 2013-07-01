@@ -1,0 +1,111 @@
+﻿<div id="myCarousel" class="carousel slide">
+    <ol class="carousel-indicators middle">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="inner-item">
+                <img src="@Url.Content("~/Images/Linkout/interior-black.png")" alt=""/>
+            </div>
+            <div class="carousel-caption">
+                <div class="pull-right">
+                    <h4>Professional Installation</h4>
+                    @*<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>*@
+                </div>
+                <div class="pull-left">
+                    <h4>The Roadwire Difference - Add Luxury to Your Car</h4>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non.</p>
+                    <h4>Exclusive Costco Offers</h4>
+                    <p><a href ng-click="routeLeather()">Leather Interirors </a></p>
+                    <p><a href ng-click="routeHeaters()">Driving Confort </a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="inner-item">
+                <a href ng-click="routeLeather()">
+                    <img src="@Url.Content("~/Images/Linkout/leather-interior.png")" alt=""/>
+                </a>
+            </div>
+            <div class="carousel-caption">
+                <div class="pull-right">@Html.Partial("Partials/OrderLeather")</div>
+                <h4>Leather Interiors</h4>
+                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="inner-item">
+                <a href ng-click="routeHeaters()">
+                    <img src="@Url.Content("~/Images/Linkout/HeatersRatio.png")" alt=""/>
+                </a>
+            </div>
+            <div class="carousel-caption">
+                <div class="pull-right">@Html.Partial("Partials/OrderHeaters")</div>
+                <h4>Driving Comfort</h4>
+                <p>
+                    Carbon fiber seat heater can be installed in your car seats under your new upholstery. Features thin, flexible cloth-like pads. Auto manufacturers use carbon fiber in factory seat heater systems. Pad style is traditionally larger than wired element pads. Provides more comfortable heat disbursement than wired-element systems. Can be trimmed and holes cut to accommodate installation in varied vehicles. Bi-level switch for high or low heat. High=7 Amps, Low=4 Amps. Pad Size 10-1/4"x18-3/4”
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+</div>
+
+<div id="type-page">
+    <div class="container">
+        <div id="prod-offers" class="row">
+            
+            <div id="prod-leather" class="span6">
+                <div class="row">
+                    <div class="span6"><h4>Select Your Leather Seats</h4></div>
+                    <div class="span3">
+                        <a href ng-click="routeLeather()">
+                            <img alt="Leather Car Seats" src="@Url.Content("~/Images/Linkout/auto_upholstery_thumbnail.png")" class="img-rounded"/>
+                        </a>
+                    </div>
+                    <div class="span3">
+                        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor.</p>
+                        <p><strong>Professional Installation Included</strong></p>
+                    
+                        <p>
+                            @Html.Partial("Partials/OrderLeather")
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="prod-heaters" class="span6">
+                <div class="row">
+                    <div class="span6"><h4>Add Climate Control to Your Seats</h4></div>
+                    <div class="span2">
+                        <a href ng-click="routeHeaters()">
+                            <img alt="Leather Car Seats" src="@Url.Content("~/Images/Linkout/RW-SH4P.png")" class="img-rounded"/>
+                        </a>
+                    </div>
+                    <div class="span4">
+                        <p>Carbon fiber seat heater can be installed in your car seats under your new upholstery. Features thin, flexible cloth-like pads. Auto manufacturers use carbon fiber in factory seat heater systems. Pad style is traditionally larger than wired element pads. Provides more comfortable heat disbursement than wired-element systems. Can be trimmed and holes cut to accommodate installation in varied vehicles. Bi-level switch for high or low heat. High=7 Amps, Low=4 Amps. Pad Size 10-1/4"x18-3/4”.</p>
+                        <p><strong>Professional Installation Included</strong></p>
+                        <p>
+                            @Html.Partial("Partials/OrderHeaters")
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+    </div>
+    @*<div class="thin-banner" class="span12"></div>*@
+</div>
+
+                @*<div class="type-selection" ng-click="routeLeather()">
+                    <div class="pull-left"><i class="seat-checked icon-2x" ng-class="{'icon-check': pickedLeather(), 'icon-check-empty': !pickedLeather()}"></i></div>
+                    <img alt="Leather Car Seats" src="@Url.Content("~/Images/Linkout/auto_upholstery_thumbnail.png")" class="img-rounded"/>
+                    <h2>Leather Interiors</h2>
+                </div>
+                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                <p><a class="btn" href ng-click="routeLeather()">Order Now <i class="icon-arrow-right"></i></a></p>*@

@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@section styles {
+    @Styles.Render("~/css/app")
+}
+<div ng-app="selector">
+    <div ng-controller="LeatherCtrl">
+
+        <div>
+            <span ng-bind="make.name"></span>
+            /<span ng-bind="year.name"></span>
+            /<span ng-bind="model.name"></span>
+            /<span ng-bind="body.name"></span> 
+            /<span ng-bind="trim.name"></span> 
+            /<span ng-bind="car.name"></span>
+            /<span ng-bind="ptrn.name"></span>
+            /<span ng-bind="intCol.name"></span>
+            /<span ng-bind="colType.id"></span>&<span ng-bind="colType.name"></span>
+            /<span ng-bind="recCol.name"></span>
+            /<span ng-bind="leaCol.name"></span>
+        </div>
+
+        <sel-car-select sec-title="Makes" sec-name="Make" sec-model="make" sec-list="makes"></sel-car-select>
+        <sel-car-select sec-title="Years" sec-name="Year" sec-model="year" sec-list="years"></sel-car-select>
+        <sel-car-select sec-title="Models" sec-name="Model" sec-model="model" sec-list="models"></sel-car-select>
+        <sel-car-select sec-title="Bodies" sec-name="Body" sec-model="body" sec-list="bodies"></sel-car-select>
+        <sel-car-select sec-title="Trims" sec-name="Trim" sec-model="trim" sec-list="trims"></sel-car-select>
+        <sel-car-select sec-title="Car" sec-name="Cars" sec-model="car" sec-list="cars"></sel-car-select>
+        <sel-car-select sec-title="Patterns" sec-name="Pattern" sec-model="ptrn" sec-list="ptrns"></sel-car-select>
+        <sel-car-select sec-title="Interior Colors" sec-name="Interior Color" sec-model="intCol" sec-list="intCols"></sel-car-select>
+
+        @*<div class="sel-sect">
+            <p>intCols</p>
+            <ul>
+                <li ng-repeat="col in intCols"><a style="cursor: pointer"><span ng-bind="col.name"/></a> </li>
+            </ul>
+        </div>*@
+
+        <div class="sel-sect">
+            <p>Color Type</p>
+            <label ng-repeat="type in colTypes">
+                <input type="radio" ng-model="colType.id" value="{{type.id}}" name="col-type" id="enumItem2{{type.id}}" />
+                <span ng-bind="type.name"/>
+            </label>
+
+            <ul>
+                <li ng-repeat="col in recCols"><a style="cursor: pointer" ng-click="pickRecCol($index)"><span ng-bind="col.leacolorname"/></a> </li>
+            </ul>
+            <ul>
+                <li ng-repeat="col in allCols"><a style="cursor: pointer" ng-click="pickAllCol($index)"><span ng-bind="col.leacolorname"/></a> </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angular-resource")
+    @Scripts.Render("~/bundles/app")
+}

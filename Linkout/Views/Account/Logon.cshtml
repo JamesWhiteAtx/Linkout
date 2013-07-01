@@ -1,0 +1,53 @@
+﻿@model CST.Security.LogOnModel
+
+@{
+    ViewBag.Title = "Logon";
+}
+
+<h2>Logon</h2>
+   
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)    
+    
+    @Html.HiddenFor(model => model.ReturnUrl);
+    <fieldset>
+        <legend>LogOnModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Login)
+        </div>
+        <div class="editor-field user-name">
+            @Html.EditorFor(model => model.Login)
+            @Html.ValidationMessageFor(model => model.Login)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RememberMe)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RememberMe)
+            @Html.ValidationMessageFor(model => model.RememberMe)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

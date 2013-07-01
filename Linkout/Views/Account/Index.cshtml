@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Account";
+}
+
+@if (Request.IsAuthenticated)
+{
+    <h3> @Html.ActionLink("Log out", "LogOff") </h3>
+}
+else
+{
+    <h3> @Html.ActionLink("Log In", "LogOn") </h3>
+}
+
+

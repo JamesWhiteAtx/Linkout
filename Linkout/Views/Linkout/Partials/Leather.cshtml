@@ -9,12 +9,12 @@
         <div sel-car-select sec-title="Cars" sec-name="Car Option" sec-model="car" slct-model="carIdx" sec-list="cars" sec-id="slct-cars" sec-only-opts="true"></div>
     </div>
 
-    <div class="span8 pagination-centered well" ng-hide="car.id">
-        <a href ng-click="routeLeather()">
-            <img alt="Leather Car Seats" src="@Url.Content("~/Images/Linkout/auto_upholstery_thumbnail.png")" class="img-rounded"/>
-            <h2>Leather Interiors</h2>
-        </a>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+    <div class="span8 well" ng-hide="car.id">
+        <h4>Select Your Leather Seats</h4>
+        <img alt="Leather Car Seats" src="@Url.Content("~/Images/Linkout/interior-black.png")" class="img-rounded"/>
+        <h4>The trused choice of car dealers</h4>
+        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+        <strong>*Professional Installation Is Include</strong>
     </div>
 
 
@@ -79,10 +79,14 @@
                 <table ng-show="ptrn.price">
                     <tr><td>{{leaCol.leacolorname}} {{ptrn.seldescr}}</td><td>{{ptrn.price | currency}}</td></tr>
                 </table>
-
-                <button class="btn btn-large btn-primary" type="button" ng-click="schedInstall()">
+                <button class="btn btn-large btn-primary" type="button" ng-click="routeConfirm()" ng-show="pickedSchedule()">
+                    Complete Order
+                    <i class="icon-arrow-right icon-white"></i>
+                </button>
+                <button class="btn btn-large btn-primary" type="button" ng-click="schedInstall()" ng-hide="pickedSchedule()">
                     Schedule Installation
-                <i class="icon-arrow-right icon-white"></i></button>
+                    <i class="icon-arrow-right icon-white"></i>
+                </button>
             </div>
 
         </div>
@@ -97,7 +101,7 @@
     $(document).ready(function () {
         //alert("happending");
         $("#leather-offer").tooltip({
-            'title': 'Roadwire offers the finest leather interiors in the business. Take a look at our excelent offers!',
+            'title': 'Roadwire offers the finest leather interiors in the business. Take a look at our excellent offers!',
             'placement': 'bottom'
         });
         $(".seat-config-info").tooltip({

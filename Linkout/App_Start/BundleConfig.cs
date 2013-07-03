@@ -87,7 +87,7 @@ namespace Linkout
                         "~/Scripts/configure/app.js",
                         //"~/Scripts/configure/services.js",
                         //"~/Scripts/configure/filters.js",
-                        //"~/Scripts/configure/directives.js",
+                        "~/Scripts/configure/directives.js",
                         "~/Scripts/configure/controllers.js"));
 
             bundles.Add(new StyleBundle("~/css/tree").Include(

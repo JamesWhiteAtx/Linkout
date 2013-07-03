@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Linkout.Data.Store" Alias="Self" Provider="Oracle.DataAccess.Client" ProviderManifestToken="10.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="LinkoutDataStoreContainer">
+          <EntitySet Name="FG_COSTCO_PRODUCTS" EntityType="Linkout.Data.Store.FG_COSTCO_PRODUCTS" store:Type="Tables" Schema="SYSADM" />
+        </EntityContainer>
+        <EntityType Name="FG_COSTCO_PRODUCTS">
+          <Key>
+            <PropertyRef Name="FG_PROD_ID" />
+          </Key>
+          <Property Name="FG_PROD_ID" Type="number" Nullable="false" />
+          <Property Name="FG_LEATHER_ROWS" Type="number" />
+          <Property Name="FG_SEAT_HEATERS" Type="number" />
+          <Property Name="FG_PROD_CODE" Type="varchar2" Nullable="false" MaxLength="50" />
+          <Property Name="FG_DESCRIPTION" Type="varchar2" Nullable="false" MaxLength="500" />
+          <Property Name="FG_PRICE" Type="number" Nullable="false" />
+          <Property Name="FG_ACTIVE_FLAG" Type="varchar2" Nullable="false" MaxLength="1" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Linkout.Data" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="LinkoutEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FG_COSTCO_PRODUCTS" EntityType="Linkout.Data.FG_COSTCO_PRODUCTS" />
+        </EntityContainer>
+        <EntityType Name="FG_COSTCO_PRODUCTS">
+          <Key>
+            <PropertyRef Name="FG_PROD_ID" />
+          </Key>
+          <Property Name="FG_PROD_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="FG_LEATHER_ROWS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="FG_SEAT_HEATERS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="FG_PROD_CODE" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FG_DESCRIPTION" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="FG_PRICE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="FG_ACTIVE_FLAG" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LinkoutDataStoreContainer" CdmEntityContainer="LinkoutEntities">
+          <EntitySetMapping Name="FG_COSTCO_PRODUCTS"><EntityTypeMapping TypeName="Linkout.Data.FG_COSTCO_PRODUCTS"><MappingFragment StoreEntitySet="FG_COSTCO_PRODUCTS">
+            <ScalarProperty Name="FG_PROD_ID" ColumnName="FG_PROD_ID" />
+            <ScalarProperty Name="FG_LEATHER_ROWS" ColumnName="FG_LEATHER_ROWS" />
+            <ScalarProperty Name="FG_SEAT_HEATERS" ColumnName="FG_SEAT_HEATERS" />
+            <ScalarProperty Name="FG_PROD_CODE" ColumnName="FG_PROD_CODE" />
+            <ScalarProperty Name="FG_DESCRIPTION" ColumnName="FG_DESCRIPTION" />
+            <ScalarProperty Name="FG_PRICE" ColumnName="FG_PRICE" />
+            <ScalarProperty Name="FG_ACTIVE_FLAG" ColumnName="FG_ACTIVE_FLAG" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="LinkoutModel">
+        <EntityTypeShape EntityType="Linkout.Data.FG_COSTCO_PRODUCTS" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -7,6 +7,9 @@ configure
     $scope.routeMenu = function () {
         $location.path('/menu');
     }
+    $scope.routePricing = function () {
+        $location.path('/pricing');
+    }
     $scope.routeCars = function () {
         $location.path('/cars');
     }
@@ -14,6 +17,92 @@ configure
 } ])
 .controller('MenuCtrl', ['$scope', function ($scope) { } ])
 .controller('CarsCtrl', ['$scope', function ($scope) { } ])
+
+.controller('PricingCtrl', ['$scope', function ($scope) { 
+    var makeProduct = function(typ) {
+        return {
+            type: typ,
+            descirption: '',
+            price: '',
+            ccItemId: '',
+            ccUrl: ''
+        };
+    };
+    var makePricer = function() {
+        var self = {};
+        
+        self.l1 = makeProduct('One Row Kit');
+        self.l2 = makeProduct('Two Row Kit');
+        self.l3 = makeProduct('Three Row Kit');
+
+        self.h1 = makeProduct('One Seat Heater');
+        self.h2 = makeProduct('Two Seat Heaters');
+
+        self.l1h1 = makeProduct(self.l1.type+' '+self.h1.type);
+        self.l2h1 = makeProduct(self.l2.type+' '+self.h1.type);
+        self.l3h1 = makeProduct(self.l3.type+' '+self.h1.type);
+
+        self.l1h2 = makeProduct(self.l1.type+' '+self.h2.type);
+        self.l2h2 = makeProduct(self.l2.type+' '+self.h2.type);
+        self.l3h2 = makeProduct(self.l3.type+' '+self.h2.type);
+
+        function safeNum(v) {
+            var f = parseFloat(v);
+            if (angular.isNumber(f)) {
+                return f;
+            } else {
+                return 0;
+            }
+        }
+
+        function discount(lp, hp, lhp) {
+            return (safeNum(lp) + safeNum(hp)) - safeNum(lhp);
+        }
+
+        self.h2Discount = function() {
+            return discount(self.h1.price, self.h1.price, self.h2.price);
+        };
+
+        self.l1h1Discount = function() {
+            return discount(self.l1.price, self.h1.price, self.l1h1.price);
+        };
+        self.l2h1Discount = function() {
+            return discount(self.l2.price, self.h1.price, self.l2h1.price);
+        };
+        self.l3h1Discount = function() {
+            return discount(self.l3.price, self.h1.price, self.l3h1.price);
+        };
+        self.l1h2Discount = function() {
+            return discount(self.l1.price, self.h2.price, self.l1h2.price);
+        };
+        self.l2h2Discount = function() {
+            return discount(self.l2.price, self.h2.price, self.l2h2.price);
+        };
+        self.l3h2Discount = function() {
+            return discount(self.l3.price, self.h2.price, self.l3h2.price);
+        };
+
+        return self;
+    };
+
+    $scope.pricer = makePricer();
+
+    $scope.pricer.l1.description = 'one';
+    $scope.pricer.l1.price = 100;
+
+    $scope.pricer.l2.description = 'two';
+    $scope.pricer.l2.price = 200;
+
+    $scope.pricer.l3.description = 'three';
+    $scope.pricer.l3.price = 300;
+
+    $scope.pricer.h1.description = 'h 1';
+    $scope.pricer.h1.price = 50;
+
+    $scope.pricer.h2.description = 'h 2';
+    $scope.pricer.h2.price = 100;
+
+} ])
 
 .controller("TreeCtrl", ['$scope', function($scope) {
 

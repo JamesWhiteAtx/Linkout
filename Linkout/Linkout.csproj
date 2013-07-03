@@ -139,6 +139,7 @@
     <Compile Include="Controllers\ConfigureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkoutController.cs" />
+    <Compile Include="Controllers\MockController.cs" />
     <Compile Include="Controllers\Schedule\InstallersController.cs" />
     <Compile Include="Controllers\Selector\AllColsController.cs" />
     <Compile Include="Controllers\Selector\BodiesController.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Controllers\Selector\YearsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
+    <Compile Include="Models\MockProduct.cs" />
     <Compile Include="Services\PriceService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -273,6 +275,10 @@
     <Content Include="Css\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Mock\auto_upho.png" />
+    <Content Include="Images\Mock\costco_wholesale_214_64.png" />
+    <Content Include="Images\Mock\favicon.ico" />
+    <Content Include="Images\Mock\seat_heat.png" />
     <Content Include="Images\Site\accent.png" />
     <Content Include="Images\Site\bullet.png" />
     <Content Include="Images\Site\heroAccent.png" />
@@ -649,7 +655,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -694,6 +699,14 @@
     <Content Include="Views\Configure\Partials\Node.cshtml" />
     <Content Include="Views\Linkout\Partials\OrderLeather.cshtml" />
     <Content Include="Views\Linkout\Partials\OrderHeaters.cshtml" />
+    <Content Include="Views\Mock\CostcoLeather.cshtml" />
+    <Content Include="Views\Mock\CostcoHeaters.cshtml" />
+    <Content Include="Views\Mock\_Layout.cshtml" />
+    <Content Include="Views\Mock\_ViewStart.cshtml" />
+    <Content Include="Views\Mock\Index.cshtml" />
+    <Content Include="Views\Mock\Product.cshtml" />
+    <Content Include="Views\View1.cshtml" />
+    <Content Include="Views\Configure\Partials\Pricing.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -105,12 +105,15 @@ linkout
     }
 
     $scope.pickedSchedule = function () {
-        return (
+        if (
             ($scope.schedule)
             && ($scope.schedule.installer)
             && ($scope.schedule.installer.id)
-            && ($scope.schedule.schedDate)
-        );
+        ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     $scope.leatherPtrnDescr = function () {
@@ -120,7 +123,7 @@ linkout
             return null;
         }
     }
-    
+
     $scope.driverDescr = 'Driver Side Seat Heater';
     $scope.passengerDescr = 'Passenger Side Seat Heater';
 
@@ -132,6 +135,21 @@ linkout
         delete $scope.heaterPrice;
     });
 
+    $scope.productPriceTotal = function () {
+        var total = 0;
+        if ($scope.heater) {
+            if ($scope.heater.driver) {
+                total = total + $scope.heaterPrice;
+            }
+            if ($scope.heater.passenger) {
+                total = total + $scope.heaterPrice;
+            }
+        }
+        if ($scope.pickedLeather()) {
+            total = total + $scope.leather.ptrn.price;
+        }
+        return total;
+    }
 
 
 } ])

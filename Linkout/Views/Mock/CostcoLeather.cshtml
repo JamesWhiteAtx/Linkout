@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Roadwire Leather Seats";
+}
+
+<div class="container">
+    <div class="row">
+        <div id="prod-img" class="span4">
+            <img src="../../Images/Mock/auto_upho.png" />
+        </div>
+        <div id="prod-info" class="span5">
+            <div id="item-info" class="row">
+                <div class="span4">
+                    <h4>Roadwire Leather Seats</h4>
+                    <h4>Add Luxury to Your Driving Experience</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span4">
+                    <p>Item # 1XXX170XX</p>
+                    <p>Features:</p>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. </p>
+                    <strong>
+                        @Html.ActionLink(
+                            "Ordering is Easy", 
+                            "Index",
+                            "Linkout", 
+                            Request.Url.Scheme, 
+                            null, 
+                            "/leather", 
+                            null,
+                            new { target = "_blank" }
+                        )
+                    </strong>
+                    <ul>
+                        <li><span style="font-weight: bold;">
+                            
+                            @Html.ActionLink(
+                                "Click here to select the year, make and model of your vehicle for customization.", 
+                                "Index",
+                                "Linkout", 
+                                Request.Url.Scheme, 
+                                null, 
+                                "/leather", 
+                                null,
+                                new { target = "_blank" }
+                            )
+
+                        </li>
+                        <li>
+                            Add item to cart and check out</li><li>Your order will be shipped direct to you from Roadwire
+                        </li>
+                        <li>
+                            For service and warranty issues contact Coverking at (800) 555-XXXX or 
+                            <a href="mailto:costcosupport@roadwirex.comx">costcosupport@coverking.com</a>
+                       </li>
+                                        
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div id="top-rated" class="span3">
+            <div class="well">
+                Top Rated Products
+            </div>
+        </div>
+    </div>
+</div>
+
+

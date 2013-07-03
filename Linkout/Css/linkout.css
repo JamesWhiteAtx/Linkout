@@ -394,3 +394,9 @@ div.schedule #inptDt
 {
     font-weight:bold;
 }
+
+#confirm-info .order-line
+{
+    border-top: 1px solid #dddddd;
+    margin-bottom: 5px;
+}

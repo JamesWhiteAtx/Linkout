@@ -69,7 +69,7 @@ namespace Linkout
         public ILeatherPrice GetLeatherPrice(int rows)
         {
             Dictionary<int, decimal> prices = new Dictionary<int, decimal>{ 
-                { 1, 300M }, { 2, 600M }, { 3, 900M } 
+                { 1, 1199M }, { 2, 1299M }, { 3, 1399M } 
             };
 
             if (prices.ContainsKey( rows )) {

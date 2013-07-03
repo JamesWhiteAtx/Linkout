@@ -1,12 +1,17 @@
 'use strict';
 // Declare app level module which depends on services and directives and filters
 
-var configure = angular.module('configure', []) //'configure.services', 'configure.directives', 'configure.filters', 'ui.bootstrap'
+var configure = angular.module('configure', ['configure.directives']) //'configure.services', 'configure.filters', 'ui.bootstrap'
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/menu', {
             title: 'menu',
             templateUrl: '/Configure/Partials/Menu',
             controller: "MenuCtrl"
+        });
+        $routeProvider.when('/pricing', {
+            title: 'pricing',
+            templateUrl: '/configure/Partials/Pricing',
+            controller: "PricingCtrl"
         });
         $routeProvider.when('/cars', {
             title: 'cars',

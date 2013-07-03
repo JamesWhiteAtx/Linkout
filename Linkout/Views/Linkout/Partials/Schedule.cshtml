@@ -10,9 +10,9 @@
 
     <div class="prod-schedule" ng-show="pickedProduct()" >
 
-        <div id="products-section">
+        @*<div id="products-section">
             id: {{leather.leaCol.id}} leather: {{leather.leaCol.name}}
-        </div>
+        </div>*@
 
         <div id="zip-section">
             <form ng-submit="loadInstallers()" name="zipForm" class="form-inline" novalidate="novalidate">
@@ -52,7 +52,14 @@
                 </div>
             </div>
 
+            <div id="complete-ord" class="span4 offset4" ng-show="!installerPicked()">
+                <button class="btn btn-large btn-primary" type="button" ng-click="confirmOrder()">
+                    Complete Order <i class="icon-arrow-right icon-white"></i>
+                </button>
+            </div>
+
             <div id="dt-info-btn-block" class="span8" ng-show="installerPicked()">
+                
                 <div id="dt-info-block" class="row">
                     <div id="dates" class="span4">
                         <div id="date" class="well">
@@ -90,7 +97,8 @@
                         </div>
                     </div>
                 </div>
-                <div id="btn-block" class="row" ng-show="installerPicked() && schedDate">
+
+                <div id="btn-block" class="row" ng-show="installerPicked() || schedDate">
                     <div id="buttons" class="span8">
                         <div class="well">
                             <div class="row">
@@ -103,6 +111,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div>

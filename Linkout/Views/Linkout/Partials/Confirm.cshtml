@@ -1,12 +1,172 @@
-﻿<div class="schedule">
-    <div ng-hide="pickedProduct()" >
+﻿<div id="confirm-order">
+
+    <div id="pick-prod-first" ng-hide="pickedProduct()" >
         <button class="btn btn-large btn-primary" type="button" ng-click="routeType()">
             <i class="icon-arrow-left icon-white"></i>
             Please select your product first
         </button>
     </div>
 
-    <div class="row-fluid" ng-show="pickedProduct()">
+    <div id="confirm-info" class="row" ng-show="pickedProduct()">
+        <div id="order-recap" class="span7">
+            <h4>Confirm Your Order</h4>
+            
+            <div class="alert alert-block alert-info" ng-show="!pickedLeather()">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <a href  ng-click="routeLeather()">
+                    <h4><i class="icon-question-sign t icon-white"></i> Interested in adding Leather Seats?</h4>
+                    <p>Roadwire offers the finest leather interiors in the business. Take a look at our excellent offers!</p>
+                </a>
+                <button class="btn btn-small btn-info" type="button" ng-click="routeLeather()">
+                    Yes, Add Leather Seats
+                </button>
+            </div>
+
+
+            <div id="leather-recap" class="order-line" ng-show="pickedLeather()">
+                <div class="row"><div class="span5"><strong>Leather Seats</strong></div></div>
+                
+                <div class="row">
+                    <div class="span1">
+                        <img ng-src="{{leather.leaCol.colorurl}}" alt="{{leather.leaCol.name}}">
+                    </div>
+                    <div class="span5">
+                        <div>{{leather.leaCol.leacolorname}} {{leather.ptrn.seldescr}}</div>
+                        <div>Part Number: {{leather.leaCol.name}}</div>
+                        <div>Pattern: {{leatherPtrnDescr()}}</div>
+                    </div>
+                    <div class="span1 text-right">
+                        {{leather.ptrn.price | currency}}
+                    </div>
+                </div>
+            </div>
+                
+
+            <div class="alert alert-block alert-info" ng-show="!pickedHeater()">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <a href  ng-click="routeHeaters()">
+                    <h4><i class="icon-question-sign t icon-white"></i> Interested in adding Seat Heaters?</h4>
+                    <p>Roadwire offers the finest seat heating systems in the business. Take a look at our excellent offers!</p>
+                </a>
+                <button class="btn btn-small btn-info" type="button" ng-click="routeHeaters()">
+                    Yes, Add Seat Heaters
+                </button>
+            </div>
+
+
+            <div id="heaters-recap" class="order-line" ng-show="pickedHeater()">
+                <div class="row"><div class="span5"><strong>Seat Heaters</strong></div></div>
+
+                <div class="row">
+                    <div class="span5 offset1">
+                        {{driverDescr}}
+                    </div>
+                    <div class="span1 text-right">
+                        {{heaterPrice | currency}}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span5 offset1">
+                        {{passengerDescr}}
+                    </div>
+                    <div class="span1 text-right">
+                        {{heaterPrice | currency}}
+                    </div>
+                </div>
+            </div>
+
+            <div id="subtotal" class="order-line" ng-show="pickedProduct()">
+                <div class="row">
+                    <div class="span6"><strong>Subtotal</strong></div>
+                    <div class="span1 text-right">
+                        {{productPriceTotal() | currency}}
+                    </div>
+                </div>
+            
+            </div>
+
+            <div id="car-recap" class="order-line" ng-show="leather.make">
+                <div class="row"><div class="span5"><strong>Your Car</strong></div></div>
+                <div class="row">
+                    <div class="span5 offset1">
+                        {{leather.make.name}} {{leather.year.name}} {{leather.model.name}} {{leather.car.name}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-block alert-info" ng-show="!pickedSchedule()">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <a href  ng-click="routeHeaters()">
+                    <h4><i class="icon-question-sign t icon-white"></i> Would you like to schedule your installation?</h4>
+                    <p>Professional installation is included with your purchase so schedule now.</p>
+                </a>
+                <button class="btn btn-small btn-info" type="button" ng-click="routeSchedule()">
+                    Yes, Schedule Installation
+                </button>
+            </div>
+
+            <div id="schedule-recap" class="order-line" ng-show="pickedSchedule()">
+                <div class="row"><div class="span5"><strong>Scheduling Details</strong></div></div>
+                <div class="row">
+                    <div class="span5 offset1">
+
+                        <ul class="inline">
+                          <li>Location: {{schedule.installer.descr}}</li>
+                          <li ng-show="schedule.installer.miles">Miles: {{schedule.installer.miles}}</li>
+                          <li ng-show="schedule.schedDate">Date: {{schedule.schedDate}}</li>
+                          <li ng-show="schedule.tod">Time Of Day: {{schedule.tod}}</li>
+                          <li ng-show="schedule.note">Note: {{schedule.note}}</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div id="member-info" class="span5">
+            <div class="well">
+                <h4>Enter Costco Member Information</h4>
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">Member Email</label>
+                    <div class="controls">
+                        <input type="text" id="inputEmail" placeholder="Email" ng-model="member.email"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="inputFirst">First Name</label>
+                    <div class="controls">
+                        <input type="text" id="inputFirst" placeholder="First Name" ng-model="member.firstname"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputLast">Last Name</label>
+                    <div class="controls">
+                        <input type="text" id="inputLast" placeholder="Last Name" ng-model="member.lastname"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputPhone">Phone</label>
+                    <div class="controls">
+                        <input type="text" id="inputPhone" placeholder="Phone" ng-model="member.phone"/>
+                    </div>
+                </div>
+
+                <div id="buttons" class="pagination-centered"  ng-show="member.email && member.lastname && member.phone">
+                    <button class="btn btn-large btn-primary" type="button" ng-click="linkToCostCo()">
+                        Complete Order on Costco.com
+                    <i class="icon-arrow-right icon-white"></i></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*    <div class="row-fluid" ng-show="pickedProduct()">
 
         <div class="span6 well"> 
             <h3>Confirm Your Order</h3>
@@ -30,6 +190,12 @@
                   </dd>
                   <dt>Part Number</dt> <dd>{{leather.leaCol.name}}</dd>
                   <dt>Pattern</dt> <dd>{{leatherPtrnDescr()}}</dd>
+                  
+                  
+                  <div ng-show="pickedPassenger()">{{passengerDescr}} {{heaterPrice | currency}}</div>
+
+                  {{ptrn.price | currency}}
+
                 </dl>
             </div>
 
@@ -111,16 +277,16 @@
     </div>
 
 </div>
-
-<script type="text/javascript">
+*@
+@*<script type="text/javascript">
     $(document).ready(function () {
         $("#leather-offer").tooltip({
-            'title': 'Roadwire offers the finest leather interiors in the business. Take a look at our excelent offers!',
+            'title': 'Roadwire offers the finest leather interiors in the business. Take a look at our excellent offers!',
             'placement': 'bottom'
         });
         $("#heater-offer").tooltip({
-            'title': 'Roadwire offers the finest seat heating systems in the business. Take a look at our excelent offers!',
+            'title': 'Roadwire offers the finest seat heating systems in the business. Take a look at our excellent offers!',
             'placement': 'bottom'
         });
     });
-</script>
+</script>*@

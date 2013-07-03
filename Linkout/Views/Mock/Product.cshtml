@@ -1,0 +1,96 @@
+﻿@model MockProduct
+
+@{
+    ViewBag.Title = "Roadwire Leather Seats";
+}
+
+@section styles {
+    <style>
+        #prod-img
+        {
+            margin: 5px;
+            padding: 5px;
+            border: 1px solid #dddddd;
+        }
+        #item-info
+        {
+            border-bottom: 1px solid #dddddd;
+        }
+        #item-order
+        {
+            padding-left: 5px;
+            border-left: 1px solid #dddddd;
+        }
+        #item-order div
+        {
+            margin-bottom: 7px;
+        }
+        .price-display
+        {
+            color: #000;
+            font-weight: bold;
+            font-size: 24px;
+            float: right;
+        }
+        label {display: inline;}
+        
+    </style>
+}
+
+<div class="container">
+    <div id="prod-section" class="row">
+        
+        <div class="span4">
+            <div id="prod-img">
+                <img src="../../Images/Mock/auto_upho.png" />
+            </div>
+        </div>
+
+        <div id="prod-info" class="span6">
+            <div class="row">
+                <div class="span6">
+                    <div id="item-info">
+                        <h4>Roadwire Leather Seats</h4>
+                        <h4>Add Luxury to Your Driving Experience</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span3">
+                    <div id="item-no">
+                        <p>Item # XXXX</p>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div id="item-order">
+                        <div id="item-price">
+                            <span>Your Price</span>
+                            <span class="price-display">$123.45</span>
+                        </div>
+                        <div>Shipping & Handling included *</div>
+                        <div>Installation included *</div>
+                        <div id="item-qty">
+
+                            <label for="item-qty" class="inline">Quantity</label>
+                            <input type="text" id="input-qty" class="input-mini" value="1" />
+
+
+                        </div>
+                        <div id="item-cart">
+
+                            <button class="btn btn-small btn-info" type="button">
+                                Add to Cart
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="top-rated" class="span2">
+            <div class="well">
+                Top Rated Products
+            </div>
+        </div>
+    </div>
+</div>

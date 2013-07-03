@@ -42,9 +42,14 @@
                         <tr ng-show="driver"><td>{{driverDescr}}</td><td>{{heaterPrice | currency}}</td></tr>
                         <tr ng-show="passenger"><td>{{passengerDescr}}</td><td>{{heaterPrice | currency}}</td></tr>
                     </table>
-                    <button class="btn btn-large btn-primary" type="button" ng-click="schedInstall()">
+                    <button class="btn btn-large btn-primary" type="button" ng-click="routeConfirm()" ng-show="pickedSchedule()">
+                        Complete Order
+                        <i class="icon-arrow-right icon-white"></i>
+                    </button>
+                    <button class="btn btn-large btn-primary" type="button" ng-click="schedInstall()" ng-hide="pickedSchedule()">
                         Schedule Installation
-                    <i class="icon-arrow-right icon-white"></i></button>
+                        <i class="icon-arrow-right icon-white"></i>
+                    </button>
                 </div>
             </div>
 
@@ -54,6 +59,7 @@
             <div class="span12">
                 <div class="well">
                 <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                <strong>*Professional Installation Is Include</strong>
                 </div>
             </div>
         </div>

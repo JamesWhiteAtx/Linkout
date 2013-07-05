@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Linkout.Data;
 
 namespace Linkout
 {
@@ -66,6 +67,13 @@ namespace Linkout
 
     public class PriceService: IPriceService
     {
+        private LinkoutEntities _linkoutEntities;
+
+        public PriceService(LinkoutEntities linkoutEntities)
+        {
+            _linkoutEntities = linkoutEntities;
+        }
+
         public ILeatherPrice GetLeatherPrice(int rows)
         {
             Dictionary<int, decimal> prices = new Dictionary<int, decimal>{ 

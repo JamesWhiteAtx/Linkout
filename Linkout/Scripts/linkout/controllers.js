@@ -2,7 +2,7 @@
 /* Linkout Controllers */
 
 linkout
-.controller('LinkoutCtrl', ['$scope', '$location', '$http', 'ProductPrice', function ($scope, $location, $http, ProductPrice) {
+.controller('LinkoutCtrl', ['$scope', '$location', 'ProductPrice', function ($scope, $location, ProductPrice) {
     $scope.breadcrumbs = [];
 
     $scope.clearCrumbs = function () {

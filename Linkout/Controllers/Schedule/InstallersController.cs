@@ -10,9 +10,17 @@ namespace Linkout.Controllers
 {
     public class InstallersController : ApiController
     {
+        private IJsonHttpResponseService _jsonHttpResponseService;
+
+        public InstallersController(IJsonHttpResponseService jsonHttpResponseService)
+        {
+            _jsonHttpResponseService = jsonHttpResponseService;
+        }
+
         public HttpResponseMessage Get(string zipcode = null)
         {
-            String json = String.Empty;
+            HttpResponseMessage respMsg = _jsonHttpResponseService.GetStringHttpResponseMessage(String.Empty);
+
             if (!String.IsNullOrWhiteSpace(zipcode)) {
                 var list = new[] {
                     new { id = 0, miles = 0.5, descr = "First Location (Street Address)" },
@@ -26,10 +34,9 @@ namespace Linkout.Controllers
                     new { id = 8, miles = 10.0, descr = "Ninth Location (Street Address)" },
                     new { id = 9, miles = 22.0, descr = "Tenth Location (Street Address)" },
                 };
-                json = JsonConvert.SerializeObject(list);
+                respMsg = _jsonHttpResponseService.GetObjectHttpResponseMessage(list);
             }
-
-            return new HttpResponseMessage { Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json") };
+            return respMsg;
         }
     }
 }

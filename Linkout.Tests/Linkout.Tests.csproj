@@ -102,6 +102,8 @@
   <ItemGroup>
     <Compile Include="PriceApisTests.cs" />
     <Compile Include="PriceRoutesTests.cs" />
+    <Compile Include="ProductApiTests.cs" />
+    <Compile Include="ProductControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ValuesControllerTest.cs" />
     <Compile Include="SelectorApiTests.cs" />

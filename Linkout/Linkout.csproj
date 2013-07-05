@@ -140,6 +140,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkoutController.cs" />
     <Compile Include="Controllers\MockController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\Schedule\InstallersController.cs" />
     <Compile Include="Controllers\Selector\AllColsController.cs" />
     <Compile Include="Controllers\Selector\BodiesController.cs" />
@@ -155,6 +156,8 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
     <Compile Include="Models\MockProduct.cs" />
+    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Services\JsonHttpResponseService.cs" />
     <Compile Include="Services\PriceService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -163,6 +166,7 @@
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\JsonResponseService.cs" />
     <Compile Include="Services\NetSuiteUriService.cs" />
+    <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\TestService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -671,6 +675,10 @@
     <ProjectReference Include="..\..\NinjectWebApi\NinjectWebApi\NinjectWebApi.csproj">
       <Project>{1FC9489E-9D37-47B7-8DF9-AF65AEBF430F}</Project>
       <Name>NinjectWebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Linkout.Data\Linkout.Data.csproj">
+      <Project>{654BBC23-C85A-407E-B339-156342223ADB}</Project>
+      <Name>Linkout.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

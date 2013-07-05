@@ -11,10 +11,6 @@ namespace Linkout.Controllers
     {
         public HttpResponseMessage Get(string ptrnid)
         {
-            //SelectorBuilder ub = new SelectorBuilder();
-            //ub.AddQuery("type", "ptrncolors");
-            //ub.AddQuery("ptrnid", ptrnid);
-            //return GetSelectorJson(ub.Uri);
             AddQuery("type", "ptrncolors");
             AddQuery("ptrnid", ptrnid);
             return JsonResponse();

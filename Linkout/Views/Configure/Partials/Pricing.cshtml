@@ -1,76 +1,41 @@
-﻿@{
-    ViewBag.Title = "Pricing";
-}
+﻿
+<style>
+    form
+    {
+        margin: 10px 0 0 0;
+    }
+</style>
 
-    <style>
-        form
-        {
-            border-top: 1px solid #dddddd;
-            margin: 10px 0 0 0;
-        }
-        
-    </style>
+<h4>Costco Product Listing</h4>
+
+<section ng-controller="TestCtrl">
+    <p>val: {{val}}</p>
+    <button class="btn" type="button" ng-click="reVal()" >re val</button>
+    <button class="btn" type="button" ng-click="clearListing()" >clearListing</button>
+    
+</section>
 
 <section ng-controller="PricingCtrl">
 
     <div class="row">
-        <div class="span6">
-            <div cc-prod-editor prod-model="pricer.l1" prod-name="l1"></div>
-            <div cc-prod-editor prod-model="pricer.l2" prod-name="l2"></div>
-            <div cc-prod-editor prod-model="pricer.l3" prod-name="l3"></div>
-        </div>
-        <div class="span6">
-            <div cc-prod-editor prod-model="pricer.h1" prod-name="h1"></div>
-            <div cc-prod-editor prod-model="pricer.h2" prod-name="h2"></div>
-            <div class="row"> <div class="span1">Discount:</div> <div class="span5"> {{pricer.h2Discount() | currency}} </div></div>
-        </div>
+        <div class="span2"><strong>Product</strong></div>
+        <div class="span6"><strong>Description</strong></div>
+        <div class="span2"><strong>Price</strong></div>
+        <div class="span2 text-right"><strong>Discount</strong></span> </div>
     </div>
-    
-    <div class="row">
-        <div class="span6">
-            <div cc-prod-editor prod-model="pricer.l1h1" prod-name="l1h1"></div>
-            <div class="row"> <div class="span1">Discount:</div> <div class="span5"> {{pricer.l1h1Discount() | currency}} </div></div>
-
-            <div cc-prod-editor prod-model="pricer.l2h1" prod-name="l2h1"></div>
-            <div class="row"> <div class="span1">Discount:</div> <div class="span5"> {{pricer.l2h1Discount() | currency}} </div></div>
-
-            <div cc-prod-editor prod-model="pricer.l3h1" prod-name="l3h1"></div>
-            <div class="row"> <div class="span1">Discount:</div> <div class="span5"> {{pricer.l3h1Discount() | currency}} </div></div>
+    <form name="prodForm" class="form-inline" ng-repeat="p in pricer.prodList">
+        <div class="row">
+            <div class="span2"> {{p.type}} </div>
+            <div class="span6"> <input type="text" class="span6" ng-model="p.description" placeholder="Descripton" /> </div>
+            <div class="span2"> 
+                <input type="text" name="price" id="price" class="span2" ng-model="p.price" ng-pattern="/^\d+\.?\d*$/" placeholder="Price"/>
+                <span class="text-warning" ng-show="prodForm.price.$error.pattern"> Enter a valid number </span>
+                <span class="text-warning" ng-show="prodForm.$error.required"> Enter a number </span>
+            </div>
+        
+            <div class="span2 text-right"> <span ng-show="p.discount()">{{p.discount() | currency}}</span> </div>
         </div>
-        <div class="span6">
-            <div cc-prod-editor prod-model="pricer.l1h2" prod-name="l1h2"></div>
-            <div class="row"> <div class="span1">Discount:</div> <div class="span5"> {{pricer.l1h2Discount() | currency}} </div></div>
-
-            <div cc-prod-editor prod-model="pricer.l2h2" prod-name="l2h2"></div>
-            <div class="row"> <div class="span1">Discount:</div> <div class="span5"> {{pricer.l2h2Discount() | currency}} </div></div>
-
-            <div cc-prod-editor prod-model="pricer.l3h2" prod-name="l3h2"></div>
-            <div class="row"> <div class="span1">Discount:</div> <div class="span5"> {{pricer.l3h2Discount() | currency}} </div></div>
-        </div>
-    </div>
-
+    </form>
 
 </section>
 
-
-@*             
-    <form name="zipForm" class="form-inline" novalidate="novalidate">
-        <input type="text" name="locZip" id="locZip" ng-model="pricer.l1.price" ng-pattern="/^\d+\.?\d*$/" >
-        <span class="text-warning" ng-show="zipForm.locZip.$error.pattern"> Enter a valid zipcode </span>
-    </form>
-             
-*@
-             
-@*    <form name="myForm" novalidate="novalidate">
-        <input type="text" name="price" id="price" ng-model="pricer.l1.price" ng-pattern="/^\d+\.?\d*$/" required/>{{pricer.l1.price}}
-        <span class="text-warning" ng-show="myForm.price.$error.pattern"> Enter a valid number </span>
-        <span class="text-warning" ng-show="myForm.$error.required"> Enter a number </span>
-    </form>
-*@
-@*      <tt>myForm.price.$valid = {{myForm.price.$valid}}</tt><br>
-      <tt>myForm.price.$error = {{myForm.price.$error}}</tt><br>
-      <tt>myForm.$valid = {{myForm.$valid}}</tt><br>
-      <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br>
-      <tt>myForm.$error.minlength = {{!!myForm.$error.minlength}}</tt><br>
-      <tt>myForm.$error.maxlength = {{!!myForm.$error.maxlength}}</tt><br>
-*@

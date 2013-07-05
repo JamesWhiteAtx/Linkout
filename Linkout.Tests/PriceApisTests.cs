@@ -42,7 +42,7 @@ namespace Linkout.Tests
 
         private PriceController MakePriceController(IPriceService srvc)
         {
-            return new PriceController(srvc);
+            return new PriceController(srvc, new JsonHttpResponseService());
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace Linkout.Tests
         [TestMethod]
         public void PriceControllerHasConstructorServiceInjected()
         {
-            PriceController ctrl = new PriceController(MakeMockPriceService());
+            PriceController ctrl = new PriceController(MakeMockPriceService(), new JsonHttpResponseService());
         }
 
         [TestMethod]
@@ -90,9 +90,7 @@ namespace Linkout.Tests
 
             IPriceService srvc = MakeMockPriceService();
             var price = srvc.GetLeatherPrice(2);
-            HttpResponseMessage testResp = new HttpResponseMessage {
-                Content = new StringContent(JsonConvert.SerializeObject(price), System.Text.Encoding.UTF8, "application/json") 
-            };
+            HttpResponseMessage testResp = new JsonHttpResponseService().GetObjectHttpResponseMessage(price);
 
             TestHelpers.HttpRespStringsAreEqual(testResp, ctrlResp);
         }
@@ -113,9 +111,7 @@ namespace Linkout.Tests
 
             IPriceService srvc = MakeMockPriceService();
             var price = srvc.GetHeaterPrice();
-            HttpResponseMessage testResp = new HttpResponseMessage {
-                Content = new StringContent(JsonConvert.SerializeObject(price), System.Text.Encoding.UTF8, "application/json")
-            };
+            HttpResponseMessage testResp = new JsonHttpResponseService().GetObjectHttpResponseMessage(price);
 
             TestHelpers.HttpRespStringsAreEqual(testResp, ctrlResp);
         }

@@ -66,10 +66,12 @@ namespace Linkout.App_Start
 
             kernel.Bind<SecurityEntities>().ToSelf().InRequestScope();
 
-            kernel.Bind<IJsonResponseService>().To<JsonResponseService>();
+            kernel.Bind<IJsonHttpResponseService>().To<JsonHttpResponseService>();
+            kernel.Bind<IJsonWebResponseService>().To<JsonWebResponseService>();
             kernel.Bind<INetSuiteUriService>().To<NetSuiteUriService>();
             kernel.Bind<IConfigurationService>().To<ConfigurationService>();
             kernel.Bind<IPriceService>().To<PriceService>();
+            kernel.Bind<IProductService>().To<ProductService>();
         }        
     }
 }

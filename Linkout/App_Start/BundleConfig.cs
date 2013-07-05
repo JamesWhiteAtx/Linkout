@@ -85,7 +85,7 @@ namespace Linkout
 
             bundles.Add(new ScriptBundle("~/bundles/configure").Include(
                         "~/Scripts/configure/app.js",
-                        //"~/Scripts/configure/services.js",
+                        "~/Scripts/linkout/services.js",
                         //"~/Scripts/configure/filters.js",
                         "~/Scripts/configure/directives.js",
                         "~/Scripts/configure/controllers.js"));

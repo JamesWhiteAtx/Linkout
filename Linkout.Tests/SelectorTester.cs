@@ -15,12 +15,12 @@ namespace Linkout.Tests
     {
         public static HttpResponseMessage HRM(Uri uri)
         {
-            return new HttpResponseMessage { Content = new StringContent(uri.ToString(), System.Text.Encoding.UTF8, "application/json") };
+            return new JsonHttpResponseService().GetObjectHttpResponseMessage(uri);
         }
 
-        public static IJsonResponseService MakeMockService()
+        public static IJsonWebResponseService MakeMockService()
         {
-            var selSrvc = new Mock<IJsonResponseService>();
+            var selSrvc = new Mock<IJsonWebResponseService>();
             selSrvc.Setup(srvc => srvc.GetSelectorJson(It.IsAny<Uri>()))
                     .Returns((Uri uri) => HRM(uri));
             return selSrvc.Object;

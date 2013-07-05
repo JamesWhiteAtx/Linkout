@@ -9,9 +9,6 @@ namespace Linkout.Controllers
     {
         public HttpResponseMessage Get()
         {
-            //SelectorBuilder ub = new SelectorBuilder();
-            //ub.AddQuery("type", "makes");
-            //return GetSelectorJson(ub.Uri);
             AddQuery("type", "makes");
             return JsonResponse();
         }

@@ -8,13 +8,20 @@ using System.IO;
 
 namespace Linkout.Services
 {
-    public interface IJsonResponseService
+    public interface IJsonWebResponseService
     {
         HttpResponseMessage GetSelectorJson(Uri uri);
     }
 
-    public class JsonResponseService : IJsonResponseService
+    public class JsonWebResponseService : IJsonWebResponseService
     {
+        private IJsonHttpResponseService _jsonHttpResponseService;
+
+        public JsonWebResponseService(IJsonHttpResponseService jsonHttpResponseService)
+        {
+            _jsonHttpResponseService = jsonHttpResponseService;
+        }
+
         public HttpResponseMessage GetSelectorJson(Uri uri)
         {
             string responseFromServer = String.Empty;
@@ -29,7 +36,7 @@ namespace Linkout.Services
                     responseFromServer = reader.ReadToEnd();
                 }
             }
-            return new HttpResponseMessage { Content = new StringContent(responseFromServer, System.Text.Encoding.UTF8, "application/json") };
+            return _jsonHttpResponseService.GetStringHttpResponseMessage(responseFromServer);
         }
     }
 }

@@ -68,28 +68,28 @@ namespace Linkout.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<FG_COSTCO_PRODUCTS> FG_COSTCO_PRODUCTS
+        public ObjectSet<CostcoProduct> CostcoProducts
         {
             get
             {
-                if ((_FG_COSTCO_PRODUCTS == null))
+                if ((_CostcoProducts == null))
                 {
-                    _FG_COSTCO_PRODUCTS = base.CreateObjectSet<FG_COSTCO_PRODUCTS>("FG_COSTCO_PRODUCTS");
+                    _CostcoProducts = base.CreateObjectSet<CostcoProduct>("CostcoProducts");
                 }
-                return _FG_COSTCO_PRODUCTS;
+                return _CostcoProducts;
             }
         }
-        private ObjectSet<FG_COSTCO_PRODUCTS> _FG_COSTCO_PRODUCTS;
+        private ObjectSet<CostcoProduct> _CostcoProducts;
 
         #endregion
         #region AddTo Methods
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the FG_COSTCO_PRODUCTS EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the CostcoProducts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToFG_COSTCO_PRODUCTS(FG_COSTCO_PRODUCTS fG_COSTCO_PRODUCTS)
+        public void AddToCostcoProducts(CostcoProduct costcoProduct)
         {
-            base.AddObject("FG_COSTCO_PRODUCTS", fG_COSTCO_PRODUCTS);
+            base.AddObject("CostcoProducts", costcoProduct);
         }
 
         #endregion
@@ -103,30 +103,30 @@ namespace Linkout.Data
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Linkout.Data", Name="FG_COSTCO_PRODUCTS")]
+    [EdmEntityTypeAttribute(NamespaceName="Linkout.Data", Name="CostcoProduct")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class FG_COSTCO_PRODUCTS : EntityObject
+    public partial class CostcoProduct : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new FG_COSTCO_PRODUCTS object.
+        /// Create a new CostcoProduct object.
         /// </summary>
-        /// <param name="fG_PROD_ID">Initial value of the FG_PROD_ID property.</param>
-        /// <param name="fG_PROD_CODE">Initial value of the FG_PROD_CODE property.</param>
-        /// <param name="fG_DESCRIPTION">Initial value of the FG_DESCRIPTION property.</param>
-        /// <param name="fG_PRICE">Initial value of the FG_PRICE property.</param>
-        /// <param name="fG_ACTIVE_FLAG">Initial value of the FG_ACTIVE_FLAG property.</param>
-        public static FG_COSTCO_PRODUCTS CreateFG_COSTCO_PRODUCTS(global::System.Decimal fG_PROD_ID, global::System.String fG_PROD_CODE, global::System.String fG_DESCRIPTION, global::System.Decimal fG_PRICE, global::System.String fG_ACTIVE_FLAG)
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
+        /// <param name="description">Initial value of the Description property.</param>
+        /// <param name="price">Initial value of the Price property.</param>
+        /// <param name="activeFlag">Initial value of the ActiveFlag property.</param>
+        public static CostcoProduct CreateCostcoProduct(global::System.Decimal id, global::System.String code, global::System.String description, global::System.Decimal price, global::System.String activeFlag)
         {
-            FG_COSTCO_PRODUCTS fG_COSTCO_PRODUCTS = new FG_COSTCO_PRODUCTS();
-            fG_COSTCO_PRODUCTS.FG_PROD_ID = fG_PROD_ID;
-            fG_COSTCO_PRODUCTS.FG_PROD_CODE = fG_PROD_CODE;
-            fG_COSTCO_PRODUCTS.FG_DESCRIPTION = fG_DESCRIPTION;
-            fG_COSTCO_PRODUCTS.FG_PRICE = fG_PRICE;
-            fG_COSTCO_PRODUCTS.FG_ACTIVE_FLAG = fG_ACTIVE_FLAG;
-            return fG_COSTCO_PRODUCTS;
+            CostcoProduct costcoProduct = new CostcoProduct();
+            costcoProduct.ID = id;
+            costcoProduct.Code = code;
+            costcoProduct.Description = description;
+            costcoProduct.Price = price;
+            costcoProduct.ActiveFlag = activeFlag;
+            return costcoProduct;
         }
 
         #endregion
@@ -137,171 +137,171 @@ namespace Linkout.Data
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal FG_PROD_ID
+        public global::System.Decimal ID
         {
             get
             {
-                return _FG_PROD_ID;
+                return _ID;
             }
             set
             {
-                if (_FG_PROD_ID != value)
+                if (_ID != value)
                 {
-                    OnFG_PROD_IDChanging(value);
-                    ReportPropertyChanging("FG_PROD_ID");
-                    _FG_PROD_ID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("FG_PROD_ID");
-                    OnFG_PROD_IDChanged();
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
                 }
             }
         }
-        private global::System.Decimal _FG_PROD_ID;
-        partial void OnFG_PROD_IDChanging(global::System.Decimal value);
-        partial void OnFG_PROD_IDChanged();
+        private global::System.Decimal _ID;
+        partial void OnIDChanging(global::System.Decimal value);
+        partial void OnIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> FG_LEATHER_ROWS
+        public Nullable<global::System.Decimal> LeatherRows
         {
             get
             {
-                return _FG_LEATHER_ROWS;
+                return _LeatherRows;
             }
             set
             {
-                OnFG_LEATHER_ROWSChanging(value);
-                ReportPropertyChanging("FG_LEATHER_ROWS");
-                _FG_LEATHER_ROWS = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FG_LEATHER_ROWS");
-                OnFG_LEATHER_ROWSChanged();
+                OnLeatherRowsChanging(value);
+                ReportPropertyChanging("LeatherRows");
+                _LeatherRows = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LeatherRows");
+                OnLeatherRowsChanged();
             }
         }
-        private Nullable<global::System.Decimal> _FG_LEATHER_ROWS;
-        partial void OnFG_LEATHER_ROWSChanging(Nullable<global::System.Decimal> value);
-        partial void OnFG_LEATHER_ROWSChanged();
+        private Nullable<global::System.Decimal> _LeatherRows;
+        partial void OnLeatherRowsChanging(Nullable<global::System.Decimal> value);
+        partial void OnLeatherRowsChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> FG_SEAT_HEATERS
+        public Nullable<global::System.Decimal> SeatHeaters
         {
             get
             {
-                return _FG_SEAT_HEATERS;
+                return _SeatHeaters;
             }
             set
             {
-                OnFG_SEAT_HEATERSChanging(value);
-                ReportPropertyChanging("FG_SEAT_HEATERS");
-                _FG_SEAT_HEATERS = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FG_SEAT_HEATERS");
-                OnFG_SEAT_HEATERSChanged();
+                OnSeatHeatersChanging(value);
+                ReportPropertyChanging("SeatHeaters");
+                _SeatHeaters = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SeatHeaters");
+                OnSeatHeatersChanged();
             }
         }
-        private Nullable<global::System.Decimal> _FG_SEAT_HEATERS;
-        partial void OnFG_SEAT_HEATERSChanging(Nullable<global::System.Decimal> value);
-        partial void OnFG_SEAT_HEATERSChanged();
+        private Nullable<global::System.Decimal> _SeatHeaters;
+        partial void OnSeatHeatersChanging(Nullable<global::System.Decimal> value);
+        partial void OnSeatHeatersChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String FG_PROD_CODE
+        public global::System.String Code
         {
             get
             {
-                return _FG_PROD_CODE;
+                return _Code;
             }
             set
             {
-                OnFG_PROD_CODEChanging(value);
-                ReportPropertyChanging("FG_PROD_CODE");
-                _FG_PROD_CODE = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("FG_PROD_CODE");
-                OnFG_PROD_CODEChanged();
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
             }
         }
-        private global::System.String _FG_PROD_CODE;
-        partial void OnFG_PROD_CODEChanging(global::System.String value);
-        partial void OnFG_PROD_CODEChanged();
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String FG_DESCRIPTION
+        public global::System.String Description
         {
             get
             {
-                return _FG_DESCRIPTION;
+                return _Description;
             }
             set
             {
-                OnFG_DESCRIPTIONChanging(value);
-                ReportPropertyChanging("FG_DESCRIPTION");
-                _FG_DESCRIPTION = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("FG_DESCRIPTION");
-                OnFG_DESCRIPTIONChanged();
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
             }
         }
-        private global::System.String _FG_DESCRIPTION;
-        partial void OnFG_DESCRIPTIONChanging(global::System.String value);
-        partial void OnFG_DESCRIPTIONChanged();
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal FG_PRICE
+        public global::System.Decimal Price
         {
             get
             {
-                return _FG_PRICE;
+                return _Price;
             }
             set
             {
-                OnFG_PRICEChanging(value);
-                ReportPropertyChanging("FG_PRICE");
-                _FG_PRICE = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FG_PRICE");
-                OnFG_PRICEChanged();
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
             }
         }
-        private global::System.Decimal _FG_PRICE;
-        partial void OnFG_PRICEChanging(global::System.Decimal value);
-        partial void OnFG_PRICEChanged();
+        private global::System.Decimal _Price;
+        partial void OnPriceChanging(global::System.Decimal value);
+        partial void OnPriceChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String FG_ACTIVE_FLAG
+        public global::System.String ActiveFlag
         {
             get
             {
-                return _FG_ACTIVE_FLAG;
+                return _ActiveFlag;
             }
             set
             {
-                OnFG_ACTIVE_FLAGChanging(value);
-                ReportPropertyChanging("FG_ACTIVE_FLAG");
-                _FG_ACTIVE_FLAG = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("FG_ACTIVE_FLAG");
-                OnFG_ACTIVE_FLAGChanged();
+                OnActiveFlagChanging(value);
+                ReportPropertyChanging("ActiveFlag");
+                _ActiveFlag = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ActiveFlag");
+                OnActiveFlagChanged();
             }
         }
-        private global::System.String _FG_ACTIVE_FLAG;
-        partial void OnFG_ACTIVE_FLAGChanging(global::System.String value);
-        partial void OnFG_ACTIVE_FLAGChanged();
+        private global::System.String _ActiveFlag;
+        partial void OnActiveFlagChanging(global::System.String value);
+        partial void OnActiveFlagChanged();
 
         #endregion
     

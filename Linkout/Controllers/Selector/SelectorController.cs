@@ -13,7 +13,7 @@ namespace Linkout.Controllers
     public class SelectorController : ApiController
     {
         [Inject]
-        public IJsonResponseService SelectorService { get; set; }
+        public IJsonWebResponseService SelectorService { get; set; }
 
         [Inject]
         public INetSuiteUriService NetSuiteUriService { get; set; }

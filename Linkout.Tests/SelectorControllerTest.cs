@@ -17,7 +17,7 @@ namespace Linkout.Tests
         SelectorController ctrl;
 
         [TestInitialize]
-        public void MyTestMethod()
+        public void InitializeMethod()
         {
             ctrl = new SelectorController()
             {
@@ -65,9 +65,9 @@ namespace Linkout.Tests
         public void SelectorControllerJsonResponseReturnServiceJson()
         {
             string responseFromServer = "the response from server";
-            HttpResponseMessage mockResp = new HttpResponseMessage { Content = new StringContent(responseFromServer, System.Text.Encoding.UTF8, "application/json") };
+            HttpResponseMessage mockResp = new JsonHttpResponseService().GetStringHttpResponseMessage(responseFromServer);  
 
-            var selSrvc = new Mock<IJsonResponseService>();
+            var selSrvc = new Mock<IJsonWebResponseService>();
             selSrvc.Setup(srvc => srvc.GetSelectorJson(It.IsAny<Uri>())).Returns(mockResp);
             ctrl.SelectorService = selSrvc.Object;
 

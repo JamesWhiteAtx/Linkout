@@ -11,10 +11,6 @@ namespace Linkout.Controllers
     {
         public HttpResponseMessage Get(string carid)
         {
-            //SelectorBuilder ub = new SelectorBuilder();
-            //ub.AddQuery("type", "carptrns");
-            //ub.AddQuery("carid", carid);
-            //return GetSelectorJson(ub.Uri);
             AddQuery("type", "carptrns");
             AddQuery("carid", carid);
             return JsonResponse();

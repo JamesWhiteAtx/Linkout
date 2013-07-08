@@ -47,10 +47,14 @@ linkout
             $scope.routeConfirm();
         }
     }
+    $scope.routeFaq = function (crumb) {
+        $location.path('/faq');
+    }
 
     $scope.leather = {};
     $scope.heater = {};
     $scope.schedule = {};
+    $scope.member = {};
 
     $scope.pickedLeather = function () {
         if (($scope.leather.leaCol) && ($scope.leather.leaCol.id) && ($scope.leather.ptrn)) {
@@ -151,6 +155,19 @@ linkout
         return total;
     }
 
+
+    $scope.memberInfo = function () {
+        if (
+            ($scope.member)
+            && ($scope.member.email)
+            && ($scope.member.lastname)
+            && ($scope.member.phone)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 } ])
 .controller('BreadCtrl', ['$scope', function ($scope) { } ])
@@ -719,10 +736,12 @@ linkout
 
     } ])
 .controller('ConfirmCtrl', ['$scope', function ($scope) {
-    var x = 1;
     $scope.clearCrumbs();
     $scope.addCrumb("Select Product");
     $scope.addCrumb("Schedule Installation");
     $scope.addCrumb("Confirm Your Order");
+} ])
+.controller('EmptyCtrl', ['$scope', function ($scope) {
+    $scope.clearCrumbs();
 } ])
 ;

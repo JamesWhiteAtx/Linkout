@@ -95,5 +95,48 @@ angular.module('linkout.directives', [])
             }
         };
     })
+    .directive('expandSect', function () {
+        return {
+            restrict: 'EA',
+            replace: true,
+            transclude: true,
+            scope: { title: '@expandTitle' },
+            template:
+                '<div class="sect-body">' +
+                    '<a href ng-click="toggle()"><h4> <i class="icon-expand" ng-show="hide"></i> <i class="icon-collapse" ng-hide="hide"></i> {{title}}</h4></a>' +
+                    '<div collapse="hide">' +
+                        '<div ng-transclude></div>' +
+                    '</div>' +
+                '</div>',
+            link: function (scope, element, attrs) {
+                scope.hide = true;
+                scope.toggle = function toggle() {
+                    scope.hide = !scope.hide;
+                }
+            }
+        }
+    })
+    .directive('faqQA', function () {
+        return {
+            restrict: 'EA',
+            replace: true,
+            transclude: true,
+            scope: { question:'@faqQ' },
+            template: 
+                '<div class="faq-body">' +
+                    '<a href ng-click="toggle()"><h5 class="faq-q"><span class="badge badge-inverse">Q:</span>{{question}}</h5></a>' +
+                    '<div collapse="hide">' +
+                        '<div class="pull-left"><span class="badge badge-inverse">A:</span></div>' +
+                        '<div ng-transclude></div>' +
+                    '</div>' +
+                '</div>',
+            link: function(scope, element, attrs) {
+                scope.hide = true;
+                scope.toggle = function toggle() {
+                    scope.hide = !scope.hide;
+                }
+            }
+        }
+    })
 
 ;

@@ -33,7 +33,7 @@ div.thin-banner
 
 #footer small
 {
-    font-size: 8px;
+    font-size: 10px;
 }
 
 ul.breadcrumb.lo-crumbs 
@@ -111,7 +111,27 @@ ul.breadcrumb.lo-crumbs
             border-radius: 0 4px 4px 0;
 }
 
+
 /* carousel */
+/** ui ********************/
+.carousel-inner {
+    background-color: #000;
+}
+.carousel-inner img{
+    margin: auto;
+}
+.carousel-indicators {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 5px;
+    text-align: center;
+}
+.carousel-indicators li {
+    float: none;
+    display: inline-block;
+}
+/**********************
 .inner-item {
     text-align: center;
     background-color: #000;
@@ -137,7 +157,7 @@ ul.breadcrumb.lo-crumbs
     float: none;
     display: inline-block;
 }
-
+*/
 div.select-box 
 {
     cursor: pointer;
@@ -399,4 +419,34 @@ div.schedule #inptDt
 {
     border-top: 1px solid #dddddd;
     margin-bottom: 5px;
+}
+
+/* FAQ */
+div.faq-body
+{
+    border-top :1px solid #d4d4d4;
+}
+
+div.faq-body span.badge
+{
+    margin-right: 5px;
+}
+
+/* footer */
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 70px;
+    border-top: 1px solid #e5e5e5;
+    background-color: #f5f5f5;
+}
+.footer-links {
+    margin: 10px 0;
+}
+.footer-links li {
+    display: inline;
+    padding: 0 2px;
+}
+.footer-links li:first-child {
+    padding-left: 0;
 }

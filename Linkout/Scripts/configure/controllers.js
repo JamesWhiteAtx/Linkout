@@ -20,10 +20,20 @@ configure
 
 .controller('TestCtrl', ['$scope', 'ProductList', 'ProductDefn', function ($scope, ProductList, ProductDefn) { 
     $scope.val = 'no val';
+    
     $scope.reVal = function()
     {
-        $scope.val = ProductList.getListing();
+        //$scope.val = ProductList.getListing();
+
+        ProductList.getListing().then(function(listing) {
+            $scope.val = listing;
+        }, function(err) {
+            $scope.val = err;
+        });
+
     }
+    
+    
     $scope.clearListing = function()
     {
         ProductList.clearListing();

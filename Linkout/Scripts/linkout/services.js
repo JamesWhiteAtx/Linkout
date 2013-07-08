@@ -50,34 +50,39 @@ angular.module('linkout.services', ['ngResource'])
     } ])
 
 
-    .factory('ProductList', ['$resource', '$cacheFactory', 'ProductDefn', function ($resource, $cacheFactory, ProductDefn) {
+    .factory('ProductList', ['$http', '$q', '$resource', '$cacheFactory', 'ProductDefn', function ($http, $q, $resource, $cacheFactory, ProductDefn) {
         var listingKey = 'listingKey';
         var cache = $cacheFactory('ProductList');
         var ListingSrcv = $resource('/product/listing');
 
         return {
+
             getListing: function () {
+                var deferred = $q.defer();
+
                 var listing = cache.get(listingKey);
-                if (!listing) {
+                if (listing) {
+                    deferred.resolve(listing);
+                } else {
+                    $http.get('/product/listing').success(function (data) {
 
-                    var srvcList = ListingSrcv.query(
-                        function (data, status, headers, config) {
-                            var listing = ProductDefn.makeProdList()
+                        var listing = ProductDefn.makeProdList()
 
-                            if (angular.isArray(srvcList)) {
-                                for (var i = 0; i < srvcList.length; i++) {
-                                    listing.mapProd(srvcList[i]);
-                                };
+                        if (angular.isArray(data)) {
+                            for (var i = 0; i < data.length; i++) {
+                                listing.mapProd(data[i]);
                             };
-                            cache.put(listingKey, listing);
-                        }
-                    );
-
-
-                    
+                        };
+                        deferred.resolve(listing);
+                        cache.put(listingKey, listing);
+                    }).error(function () {
+                        deferred.reject();
+                    });
                 }
-                return listing;
+
+                return deferred.promise;
             },
+
             clearListing: function () {
                 cache.remove(listingKey);
             }
@@ -128,7 +133,7 @@ angular.module('linkout.services', ['ngResource'])
                     assgn(self.h1);
                 } else if ((!rows) && (heaters == 2)) {
                     assgn(self.h2);
-                
+
                 } else if ((rows == 1) && (!heaters)) {
                     assgn(self.l1);
                 } else if ((rows == 1) && (heaters == 1)) {

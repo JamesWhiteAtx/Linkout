@@ -177,6 +177,7 @@
     <Content Include="Images\Linkout\cc_logo.gif" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\Linkout\HeatersRatio.png" />
+    <Content Include="Images\Linkout\history.png" />
     <Content Include="Images\Linkout\img_not_avail.png" />
     <Content Include="Images\Linkout\InsNetlogo.png" />
     <Content Include="Images\Linkout\interior-black.png" />
@@ -185,8 +186,10 @@
     <Content Include="Images\Linkout\loading-large.gif" />
     <Content Include="Images\Linkout\loading.gif" />
     <Content Include="Images\Linkout\logo.png" />
+    <Content Include="Images\Linkout\partners.png" />
     <Content Include="Images\Linkout\roadwire_cc.png" />
     <Content Include="Images\Linkout\RW-SH4P.png" />
+    <Content Include="Images\Linkout\testimonials.png" />
     <Content Include="Images\Linkout\two_tone_thumb.png" />
     <Content Include="Css\linkout.css" />
     <Content Include="Css\bootstrap\bootstrap-responsive.css" />
@@ -715,6 +718,9 @@
     <Content Include="Views\Mock\Product.cshtml" />
     <Content Include="Views\View1.cshtml" />
     <Content Include="Views\Configure\Partials\Pricing.cshtml" />
+    <Content Include="Views\Linkout\Partials\Faq.cshtml" />
+    <Content Include="Views\Linkout\Partials\about.cshtml" />
+    <Content Include="Views\Linkout\Partials\Videos.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

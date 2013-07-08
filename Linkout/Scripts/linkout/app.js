@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on services and directives
-var linkout = angular.module('linkout', ['linkout.services', 'linkout.directives']) //'ui.bootstrap', 'linkout.filters'
+var linkout = angular.module('linkout', ['ui.bootstrap', 'linkout.services', 'linkout.directives']) //'ui.bootstrap', 'linkout.filters'
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/type', {
             title: 'type',
@@ -29,6 +29,22 @@ var linkout = angular.module('linkout', ['linkout.services', 'linkout.directives
             templateUrl: '/Linkout/Partials/Confirm',
             controller: "ConfirmCtrl"
         });
+        $routeProvider.when('/about', {
+            title: 'faq',
+            templateUrl: '/Linkout/Partials/About',
+            controller: "EmptyCtrl"
+        });
+        $routeProvider.when('/faq', {
+            title: 'faq',
+            templateUrl: '/Linkout/Partials/Faq',
+            controller: "EmptyCtrl"
+        });
+        $routeProvider.when('/videos', {
+            title: 'videos',
+            templateUrl: '/Linkout/Partials/Videos',
+            controller: "EmptyCtrl"
+        });
+
         $routeProvider.otherwise({ redirectTo: '/type' });
     } ])
 ;

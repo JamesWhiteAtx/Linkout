@@ -39,7 +39,7 @@
               
                   <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li ng-class="{active: title=='type'}"> <a href ng-click="routeType()">Costco Offers</a></li>
+                        <li ng-class="{active: title=='type'}"> <a href ng-click="routeType()">Costco Offers</a> </li>
                         <li ng-class="{active: title=='leather'}"> <a href ng-click="routeLeather()">Leather</a> </li>
                         <li ng-class="{active: title=='heaters'}"> <a href ng-click="routeHeaters()">Heaters</a> </li>   
                         <li ng-class="{active: title=='schedule'}" ng-show="pickedProduct()"> 
@@ -74,28 +74,27 @@
 
     </div>
 
-    <footer id="footer" class="container">
-        <div class="row">
-            <div class="span2">
-                <a href="http://roadwire.com/s.nl/sc.10/.f" title="About Us">About Roadwire</a>
-            </div>
-            <div class="span2">
-                <a href="http://roadwire.com/s.nl/c.801095/sc.10/category.321192/.f" title="Contact" id="footer_contactus">Contact Us</a>
-            </div>
-            <div class="span2">
-                <a href="http://roadwire.com/s.nl/c.801095/it.I/id.19/.f" title="Return Policy" id="footer_return">Return Policy</a>
-            </div>
-            <div class="span2">
-                <a href="http://roadwire.com/s.nl/c.801095/it.I/id.4/.f" title="Warranty" id="footer_warranty">Warranty</a>
-            </div>
-            <div class="pull-right">
-                <a target="_blank" href="http://www.facebook.com/Roadwire" class="btn btn-facebook"><i class="icon-facebook" title="Connect with Facebook"></i></a>
-                <a target="_blank" href="http://twitter.com/Roadwire" class="btn btn-twitter"><i class="icon-twitter" title="Connect with Twitter"></i></a>
-                <a target="_blank" href="https://plus.google.com/102614739915320240152/posts" class="btn btn-google-plus"><i class="icon-google-plus" title="Connect with Google Plus"></i></a>
-                <a target="_blank" href="http://www.youtube.com/user/roadwireflix" class="btn btn-youtube"><i class="icon-youtube" title="Watch us on YouTube"></i></a>
-            </div>
-
+    <footer id="footer" class="footer container">
+        
+        <div class="pull-right">
+            <a target="_blank" href="http://www.facebook.com/Roadwire" class="btn btn-facebook"><i class="icon-facebook" title="Connect with Facebook"></i></a>
+            <a target="_blank" href="http://twitter.com/Roadwire" class="btn btn-twitter"><i class="icon-twitter" title="Connect with Twitter"></i></a>
+            <a target="_blank" href="https://plus.google.com/102614739915320240152/posts" class="btn btn-google-plus"><i class="icon-google-plus" title="Connect with Google Plus"></i></a>
+            <a target="_blank" href="#/videos"  class="btn btn-youtube"><i class="icon-youtube" title="Watch us on YouTube"></i></a>
         </div>
+
+        <ul class="footer-links">
+          <li><a href="#/faq" title="About Us">FAQ</a></li>
+          <li class="muted">·</li>
+          <li><a href="#/about" title="About Us">About Roadwire</a></li> @*<a href="http://roadwire.com/s.nl/sc.10/.f" title="About Us">About Roadwire</a>*@
+          <li class="muted">·</li>
+          <li><a href="http://roadwire.com/s.nl/c.801095/sc.10/category.321192/.f" title="Contact" id="footer_contactus">Contact Us</a></li>
+          <li class="muted">·</li>
+          <li><a href="http://roadwire.com/s.nl/c.801095/it.I/id.19/.f" title="Return Policy" id="footer_return">Return Policy</a></li>
+          <li class="muted">·</li>
+          <li><a href="http://roadwire.com/s.nl/c.801095/it.I/id.4/.f" title="Warranty" id="footer_warranty">Warranty</a></li>
+        </ul>        
+
         <small>
             Copyright &copy; @DateTime.Now.Year Roadwire LLC. All rights reserved. The Roadwire trademark and logo are registered trademarks of Roadwire LLC. All other registered trademarks or trademarks are property of their respective owners.
         </small>
@@ -111,7 +110,7 @@
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angular-resource")
     @Scripts.Render("~/bundles/bootstrapjs")
-@*    @Scripts.Render("~/bundles/ui-boots")*@
+    @Scripts.Render("~/bundles/ui-boots")
     @Scripts.Render("~/bundles/linkout")
 
 }

@@ -2,7 +2,48 @@
 /* Linkout Controllers */
 
 linkout
-.controller('LinkoutCtrl', ['$scope', '$location', 'ProductPrice', function ($scope, $location, ProductPrice) {
+.controller('DialogController', ['$scope', 'dialog', function ($scope, dialog) {
+    $scope.close = function (result) {
+        dialog.close(result);
+    };
+} ])
+.controller('LinkoutCtrl', ['$scope', '$location', '$dialog', 'ProductPrice', function ($scope, $location, $dialog, ProductPrice) {
+    var t = 
+    '<div class="modal-header">' +
+    '<h3>Why Professional Installation?</h3>' +
+    '</div>' +
+    '<div class="modal-body">' +
+    '<div class="pull-left"> ' +
+    '<img alt="" src="\/Images\/Linkout\/testimonials.png" class="img-polaroid"/>' +
+    '</div>' +
+    '<p>There is nothing quite as satisfying as building or fixing something yourself. However, there are some things that are better left to the professionals. While Roadwire\'s products help deliver the ultimate driving experience, the greatest and most long-lasting enjoyment comes when they are properly installed.</p>' +
+    '<p>For this reason, Roadwire has bundled professional installation into all of its product packages. Roadwire has partnered with InstallerNet, the largest independent installation network in the country, to match you with qualified, top-rated, local restylers that can help you get the most out of your Roadwire products. When you make a purchase on eBay, you will receive an InstallCard. Simply visit the website on the back of the card or call the number, enter the code, and schedule your install. It is that easy. If you run in to any problems, InstallerNet\'s friendly installation coordinators can assist you with any questions you may have.</p>'+
+    '<p>Now, Roadwire and InstallerNet have removed the hassle from buying products on eBay. We have bundled the product, professional installation, free shipping, and our industry-leading 3 year/36,000 mile warranty into one low price. Buy with confidence knowing you are getting the best deal, direct from the manufacturer to you!</p>'+
+    '</div>' +
+    '<div class="modal-footer">' +
+    '<button ng-click="close(result)" class="btn btn-primary" >Close</button>' +
+    '</div>';
+
+    $scope.opts = {
+        backdrop: true,
+        backdropFade: true,
+        dialogFade: true,
+        keyboard: true,
+        backdropClick: true,
+        template: t,
+        controller: 'DialogController'
+    };
+
+    $scope.installInfo = function () {
+        var d = $dialog.dialog($scope.opts);
+        d.open().then(function (result) {
+            if (result) {
+                alert('dialog closed with result: ' + result);
+            }
+        });
+    };
+
+    
     $scope.breadcrumbs = [];
 
     $scope.clearCrumbs = function () {

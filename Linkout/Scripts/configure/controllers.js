@@ -18,140 +18,137 @@ configure
 .controller('MenuCtrl', ['$scope', function ($scope) { } ])
 .controller('CarsCtrl', ['$scope', function ($scope) { } ])
 
-.controller('TestCtrl', ['$scope', 'ProductList', 'ProductDefn', function ($scope, ProductList, ProductDefn) { 
-    $scope.val = 'no val';
-    
-    $scope.reVal = function()
+.controller('PricingCtrl', ['$scope', 'ProductList', function ($scope, ProductList) { 
+   
+    $scope.listing = {};
+
+    $scope.loadListing = function()
     {
-        //$scope.val = ProductList.getListing();
-
-        ProductList.getListing().then(function(listing) {
-            $scope.val = listing;
+        ProductList.loadListing().then(function(listing) {
+            $scope.listing = listing;
         }, function(err) {
-            $scope.val = err;
+            $scope.listing = null;
         });
-
     }
-    
     
     $scope.clearListing = function()
     {
         ProductList.clearListing();
     }
 
-    var x = ProductDefn.makeProdList()
-    x.l1.description = 'one';
+    $scope.cacheListing = function()
+    {
+        ProductList.cacheListing($scope.listing);
+    }
 
-    var y = ProductDefn.makeProdList()
-    y.l1.description = 'Why';
-
+    $scope.loadListing();
 } ])
 
-.controller('PricingCtrl', ['$scope', function ($scope) { 
-    var makeProduct = function(typ) {
-        return {
-            type: typ,
-            descirption: '',
-            price: '',
-            ccItemId: '',
-            ccUrl: '',
-            discount: function() {return 0;}
-        };
-    };
-    var makePricer = function() {
-        var self = {};
-        
-        self.l1 = makeProduct('1 Row Kit');
-        self.l2 = makeProduct('2 Row Kit');
-        self.l3 = makeProduct('3 Row Kit');
+//.controller('PricingCtrl', ['$scope', function ($scope) { 
+//    var makeProduct = function(typ) {
+//        return {
+//            type: typ,
+//            descirption: '',
+//            price: '',
+//            ccItemId: '',
+//            ccUrl: '',
+//            discount: function() {return 0;}
+//        };
+//    };
+//    var makePricer = function() {
+//        var self = {};
+//        
+//        self.l1 = makeProduct('1 Row Kit');
+//        self.l2 = makeProduct('2 Row Kit');
+//        self.l3 = makeProduct('3 Row Kit');
 
-        self.h1 = makeProduct('1 Heater');
-        self.h2 = makeProduct('2 Heaters');
+//        self.h1 = makeProduct('1 Heater');
+//        self.h2 = makeProduct('2 Heaters');
 
-        self.l1h1 = makeProduct(self.l1.type+' '+self.h1.type);
-        self.l2h1 = makeProduct(self.l2.type+' '+self.h1.type);
-        self.l3h1 = makeProduct(self.l3.type+' '+self.h1.type);
+//        self.l1h1 = makeProduct(self.l1.type+' '+self.h1.type);
+//        self.l2h1 = makeProduct(self.l2.type+' '+self.h1.type);
+//        self.l3h1 = makeProduct(self.l3.type+' '+self.h1.type);
 
-        self.l1h2 = makeProduct(self.l1.type+' '+self.h2.type);
-        self.l2h2 = makeProduct(self.l2.type+' '+self.h2.type);
-        self.l3h2 = makeProduct(self.l3.type+' '+self.h2.type);
+//        self.l1h2 = makeProduct(self.l1.type+' '+self.h2.type);
+//        self.l2h2 = makeProduct(self.l2.type+' '+self.h2.type);
+//        self.l3h2 = makeProduct(self.l3.type+' '+self.h2.type);
 
-        function safeNum(v) {
-            var f = parseFloat(v);
-            if (angular.isNumber(f)) {
-                return f;
-            } else {
-                return 0;
-            }
-        }
+//        function safeNum(v) {
+//            var f = parseFloat(v);
+//            if (angular.isNumber(f)) {
+//                return f;
+//            } else {
+//                return 0;
+//            }
+//        }
 
-        function discount(lp, hp, lhp) {
-            return (safeNum(lp) + safeNum(hp)) - safeNum(lhp);
-        }
+//        function discount(lp, hp, lhp) {
+//            return (safeNum(lp) + safeNum(hp)) - safeNum(lhp);
+//        }
 
-        self.h2.discount = function() {
-            return discount(self.h1.price, self.h1.price, self.h2.price);
-        };
+//        self.h2.discount = function() {
+//            return discount(self.h1.price, self.h1.price, self.h2.price);
+//        };
 
-        self.l1h1.discount = function() {
-            return discount(self.l1.price, self.h1.price, self.l1h1.price);
-        };
-        self.l1h2.discount = function() {
-            return discount(self.l1.price, self.h2.price, self.l1h2.price);
-        };
+//        self.l1h1.discount = function() {
+//            return discount(self.l1.price, self.h1.price, self.l1h1.price);
+//        };
+//        self.l1h2.discount = function() {
+//            return discount(self.l1.price, self.h2.price, self.l1h2.price);
+//        };
 
-        self.l2h1.discount = function() {
-            return discount(self.l2.price, self.h1.price, self.l2h1.price);
-        };
-        self.l2h2.discount = function() {
-            return discount(self.l2.price, self.h2.price, self.l2h2.price);
-        };
+//        self.l2h1.discount = function() {
+//            return discount(self.l2.price, self.h1.price, self.l2h1.price);
+//        };
+//        self.l2h2.discount = function() {
+//            return discount(self.l2.price, self.h2.price, self.l2h2.price);
+//        };
 
-        self.l3h1.discount = function() {
-            return discount(self.l3.price, self.h1.price, self.l3h1.price);
-        };
-        self.l3h2.discount = function() {
-            return discount(self.l3.price, self.h2.price, self.l3h2.price);
-        };
+//        self.l3h1.discount = function() {
+//            return discount(self.l3.price, self.h1.price, self.l3h1.price);
+//        };
+//        self.l3h2.discount = function() {
+//            return discount(self.l3.price, self.h2.price, self.l3h2.price);
+//        };
 
-        self.prodList = [];
+//        self.prodList = [];
 
-        self.prodList.push(self.h1);
-        self.prodList.push(self.h2);
+//        self.prodList.push(self.h1);
+//        self.prodList.push(self.h2);
 
-        self.prodList.push(self.l1);
-        self.prodList.push(self.l1h1);
-        self.prodList.push(self.l1h2);
-        
-        self.prodList.push(self.l2);
-        self.prodList.push(self.l2h1);
-        self.prodList.push(self.l2h2);
+//        self.prodList.push(self.l1);
+//        self.prodList.push(self.l1h1);
+//        self.prodList.push(self.l1h2);
+//        
+//        self.prodList.push(self.l2);
+//        self.prodList.push(self.l2h1);
+//        self.prodList.push(self.l2h2);
 
-        self.prodList.push(self.l3);
-        self.prodList.push(self.l3h1);
-        self.prodList.push(self.l3h2);
+//        self.prodList.push(self.l3);
+//        self.prodList.push(self.l3h1);
+//        self.prodList.push(self.l3h2);
 
-        return self;
-    };
+//        return self;
+//    };
 
-    $scope.pricer = makePricer();
+//    $scope.pricer = makePricer();
 
-    $scope.pricer.l1.description = 'one';
-    $scope.pricer.l1.price = 100;
+//    $scope.pricer.l1.description = 'one';
+//    $scope.pricer.l1.price = 100;
 
-    $scope.pricer.l2.description = 'two';
-    $scope.pricer.l2.price = 200;
+//    $scope.pricer.l2.description = 'two';
+//    $scope.pricer.l2.price = 200;
 
-    $scope.pricer.l3.description = 'three';
-    $scope.pricer.l3.price = 300;
+//    $scope.pricer.l3.description = 'three';
+//    $scope.pricer.l3.price = 300;
 
-    $scope.pricer.h1.description = 'h 1';
-    $scope.pricer.h1.price = 50;
+//    $scope.pricer.h1.description = 'h 1';
+//    $scope.pricer.h1.price = 50;
 
-    $scope.pricer.h2.description = 'h 2';
-    $scope.pricer.h2.price = 100;
+//    $scope.pricer.h2.description = 'h 2';
+//    $scope.pricer.h2.price = 100;
 
-} ])
+//} ])
 
 .controller("TreeCtrl", ['$scope', function($scope) {
 

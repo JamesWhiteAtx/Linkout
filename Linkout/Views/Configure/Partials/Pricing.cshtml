@@ -8,14 +8,8 @@
 
 <h4>Costco Product Listing</h4>
 
-<section ng-controller="TestCtrl">
-    <p>val: {{val}}</p>
-    <button class="btn" type="button" ng-click="reVal()" >re val</button>
-    <button class="btn" type="button" ng-click="clearListing()" >clearListing</button>
-    
-</section>
 
-<section ng-controller="PricingCtrl">
+<section id="pricing-listing">
 
     <div class="row">
         <div class="span2"><strong>Product</strong></div>
@@ -23,9 +17,9 @@
         <div class="span2"><strong>Price</strong></div>
         <div class="span2 text-right"><strong>Discount</strong></span> </div>
     </div>
-    <form name="prodForm" class="form-inline" ng-repeat="p in pricer.prodList">
+    <form name="prodForm" class="form-inline" ng-repeat="p in listing.prodList">
         <div class="row">
-            <div class="span2"> {{p.type}} </div>
+            <div class="span2"> {{$index+1}}) <strong>{{p.type}}</strong> </div>
             <div class="span6"> <input type="text" class="span6" ng-model="p.description" placeholder="Descripton" /> </div>
             <div class="span2"> 
                 <input type="text" name="price" id="price" class="span2" ng-model="p.price" ng-pattern="/^\d+\.?\d*$/" placeholder="Price"/>
@@ -36,6 +30,12 @@
             <div class="span2 text-right"> <span ng-show="p.discount()">{{p.discount() | currency}}</span> </div>
         </div>
     </form>
+
+    <button class="btn" type="button" ng-click="cacheListing()">
+        <i class="icon-save"></i>
+        Cache Listing
+    </button>
+
 
 </section>
 

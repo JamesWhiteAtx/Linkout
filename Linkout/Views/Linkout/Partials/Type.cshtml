@@ -3,7 +3,7 @@
       <img ng-src="@Url.Content("~/Images/Linkout/interior-black.png")">
       <div class="carousel-caption">
         <h4>The Roadwire Difference - Add Luxury to Your Car</h4>
-        <h4>Professional Installation</h4>
+        <h4><a href ng-click="installInfo()"><i class="icon-info-sign"></i> Professional Installation Included</a></h4>
         <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non.</p>
         <h4>Exclusive Costco Offers</h4>
         <p><a href ng-click="routeLeather()">Leather Interirors </a></p>
@@ -100,7 +100,7 @@
                     <div class="span3">
                         <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
                         <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor.</p>
-                        <p><strong>Professional Installation Included</strong></p>
+                        <p><strong><a href ng-click="installInfo()"><i class="icon-info-sign"></i> Professional Installation Included</a></strong></p>
                     
                         <p>
                             @Html.Partial("Partials/OrderLeather")
@@ -120,7 +120,7 @@
                     </div>
                     <div class="span4">
                         <p>Carbon fiber seat heater can be installed in your car seats under your new upholstery. Features thin, flexible cloth-like pads. Auto manufacturers use carbon fiber in factory seat heater systems. Pad style is traditionally larger than wired element pads. Provides more comfortable heat disbursement than wired-element systems. Can be trimmed and holes cut to accommodate installation in varied vehicles.</p>
-                        <p><strong>Professional Installation Included</strong></p>
+                        <p><strong><a href ng-click="installInfo()"><i class="icon-info-sign"></i> Professional Installation Included</a></strong></p>
                         <p>
                             @Html.Partial("Partials/OrderHeaters")
                         </p>

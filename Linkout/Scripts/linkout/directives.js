@@ -138,5 +138,4 @@ angular.module('linkout.directives', [])
             }
         }
     })
-
 ;

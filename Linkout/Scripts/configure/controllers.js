@@ -17,41 +17,39 @@ configure
 } ])
 .controller('MenuCtrl', ['$scope', function ($scope) { } ])
 
-.controller('PricingCtrl', ['$scope', 'ProductList', function ($scope, ProductList) { 
-   
+.controller('PricingCtrl', ['$scope', 'ProductList', function ($scope, ProductList) {
+
     $scope.listing = {};
 
-    $scope.loadListing = function()
-    {
-        ProductList.loadListing().then(function(listing) {
+    $scope.loadListing = function () {
+        ProductList.loadListing().then(function (listing) {
             $scope.listing = listing;
-        }, function(err) {
+        }, function (err) {
             $scope.listing = null;
         });
     }
-    
-    $scope.clearListing = function()
-    {
+
+    $scope.clearListing = function () {
         ProductList.clearListing();
     }
 
-    $scope.cacheListing = function()
-    {
+    $scope.cacheListing = function () {
         ProductList.cacheListing($scope.listing);
     }
 
     $scope.loadListing();
 } ])
 
-.controller('CarsCtrl', ['$scope', function ($scope) { 
+.controller('CarsCtrl', ['$scope', function ($scope) {
     $scope.imthecarscontroller = 'imthecarscontroller';
 } ])
 .controller("TreeCtrl", ['$scope', 'TreeService', function ($scope, TreeService) {
 
     $scope.tree = TreeService.rootNode("node0");
-    $scope.tree.addKid("node01");
-    $scope.tree.addKid("node02")
-    $scope.tree.addKid("node03")
+    $scope.tree.loadKids();
+    //$scope.tree.addKid("node01");
+    //$scope.tree.addKid("node02")
+    //$scope.tree.addKid("node03")
     $scope.tree.expanded = true;
 } ])
 

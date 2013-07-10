@@ -3,11 +3,15 @@
 }
 
     <div>
-        <i class="icon-caret-right icon-large" title="expand" ng-show="node.canExpand()" ng-click="node.expand()"></i>
-        <i class="icon-caret-down icon-large" title="collapse" ng-show="node.canCollapse()" ng-click="node.collapse()"></i>
-        {{node.type}} {{node.name}} @*showing:{{node.showing()}} expanded:{{node.expanded}}*@
+        <span ng-click="node.explapse()">
+            <i class="icon-caret-right icon-large" title="expand" ng-show="node.canExpand()"></i>
+            <i class="icon-caret-down icon-large" title="collapse" ng-show="node.canCollapse()"></i>
+            {{node.type}} {{node.name}} @*showing:{{node.showing()}} expanded:{{node.expanded}}*@
+        </span>
 
-        <button ng-show="node.canHaveKids()" class="btn btn-mini" ng-click="node.addKid()"><i class="icon-plus"></i></button>
+        <span ng-show="node.isLoading" class="loading">...</span>
+
+        <button ng-show="node.canHaveKids()" class="btn btn-mini" ng-click="node.loadKids()"><i class="icon-plus"></i></button>
 
     </div>
 

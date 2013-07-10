@@ -57,3 +57,7 @@
  .tree li div:hover+ul li::after, .tree li div:hover+ul li::before, .tree li a:hover+ul::before, .tree li a:hover+ul ul::before {
     border-color: #94a0b4;
 }
+.loading
+{
+    background:url('/Images/Linkout/loading.gif') no-repeat center center;
+}

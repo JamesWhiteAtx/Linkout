@@ -4,6 +4,8 @@
 
 <div ng-controller="TreeCtrl">
 
+    <div ng-show="tree.isLoading" class="loading">...</div>
+    
     <ul class="tree">
         <li ng-repeat="node in tree.kids" ng-include src="'Configure/Partials/Node'">
         </li>

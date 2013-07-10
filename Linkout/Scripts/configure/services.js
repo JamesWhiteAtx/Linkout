@@ -8,83 +8,120 @@ angular.module('configure.services', ['ngResource'])
 //IntCol
 
     .factory('PtrnService', [function () {
+    } ])
+    .factory('CarService', ['$q', 'Ptrns', 'NodeService', 'PtrnService', function ($q, Ptrns, NodeService, PtrnService) {
+    } ])
+    .factory('TrimService', ['$q', 'Cars', 'NodeService', 'CarService', function ($q, Cars, NodeService, CarService) {
+    } ])
+    .factory('BodyService', ['$q', 'Trims', 'NodeService', 'TrimService', function ($q, Trims, NodeService, TrimService) {
+    } ])
+    .factory('ModelService', ['$q', 'Bodies', 'NodeService', 'BodyService', function ($q, Bodies, NodeService, BodyService) {
+    } ])
+    .factory('YearService', ['$q', 'Models', 'NodeService', 'ModelService', function ($q, Models, NodeService, ModelService) {
         return {
-            getType: function () { return "Pattern"; },
-            getSubService: function () { return null; }
+            loadKids: function (parentNode) {
+                var delay = $q.defer();
+                Models.get({ makeid: parentNode.data.id, yearid: '' },
+                    function (result) {
+                        if ((result) && (result.success)) {
+                            var list = $.map(result.models, function (item) {
+                                return NodeService.newNode("Model", item.name, item, ModelService);
+                            });
+                            delay.resolve(list);
+                        } else { delay.reject(result); }
+                    },
+                    function (result) { delay.reject(result); }
+                );
+                return delay.promise;
+            }
         }
     } ])
-    .factory('CarService', ['PtrnService', function (PtrnService) {
+    .factory('MakeService', ['KidService', 'Years', 'YearService', function (KidService, Years, YearService) {
         return {
-            getType: function () { return "Car"; },
-            getSubService: function () { return PtrnService; }
+            loadKids: function (parentNode) {
+                return KidService.loadKids(parentNode, Years, "years", { makeid: parentNode.data.id }, "Year", YearService);
+            }
         }
     } ])
-    .factory('TrimService', ['CarService', function (CarService) {
+    .factory('RootService', ['KidService', 'Makes', 'MakeService', function (KidService, Makes, MakeService) {
         return {
-            getType: function () { return "Trim"; },
-            getSubService: function () { return CarService; }
+            loadKids: function (parentNode) {
+                return KidService.loadKids(parentNode, Makes, "makes", {}, "Make", MakeService);
+            }
         }
     } ])
-    .factory('BodyService', ['TrimService', function (TrimService) {
+
+    .factory('KidService', ['$q', 'NodeService', function ($q, NodeService) {
         return {
-            getType: function () { return "Body"; },
-            getSubService: function () { return TrimService; }
+            loadKids: function (parentNode, apiSrvc, listArr, parm, type, nodeSrvc) {
+                var delay = $q.defer();
+                apiSrvc.get(parm,
+                    function (result) {
+                        if ((result) && (result.success)) {
+                            var list = $.map(result[listArr], function (item) {
+                                var newNode = NodeService.newNode(type, item.name, item, nodeSrvc);
+                                return newNode;
+                            });
+                            delay.resolve(list);
+                        } else { delay.reject(result); }
+                    },
+                    function (result) { delay.reject(result); }
+                );
+                return delay.promise;
+            }
         }
     } ])
-    .factory('ModelService', ['BodyService', function (BodyService) {
-        return {
-            getType: function () { return "Model"; },
-            getSubService: function () { return BodyService; }
-        }
-    } ])
-    .factory('YearService', ['ModelService', function (ModelService) {
-        return {
-            getType: function () { return "Year"; },
-            getSubService: function () { return ModelService; }
-        }
-    } ])
-    .factory('MakeService', ['YearService', function (YearService) {
-        return {
-            getType: function () { return "Make"; },
-            getSubService: function () { return YearService; }
-        }
-    } ])
-    .factory('RootService', ['MakeService', function (MakeService) {
-        return {
-            getType: function () { return "Root"; },
-            getSubService: function () { return MakeService; }
-        }
-    } ])
-    .factory('TreeService', ['RootService', function (RootService) {
-        var newNode = function (name, subService) {
-            var subServer = subService;
+
+    .factory('NodeService', [function (RootService) {
+        var newNode = function (type, name, data, service) {
             var node = {}
+            var nodeService = service;
 
             //Public property    
-            node.type = subServer.getType();
+            node.type = type; //nodeService.getType();
             node.name = name;
+            node.data = data;
             node.kids = [];
+            node.loaded = false;
             node.parentNode = null;
+            node.isLoading = false;
             node.expanded = false;
 
             //Public methods
-
             node.canHaveKids = function () {
-                var subService = subServer.getSubService();
-                return (subService);
-                //return true; // (!!subServer.getSubService());
-            };
-            node.addKid = function (name) {
-                var subService = subServer.getSubService();
-                if (subService) {
-                    var newKid = newNode(name, subService);
-                    node.kids.push(newKid);
-                    newKid.parentNode = node;
-                    node.expanded = true;
-                    return newKid;
+                if (!nodeService) {
+                    return true;
+                };
+                var canHaveFcn = nodeService.canHaveKids;
+                if (canHaveFcn) {
+                    return canHaveFcn();
                 } else {
-                    return null;
-                }
+                    return true;
+                };
+            };
+            node.loadKids = function () {
+                node.isLoading = true;
+                nodeService.loadKids(node)
+                    .then(
+                        function (kids) {
+                            for (var i = 0; i < kids.length; i++) {
+                                node.addKid(kids[i]);
+                            };
+                            node.isLoading = false;
+                            node.loaded = true;
+                        },
+                        function (err) {
+                            node.kids = [];
+                            node.isLoading = false;
+                            node.loaded = true;
+                        }
+                    );
+            };
+            node.addKid = function (newKid) {
+                //var newKid = newNode(name, nodeService);
+                node.kids.push(newKid);
+                newKid.parentNode = node;
+                return newKid;
             };
             node.clearKids = function () {
                 node.nodes = [];
@@ -95,17 +132,38 @@ angular.module('configure.services', ['ngResource'])
             };
 
             node.canExpand = function () {
-                return (node.hasKids() && (!node.expanded));
+                return (
+                    ((!node.loaded && node.canHaveKids()) || (node.loaded && node.hasKids()))
+                    &&
+                    (!node.expanded)
+                );
             }
             node.canCollapse = function () {
                 return (node.hasKids() && node.expanded);
             }
-
             node.expand = function () {
-                node.expanded = true;
+                if (node.isLoading) {
+                    return;
+                };
+                if (node.hasKids()) {
+                    node.expanded = true;
+                } else if (!node.loaded && node.canHaveKids()) {
+                    node.loadKids();
+                    node.expanded = true;
+                }
             }
             node.collapse = function () {
                 node.expanded = false;
+            }
+            node.explapse = function () {
+                if (node.isLoading) {
+                    return;
+                };
+                if (node.expanded) {
+                    node.collapse();
+                } else {
+                    node.expand();
+                }
             }
 
             node.showing = function () {
@@ -121,9 +179,15 @@ angular.module('configure.services', ['ngResource'])
         };
 
         return {
-            rootNode: function (name) { return newNode(name, RootService); }
+            newNode: newNode
         };
 
+    } ])
+
+    .factory('TreeService', ['NodeService', 'RootService', function (NodeService, RootService) {
+        return {
+            rootNode: function (name) { return NodeService.newNode("Root", name, {}, RootService); }
+        };
     } ])
 
 ;

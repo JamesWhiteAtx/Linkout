@@ -2,29 +2,70 @@
     ViewBag.Title = "Cars";
 }
 
+<style>
+    .fill-body
+    {
+        position:fixed;
+        top:120px;
+        bottom:5px;
+        overflow: scroll;
+    }
+    #tree-display 
+    {
+        left:50px;
+        right: 400px;
+    }
+    #node-details 
+    {
+        right: 50px;
+        width:300px;
+    }
+</style>
+
 <div ng-controller="TreeCtrl">
 
-    <div ng-show="tree.isLoading" class="loading">...</div>
+    <div id="tree-display" class="fill-body well">
+
+        <div ng-show="tree.isLoading" class="loading">...</div>
+
+        <ul class="tree">
+            <li ng-repeat="node in tree.kids" ng-include src="'Configure/Partials/Node'">
+            </li>
+        </ul>
+
+    </div>
     
-    <ul class="tree">
-        <li ng-repeat="node in tree.kids" ng-include src="'Configure/Partials/Node'">
-        </li>
-    </ul>
+    <div id="node-details" class="fill-body well">
+        <table class="table table-condensed" ng-show="selectNode">
+            <tr>
+                <th>{{selectNode.type}}</th>
+                <th>{{selectNode.name}}</th>
+            </tr>
+            <tr ng-repeat="detail in selectNode.details" >
+                <td>{{detail.name}}</td>
+                <td>{{detail.value}}</td>
+                <td ng-show="detail.editurl">
+                    <a href="{{detail.editurl}}" target="_blank" title="Edit Car Record">
+                        <img ng-src="/Images/Configure/NetSuite.ico" alt="NetSuite" />
+                    </a>
+                
+                </td>
+            </tr>
+        </table>
+    </div>
 
 </div>
 
-@*
-<script type="text/ng-template"  id="tree_item_renderer.html">
-    {{data.name}}
-    <button class="btn btn-primary" ng-click="add(data)">Add child to {{data.name}}</button>
-    <button class="btn btn-primary" ng-click="addSibxx(data)">Delete {{data.name}}</button>
-    <button class="btn btn-primary" ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete childeren of {{data.name}}</button>
-    <ul>
-        <li ng-repeat="data in data.nodes" ng-include="'tree_item_renderer.html'"></li>
-    </ul>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(window).bind('scroll', function () {
+            var s = $(window).scrollTop();
+            var p = 120 - s;
+            var t = 0;
+            if (p > 0) {
+                t = p;
+            }
+            $('.fill-body').css('top', t + 'px');
+        });
+    });
 </script>
-<hr />
-<ul ng-controller="TreeController">
-    <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
-</ul>
-*@

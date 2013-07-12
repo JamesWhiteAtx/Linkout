@@ -171,7 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Css\bootstrap\social-buttons.css" />
+    <Content Include="Css\configure.css" />
     <Content Include="Css\tree.css" />
+    <Content Include="Images\Configure\NetSuite.ico" />
     <Content Include="Images\Linkout\auto_upholstery_thumbnail.png" />
     <Content Include="Images\Linkout\banner.jpg" />
     <Content Include="Images\Linkout\cc_logo.gif" />
@@ -721,6 +723,7 @@
     <Content Include="Views\Linkout\Partials\Faq.cshtml" />
     <Content Include="Views\Linkout\Partials\about.cshtml" />
     <Content Include="Views\Linkout\Partials\Videos.cshtml" />
+    <Content Include="Views\Configure\Partials\CarPatterns.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -91,6 +91,9 @@ namespace Linkout
                         "~/Scripts/configure/controllers.js",
                         "~/Scripts/linkout/services.js"));
 
+            bundles.Add(new StyleBundle("~/css/configure").Include(
+                        "~/css/configure.css"));
+
             bundles.Add(new StyleBundle("~/css/tree").Include(
                         "~/css/tree.css"));
 

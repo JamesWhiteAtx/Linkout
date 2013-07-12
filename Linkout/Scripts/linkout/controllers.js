@@ -348,11 +348,14 @@ linkout
                                 $scope.addCrumb(crumb);
                             }
                         }
+                    
                     } else {
                         $scope[trgArr] = [];
                     }
+                    
                     $scope[selProp].isLoading = false;
                 },
+                
                 function (data, status, headers, config) {
                     if (errFcn) {
                         $scope[trgArr] = errFcn(data, status, headers, config);
@@ -438,31 +441,31 @@ linkout
                 if (newVal === oldVal) { return; };
                 scltProp('make', 'makes', newVal)
                 loadList(Years, makeIdParm(["make"]), "Year",
-                'years', 'years', 'year', null, null);
+                    'years', 'years', 'year', null, null);
             });
             unWatchYear = $scope.$watch('yearIdx', function (newVal, oldVal) {
                 if (newVal === oldVal) { return; };
                 scltProp('year', 'years', newVal);
                 loadList(Models, makeIdParm(["make", "year"]), "Model",
-                'models', 'models', 'model', null, null);
+                    'models', 'models', 'model', null, null);
             });
             unWatchModel = $scope.$watch('modelIdx', function (newVal, oldVal) {
                 if (newVal === oldVal) { return; };
                 scltProp('model', 'models', newVal);
                 loadList(Bodies, makeIdParm(["make", "year", "model"]), "Body",
-                'bodies', 'bodys', 'body', null, null);
+                    'bodies', 'bodys', 'body', null, null);
             });
             unWatchBody = $scope.$watch('bodyIdx', function (newVal, oldVal) {
                 if (newVal === oldVal) { return; };
                 scltProp('body', 'bodys', newVal);
                 loadList(Trims, makeIdParm(["make", "year", "model", "body"]), "Trim",
-                'trims', 'trims', 'trim', null, null);
+                    'trims', 'trims', 'trim', null, null);
             });
             unWatchTrim = $scope.$watch('trimIdx', function (newVal, oldVal) {
                 if (newVal === oldVal) { return; };
                 scltProp('trim', 'trims', newVal);
                 loadList(Cars, makeIdParm(["make", "year", "model", "body", "trim"]), "Car",
-                'cars', 'cars', 'car', null, null);
+                    'cars', 'cars', 'car', null, null);
             });
             unWatchCar = $scope.$watch('carIdx', function (newVal, oldVal) {
                 if (newVal === oldVal) { return; };

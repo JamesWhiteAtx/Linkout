@@ -2,23 +2,21 @@
     ViewBag.Title = "Include";
 }
 
-    <div>
-        <span ng-click="node.explapse()">
+<section>
+    <div class="btn" ng-click="node.explapse()" ng-show="node.canHaveKids()">
+        <span ng-hide="node.isLoading">
             <i class="icon-caret-right icon-large" title="expand" ng-show="node.canExpand()"></i>
             <i class="icon-caret-down icon-large" title="collapse" ng-show="node.canCollapse()"></i>
-            {{node.type}} {{node.name}} @*showing:{{node.showing()}} expanded:{{node.expanded}}*@
+            <i class="icon-frown icon-large" title="error" ng-show="node.kidsError()"></i>
         </span>
-
         <span ng-show="node.isLoading" class="loading">...</span>
-
-        <button ng-show="node.canHaveKids()" class="btn btn-mini" ng-click="node.loadKids()"><i class="icon-plus"></i></button>
-
+    </div>
+    <div class="node-body" ng-click="nodeSelect(node)">
+        {{node.type}} {{node.name}} 
     </div>
 
     <ul class="tree">
         <li ng-repeat="node in node.kids" ng-show="node.showing()"  ng-include src="'Configure/Partials/Node'">
         </li>
     </ul>
-
-@*    <button class="btn btn-primary" ng-click="node.addKid('kiddy')">Add child to {{node.name}}</button>
-*@
+</section>

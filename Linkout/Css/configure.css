@@ -1,0 +1,8 @@
+﻿.loading
+{
+    background:url('/Images/Linkout/loading.gif') no-repeat center center;
+}
+.loading-large
+{
+    background:url('/Images/Linkout/loading-large.gif') no-repeat center center;
+}

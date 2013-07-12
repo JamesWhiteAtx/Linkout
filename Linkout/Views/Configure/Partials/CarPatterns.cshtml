@@ -1,0 +1,10 @@
+﻿<h2>CarPatterns</h2>
+
+
+<table class="table table-condensed">
+    <tr ng-repeat="err in errs" >
+        <td>
+            <span ng-class="{loading: err.isLoading}">{{err.name}}</span>
+        </td>
+    </tr>
+</table>

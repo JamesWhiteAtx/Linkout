@@ -29,13 +29,17 @@
 }
 .tree li div {
     display: inline-block;
-    border: 1px solid #ccc;
     padding: 5px 10px;
+    cursor: pointer;
+}
+.tree li div.node-body {
+    border: 1px solid #ccc;
     text-decoration: none;
     color: #666;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
+    white-space:nowrap;
 }
 /*Remove connectors before root*/
  .tree > ul > li::before, .tree > ul > li::after {
@@ -48,16 +52,12 @@
 /*Time for some hover effects*/
 
 /*We will apply the hover effect the the lineage of the element also*/
- .tree li div:hover, .tree li div:hover+ul li div {
+ .tree li div.node-body:hover, .tree li div.node-body:hover+ul li div.node-body {
     background: #c8e4f8;
     color: #000;
     border: 1px solid #94a0b4;
 }
 /*Connector styles on hover*/
- .tree li div:hover+ul li::after, .tree li div:hover+ul li::before, .tree li a:hover+ul::before, .tree li a:hover+ul ul::before {
+ .tree li div.node-body:hover+ul li::after, .tree li div.node-body:hover+ul li::before, .tree li a:hover+ul::before, .tree li a:hover+ul ul::before {
     border-color: #94a0b4;
-}
-.loading
-{
-    background:url('/Images/Linkout/loading.gif') no-repeat center center;
 }

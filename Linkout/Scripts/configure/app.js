@@ -18,6 +18,11 @@ var configure = angular.module('configure', ['linkout.services', 'configure.serv
             templateUrl: '/configure/Partials/Cars',
             controller: "CarsCtrl"
         });
+        $routeProvider.when('/carPatterns', {
+            title: 'carPatterns',
+            templateUrl: '/configure/Partials/CarPatterns',
+            controller: "CarPatternsCtrl"
+        });
         $routeProvider.otherwise({ redirectTo: '/menu' });
     } ])
 ;

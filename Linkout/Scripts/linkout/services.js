@@ -3,35 +3,128 @@
 angular.module('linkout.services', ['ngResource'])
     .value('version', '0.1')
 
+    .factory('SelApiList', ['$q', function ($q) {
+        var successProp = 'success';
+        return function (resource, parmObj, listArr, listTransform) {
+            var delay = $q.defer();
+            resource
+                .get(parmObj,
+                    function (result) {
+                        if ((result) && (result[successProp])) {
+                            var obj = {};
+                            for (var name in result) {
+                                if (name === listArr) {
+                                    obj.list = result[listArr];
+                                } else if ((name != successProp) && result.hasOwnProperty(name) && (typeof result[name] !== "function")) {
+                                    obj[name] = result[name];
+                                }
+                            };
+
+                            if (typeof listTransform === "function") {
+                                obj.list = listTransform(obj);
+                            }
+
+                            delay.resolve(obj);
+                        } else {
+                            delay.reject(result);
+                        }
+                    },
+                    function (result) {
+                        delay.reject(result);
+                    }
+                );
+            return delay.promise;
+        };
+    } ])
+
     .factory('Makes', ['$resource', function ($resource) {
         return $resource('/selector/makes');
     } ])
+    .factory('MakeList', ['SelApiList', 'Makes', function (SelApiList, Makes) {
+        return function (parm, listTransform) {
+            return SelApiList(Makes, {}, "makes", listTransform);
+        }
+    } ])
+
     .factory('Years', ['$resource', function ($resource) {
         return $resource('/selector/make/:makeid/years', { makeid: '@makeid' });
     } ])
+    .factory('YearList', ['SelApiList', 'Years', function (SelApiList, Years) {
+        return function (parm, listTransform) {
+            return SelApiList(Years, parm, "years", listTransform);
+        }
+    } ])
+
     .factory('Models', ['$resource', function ($resource) {
         return $resource('/selector/make/:makeid/year/:yearid/models', { makeid: '@makeid', yearid: '@yearid' });
     } ])
+    .factory('ModelList', ['SelApiList', 'Models', function (SelApiList, Models) {
+        return function (parm, listTransform) {
+            return SelApiList(Models, parm, 'models', listTransform);
+        }
+    } ])
+
     .factory('Bodies', ['$resource', function ($resource) {
         return $resource('/selector/make/:makeid/year/:yearid/model/:modelid/bodies', { makeid: '@makeid', yearid: '@yearid', modelid: '@modelid' });
     } ])
+    .factory('BodyList', ['SelApiList', 'Bodies', function (SelApiList, Bodies) {
+        return function (parm, listTransform) {
+            return SelApiList(Bodies, parm, 'bodies', listTransform);
+        }
+    } ])
+
     .factory('Trims', ['$resource', function ($resource) {
         return $resource('/selector/make/:makeid/year/:yearid/model/:modelid/body/:bodyid/trims', { makeid: '@makeid', yearid: '@yearid', modelid: '@modelid', bodyid: '@bodyid' });
     } ])
+    .factory('TrimList', ['SelApiList', 'Trims', function (SelApiList, Trims) {
+        return function (parm, listTransform) {
+            return SelApiList(Trims, parm, 'trims', listTransform);
+        }
+    } ])
+
     .factory('Cars', ['$resource', function ($resource) {
         return $resource('/selector/make/:makeid/year/:yearid/model/:modelid/body/:bodyid/trim/:trimid/cars', { makeid: '@makeid', yearid: '@yearid', modelid: '@modelid', bodyid: '@bodyid', trimid: '@trimid' });
     } ])
+    .factory('CarList', ['SelApiList', 'Cars', function (SelApiList, Cars) {
+        return function (parm, listTransform) {
+            return SelApiList(Cars, parm, 'cars', listTransform);
+        }
+    } ])
+
     .factory('Ptrns', ['$resource', function ($resource) {
         return $resource('/selector/car/:carid/ptrns', { carid: '@carid' });
     } ])
+    .factory('PtrnList', ['SelApiList', 'Ptrns', function (SelApiList, Ptrns) {
+        return function (parm, listTransform) {
+            return SelApiList(Ptrns, parm, 'patterns', listTransform);
+        }
+    } ])
+
     .factory('IntCols', ['$resource', function ($resource) {
         return $resource('/selector/car/:carid/ptrn/:ptrnid/intcols', { carid: '@carid', ptrnid: '@ptrnid' });
     } ])
+    .factory('IntColList', ['SelApiList', 'IntCols', function (SelApiList, IntCols) {
+        return function (parm, listTransform) {
+            return SelApiList(IntCols, parm, 'colors', listTransform);
+        }
+    } ])
+
     .factory('RecCols', ['$resource', function ($resource) {
         return $resource('/selector/car/:carid/ptrn/:ptrnid/intcol/:intcolid/reccols', { carid: '@carid', ptrnid: '@ptrnid', intcolid: '@intcolid' });
     } ])
+    .factory('RecColList', ['SelApiList', 'RecCols', function (SelApiList, RecCols) {
+        return function (parm, listTransform) {
+            return SelApiList(RecCols, parm, 'colors', listTransform);
+        }
+    } ])
+
     .factory('AllCols', ['$resource', function ($resource) {
         return $resource('/selector/ptrn/:ptrnid/allcols', { ptrnid: '@ptrnid' });
+    } ])
+    .factory('AllColList', ['SelApiList', 'AllCols', function (SelApiList, AllCols) {
+        return function (parm, listTransform) {
+            return SelApiList(AllCols, parm, 'colors', listTransform);
+        }
     } ])
 
     .factory('Installers', ['$resource', function ($resource) {
@@ -52,7 +145,7 @@ angular.module('linkout.services', ['ngResource'])
     .factory('ProductList', ['$http', '$q', '$cacheFactory', 'ProductDefn', function ($http, $q, $cacheFactory, ProductDefn) {
         var listingKey = 'prod_list_key';
         var cache = $cacheFactory('ProductList');
-        
+
         var loadListing = function () {
             var deferred = $q.defer();
             var listing = cache.get(listingKey);

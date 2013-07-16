@@ -5,20 +5,36 @@ angular.module('linkout.services', ['ngResource'])
 
     .factory('SelApiList', ['$q', function ($q) {
         var successProp = 'success';
-        return function (resource, parmObj, listArr, listTransform) {
+
+        function resultObj(result, listArr) {
+            var obj = {};
+            for (var name in result) {
+                if (name === listArr) {
+                    obj.list = result[listArr];
+                } else if ((name != successProp) && result.hasOwnProperty(name) && (typeof result[name] !== "function")) {
+                    obj[name] = result[name];
+                }
+            };
+            return obj;
+        };
+
+        return function (resource, parmObj, listArr, listTransform, itemTransFcn) {
             var delay = $q.defer();
             resource
                 .get(parmObj,
                     function (result) {
                         if ((result) && (result[successProp])) {
-                            var obj = {};
-                            for (var name in result) {
-                                if (name === listArr) {
-                                    obj.list = result[listArr];
-                                } else if ((name != successProp) && result.hasOwnProperty(name) && (typeof result[name] !== "function")) {
-                                    obj[name] = result[name];
+                            var obj = resultObj(result, listArr);
+
+                            obj.list = $.map(obj.list, function (item) {
+                                if (typeof itemTransFcn === "function") {
+                                    itemTransFcn(item);
                                 }
-                            };
+                                if (angular.isUndefined(item.display)) {
+                                    item.display = item.name;
+                                }
+                                return item;
+                            });
 
                             if (typeof listTransform === "function") {
                                 obj.list = listTransform(obj);
@@ -26,7 +42,8 @@ angular.module('linkout.services', ['ngResource'])
 
                             delay.resolve(obj);
                         } else {
-                            delay.reject(result);
+                            var obj = resultObj(result, listArr)
+                            delay.reject(obj);
                         }
                     },
                     function (result) {
@@ -96,7 +113,8 @@ angular.module('linkout.services', ['ngResource'])
     } ])
     .factory('PtrnList', ['SelApiList', 'Ptrns', function (SelApiList, Ptrns) {
         return function (parm, listTransform) {
-            return SelApiList(Ptrns, parm, 'patterns', listTransform);
+            return SelApiList(Ptrns, parm, 'patterns', listTransform,
+                function (item) { item.display = item.seldescr + ' (' + item.name + ')'; });
         }
     } ])
 
@@ -105,7 +123,8 @@ angular.module('linkout.services', ['ngResource'])
     } ])
     .factory('IntColList', ['SelApiList', 'IntCols', function (SelApiList, IntCols) {
         return function (parm, listTransform) {
-            return SelApiList(IntCols, parm, 'colors', listTransform);
+            return SelApiList(IntCols, parm, 'colors', listTransform,
+                function (item) { item.display = item.name + ' (' + item.id + ')'; });
         }
     } ])
 
@@ -114,7 +133,11 @@ angular.module('linkout.services', ['ngResource'])
     } ])
     .factory('RecColList', ['SelApiList', 'RecCols', function (SelApiList, RecCols) {
         return function (parm, listTransform) {
-            return SelApiList(RecCols, parm, 'colors', listTransform);
+            return SelApiList(RecCols, parm, 'colors', listTransform,
+                function (item) {
+                    item.display = item.leacolorname + ' (' + item.rectype + ')';
+                    item.invitemid = item.id;
+                });
         }
     } ])
 
@@ -123,7 +146,11 @@ angular.module('linkout.services', ['ngResource'])
     } ])
     .factory('AllColList', ['SelApiList', 'AllCols', function (SelApiList, AllCols) {
         return function (parm, listTransform) {
-            return SelApiList(AllCols, parm, 'colors', listTransform);
+            return SelApiList(AllCols, parm, 'colors', listTransform,
+                function (item) {
+                    item.display = item.leacolorname;
+                    item.invitemid = item.id;
+                });
         }
     } ])
 

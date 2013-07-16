@@ -42,14 +42,14 @@
                 <th>{{selectNode.name}}</th>
             </tr>
             <tr ng-repeat="detail in selectNode.details" >
-                <td>{{detail.name}}</td>
-                <td>{{detail.value}}</td>
-                <td ng-show="detail.editurl">
-                    <a href="{{detail.editurl}}" target="_blank" title="Edit Car Record">
+                <td>
+                    <a href="{{detail.linkurl}}" target="_blank" title="Link to {{detail.name}}" ng-show="detail.linkurl">
                         <img ng-src="/Images/Configure/NetSuite.ico" alt="NetSuite" />
                     </a>
                 
                 </td>
+                <td>{{detail.name}}</td>
+                <td>{{detail.value}}</td>
             </tr>
         </table>
     </div>

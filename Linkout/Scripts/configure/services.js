@@ -138,7 +138,7 @@ angular.module('configure.services', ['ngResource'])
                                 data[type + 'id'] = item.id;
                                 data[type + 'name'] = item.name;
 
-                                var newNode = NodeService.newNode(item.name, data, nodeSrvc);
+                                var newNode = NodeService.newNode(item.display, data, nodeSrvc);
                                 return newNode;
                             }
                         });
@@ -158,13 +158,13 @@ angular.module('configure.services', ['ngResource'])
     } ])
 
     .factory('NodeService', [function (RootService) {
-        var newNode = function (name, data, service) {
+        var newNode = function (display, data, service) {
             var node = {}
             var nodeService = service;
 
             //Public property    
             node.type = service.type;
-            node.name = name;
+            node.display = display;
             node.data = data;
             node.kids = [];
             node.loaded = false;
@@ -202,7 +202,6 @@ angular.module('configure.services', ['ngResource'])
                     );
             };
             node.addKid = function (newKid) {
-                //var newKid = newNode(name, nodeService);
                 node.kids.push(newKid);
                 newKid.parentNode = node;
                 return newKid;
@@ -273,8 +272,35 @@ angular.module('configure.services', ['ngResource'])
 
     .factory('TreeService', ['NodeService', 'RootService', function (NodeService, RootService) {
         return {
-            rootNode: function (name) { return NodeService.newNode(name, {}, RootService); }
+            rootNode: function (display) { return NodeService.newNode(display, {}, RootService); }
+        };
+    } ])
+
+    .factory('NetsuiteLinks', ['$http', function ($http) {
+        return {
+            makeLink: function (id) {
+                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=19&id=' + id; //&e=T
+            },
+            modelLink: function (id) {
+                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=20&id=' + id; 
+            },
+            bodyLink: function (id) {
+                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=21&id=' + id; 
+            },
+            trimLink: function (id) {
+                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=69&id=' + id;
+            },
+            carLink: function (id) {
+                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=63&id=' + id; 
+            },
+            patternLink: function (id) {
+                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=13&id=' + id; 
+            },
+            invItemLink: function (id) {
+                return 'https://system.sandbox.netsuite.com/app/common/item/item.nl?id=' + id;  //&e=T
+            }
         };
     } ])
 
 ;
+

@@ -1,10 +1,115 @@
-﻿<h2>CarPatterns</h2>
+﻿<h2>Car Patterns Error Report</h2>
 
+<button class="btn btn-success" type="button" ng-hide="reportRunning()" ng-click="runReport()">
+    <span ng-show="started">Re-</span>Run Report
+</button>
+<button class="btn btn-success" type="button" ng-show="reportRunning() && paused" ng-click="resumeReport()">
+    Resume Report
+</button>
+<button class="btn btn-warning" type="button" ng-show="reportRunning() && !paused" ng-click="pauseReport()">
+    Pause Report
+</button>
+
+<div class="pull-right" >
+    <label class="checkbox inline" ng:repeat="level in levels">
+        <input type="checkbox" ng-disabled="reportRunning()" ng-model="level.checked"> {{level.type}}
+    </label>
+</div>
+
+@*<div>stack: {{maxStack}} async: {{maxAsync}}</div>*@
+<div> 
+    <span ng-show="reportRunning() && paused">Paused</span> 
+    <span ng-show="reportRunning()" ng-class="{loading: isLoading > 0}">...</span> 
+    <span ng-show="reportRunning()">
+        {{currStack.message}}
+        {{currStack.makename}}
+        {{currStack.yearname}}
+        {{currStack.modelname}}
+        {{currStack.bodyname}}
+        {{currStack.trimname}}
+        {{currStack.carname}}
+    </span> 
+</div>
 
 <table class="table table-condensed">
+    <tr>
+        <th>Error</th>
+        <th ng-show="levels[0].checked">Make</th>
+        <th ng-show="levels[1].checked">Year</th>
+        <th ng-show="levels[2].checked">Model</th>
+        <th ng-show="levels[3].checked">Body</th>
+        <th ng-show="levels[4].checked">Trim</th>
+        <th><span ng-show="levels[5].checked">Car</span></th>
+        <th ng-show="levels[6].checked">Pattern</th>
+    </tr>
     <tr ng-repeat="err in errs" >
+        <td>{{err.message}}</td>
+        <td ng-show="levels[0].checked">
+            {{err.makename}}
+            <span ng-show="err.makeid">
+                <a ng-href="{{err.makeLinkurl}}" target="_blank" title="Link to Netsuite" ng-show="err.makeLinkurl">
+                    <img ng-src="/Images/Configure/NetSuite.ico" alt="NetSuite" />
+                    [{{err.makeid}}]
+                </a>
+            </span>
+        </td>
+        <td ng-show="levels[1].checked">
+            {{err.yearname}}
+            <span ng-show="err.yearid">
+                [{{err.yearid}}]
+            </span>
+        </td>
+        <td ng-show="levels[2].checked">
+            {{err.modelname}}
+            <span ng-show="err.modelid">
+
+                <a ng-href="{{err.modelLinkurl}}" target="_blank" title="Link to Netsuite" ng-show="err.modelLinkurl">
+                    <img ng-src="/Images/Configure/NetSuite.ico" alt="NetSuite" />
+                    [{{err.modelid}}]
+                </a>
+            </span>
+        </td>
+        <td ng-show="levels[3].checked">
+            {{err.bodyname}}
+            <span ng-show="err.bodyid">
+
+                <a ng-href="{{err.bodyLinkurl}}" target="_blank" title="Link to Netsuite" ng-show="err.bodyLinkurl">
+                    <img ng-src="/Images/Configure/NetSuite.ico" alt="NetSuite" />
+                    [{{err.bodyid}}]
+                </a>
+            </span>
+        </td>
+        <td ng-show="levels[4].checked">
+            {{err.trimname}}
+            <span ng-show="err.trimid">
+
+                <a ng-href="{{err.trimLinkurl}}" target="_blank" title="Link to Netsuite" ng-show="err.trimLinkurl">
+                    <img ng-src="/Images/Configure/NetSuite.ico" alt="NetSuite" />
+                    [{{err.trimid}}]
+                </a>
+            </span>
+        </td>
         <td>
-            <span ng-class="{loading: err.isLoading}">{{err.name}}</span>
+            <span ng-show="levels[5].checked">
+                {{err.carname}}
+                <span ng-show="err.carid">
+
+                    <a ng-href="{{err.carLinkurl}}" target="_blank" title="Link to Netsuite" ng-show="err.carLinkurl">
+                        <img ng-src="/Images/Configure/NetSuite.ico" alt="NetSuite" />
+                        [{{err.carid}}]
+                    </a>
+                </span>
+            </span>
+        </td>
+        <td ng-show="levels[6].checked">
+            {{err.ptrnname}}
+            <span ng-show="err.ptrnid">
+                    
+                <a ng-href="{{err.ptrnLinkurl}}" target="_blank" title="Link to Netsuite" ng-show="err.ptrnLinkurl">
+                    <img ng-src="/Images/Configure/NetSuite.ico" alt="NetSuite" />
+                    [{{err.ptrnid}}]
+                </a>
+            </span>
         </td>
     </tr>
 </table>

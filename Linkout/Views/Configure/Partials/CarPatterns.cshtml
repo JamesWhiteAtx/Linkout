@@ -1,22 +1,29 @@
 ﻿<h2>Car Patterns Error Report</h2>
 
-<button class="btn btn-success" type="button" ng-hide="reportRunning()" ng-click="runReport()">
-    <span ng-show="started">Re-</span>Run Report
-</button>
-<button class="btn btn-success" type="button" ng-show="reportRunning() && paused" ng-click="resumeReport()">
-    Resume Report
-</button>
-<button class="btn btn-warning" type="button" ng-show="reportRunning() && !paused" ng-click="pauseReport()">
-    Pause Report
-</button>
-
 <div class="pull-right" >
     <label class="checkbox inline" ng:repeat="level in levels">
         <input type="checkbox" ng-disabled="reportRunning()" ng-model="level.checked"> {{level.type}}
     </label>
+    <div>errors: {{errs.length}}  elapsed: {{elapStr}}</div>
 </div>
 
-@*<div>stack: {{maxStack}} async: {{maxAsync}}</div>*@
+
+<button class="btn btn-success" type="button" ng-hide="reportRunning()" ng-click="runReport()">
+     <i class="icon-play"></i>
+    <span ng-show="started">Re-</span>Run Report
+</button>
+<button class="btn btn-success" type="button" ng-show="reportRunning() && paused" ng-click="resumeReport()">
+    <i class="icon-play"></i>
+    Resume Report
+</button>
+<button class="btn btn-warning" type="button" ng-show="reportRunning() && !paused" ng-click="pauseReport()">
+    <i class="icon-pause"></i>
+    Pause Report
+</button>
+
+@*stack: {{maxStack}} async: {{maxAsync}} *@
+
+
 <div> 
     <span ng-show="reportRunning() && paused">Paused</span> 
     <span ng-show="reportRunning()" ng-class="{loading: isLoading > 0}">...</span> 
@@ -55,9 +62,6 @@
         </td>
         <td ng-show="levels[1].checked">
             {{err.yearname}}
-            <span ng-show="err.yearid">
-                [{{err.yearid}}]
-            </span>
         </td>
         <td ng-show="levels[2].checked">
             {{err.modelname}}

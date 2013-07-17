@@ -52,17 +52,29 @@ configure
     $scope.tree.expanded = true;
 
     $scope.nodeSelect = function (node) {
-        $scope.selectNode = { type: node.type, name: node.name, details: [] };
+        if (!node) {
+            return;
+        }
+
+        if (($scope.selectNode) && ($scope.selectNode.lastSelected)) {
+            $scope.selectNode.lastSelected.selected = false;
+        }
+        node.selected = true;
+
+        $scope.selectNode = { type: node.type, name: node.name, display: node.display, links: [], details: [], lastSelected: node };
 
         var d = node.data;
         var link;
         var detail;
         for (var name in d) {
             if (d.hasOwnProperty(name) && (typeof d[name] !== "function")) {
+
                 detail = {
                     name: name,
                     value: d[name]
                 };
+                $scope.selectNode.details.push(detail);
+
                 if (name === 'makeid') {
                     link = {
                         linkurl: NetsuiteLinks.makeLink(d[name]),
@@ -91,19 +103,17 @@ configure
                 }
 
                 if (link) {
-                    $scope.selectNode.details.splice(0, 0, link);
+                    $scope.selectNode.links.push(link);
                 }
-                $scope.selectNode.details.push(detail);
-
-
 
             }
         };
     }
 } ])
 
-.controller("CarPatternsCtrl", ['$q', '$scope', 'MakeList', 'YearList', 'ModelList', 'BodyList', 'TrimList', 'CarList', 'PtrnList', 'IntColList', 'NetsuiteLinks',
-function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList, PtrnList, IntColList, NetsuiteLinks) {
+.controller("CarPatternsCtrl", ['$q', '$scope', 'MakeList', 'YearList', 'ModelList', 'BodyList', 'TrimList', 'CarList', 'PtrnList', 'IntColList', 'NetsuiteLinks', 'Stopwatch',
+function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList, PtrnList, IntColList, NetsuiteLinks, Stopwatch) {
+    $scope.stopwatch = null;
     $scope.started = false;
     $scope.waiting = false;
     $scope.paused = false;
@@ -216,7 +226,7 @@ function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList
             function (result) {
                 if (angular.isArray(result.list) || ((result.list.length > 0))) {
                     var childStack = [];
-                    for (var i = 0; ((i < result.list.length) && (i < 5)); i++) {
+                    for (var i = 0; ((i < result.list.length)); i++) { // && (i < 5)
                         childStack.push(makeRun(idx + 1, parm, data, result.list[i]));
                     };
                     delay.resolve(childStack);
@@ -291,6 +301,7 @@ function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList
                         }
                     }
                     $scope.waiting = false;
+                    $scope.elapStr = $scope.stopwatch.elapsedStr();
                     $scope.isLoading = $scope.isLoading - 1;
                     if (!$scope.paused) {
                         runNextLevel();
@@ -300,6 +311,7 @@ function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList
                     $scope.async = $scope.async - 1;
                     alert(err);
                     $scope.waiting = false;
+                    $scope.elapStr = $scope.stopwatch.elapsedStr();
                     $scope.isLoading = $scope.isLoading - 1;
                 }
             );
@@ -310,6 +322,7 @@ function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList
         return $scope.waiting || (stack.length > 0);
     }
     $scope.runReport = function () {
+
         $scope.paused = false;
         $scope.isLoading = 0;
         $scope.errs = [];
@@ -317,8 +330,12 @@ function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList
         stack = [];
         stack.push(makeRun(0, {}, {}));
 
+        $scope.stopwatch = Stopwatch();
+        $scope.elapStr = null;
+
         $scope.started = true;
         $scope.waiting = false;
+
         runNextLevel();
     }
     $scope.pauseReport = function () {

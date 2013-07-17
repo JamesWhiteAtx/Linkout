@@ -709,7 +709,7 @@
     <Content Include="Views\Configure\_ViewStart.cshtml" />
     <Content Include="Views\Configure\Partials\Menu.cshtml" />
     <Content Include="Views\Configure\Partials\Cars.cshtml" />
-    <Content Include="Views\Configure\Partials\Node.cshtml" />
+    <Content Include="Views\Configure\Partials\CarNode.cshtml" />
     <Content Include="Views\Linkout\Partials\OrderLeather.cshtml" />
     <Content Include="Views\Linkout\Partials\OrderHeaters.cshtml" />
     <Content Include="Views\Mock\CostcoLeather.cshtml" />

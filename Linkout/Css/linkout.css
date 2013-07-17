@@ -205,6 +205,9 @@ div.select-box.selected
 {
     /*color:#0185C5; */
     border:1px solid Black;
+
+    -webkit-box-shadow: 3px 3px 5px 5px #38668F;
+    -moz-box-shadow: 3px 3px 5px 5px #38668F;
     box-shadow: 3px 3px 5px 5px #38668F;
 }
 
@@ -333,6 +336,9 @@ div.ptrn-info.selected
     font-weight: bold;
     color: #38668F;
     border: 1px solid Black;
+    
+    -webkit-box-shadow: 3px 3px 5px 5px #38668F;
+    -moz-box-shadow: 3px 3px 5px 5px #38668F;
     box-shadow: 3px 3px 5px 5px #38668F;
 }
 

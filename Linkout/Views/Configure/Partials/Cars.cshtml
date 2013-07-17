@@ -29,7 +29,7 @@
         <div ng-show="tree.isLoading" class="loading">...</div>
 
         <ul class="tree">
-            <li ng-repeat="node in tree.kids" ng-include src="'Configure/Partials/Node'">
+            <li ng-repeat="node in tree.kids" ng-include src="'Configure/Partials/CarNode'">
             </li>
         </ul>
 
@@ -39,15 +39,16 @@
         <table class="table table-condensed" ng-show="selectNode">
             <tr>
                 <th>{{selectNode.type}}</th>
-                <th>{{selectNode.name}}</th>
+                <th>{{selectNode.display}}</th>
+            </tr>
+            <tr ng-repeat="link in selectNode.links" >
+                <td colspan="2">
+                    <a href="{{link.linkurl}}" target="_blank" title="Link to {{link.name}}">
+                        <img ng-src="/Images/Configure/NetSuite.ico" alt="NetSuite" /> {{link.name}}
+                    </a>
+                </td>
             </tr>
             <tr ng-repeat="detail in selectNode.details" >
-                <td>
-                    <a href="{{detail.linkurl}}" target="_blank" title="Link to {{detail.name}}" ng-show="detail.linkurl">
-                        <img ng-src="/Images/Configure/NetSuite.ico" alt="NetSuite" />
-                    </a>
-                
-                </td>
                 <td>{{detail.name}}</td>
                 <td>{{detail.value}}</td>
             </tr>

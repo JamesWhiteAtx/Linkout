@@ -35,11 +35,15 @@
 .tree li div.node-body {
     border: 1px solid #ccc;
     text-decoration: none;
-    color: #666;
+    /*color: #666;*/
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     white-space:nowrap;
+}
+.tree li div.node-body.selected 
+{
+    font-weight:bold;
 }
 /*Remove connectors before root*/
  .tree > ul > li::before, .tree > ul > li::after {
@@ -49,13 +53,18 @@
  .tree li:last-child::before {
     height: 30px;
 }
-/*Time for some hover effects*/
+
+/*hover effects*/
 
 /*We will apply the hover effect the the lineage of the element also*/
  .tree li div.node-body:hover, .tree li div.node-body:hover+ul li div.node-body {
-    background: #c8e4f8;
-    color: #000;
+    /*background: #c8e4f8;*/
+    /*color: #000;*/
     border: 1px solid #94a0b4;
+    
+    -webkit-box-shadow: 2px 2px 3px 3px #38668F;
+    -moz-box-shadow: 2px 2px 3px 3px #38668F;
+    box-shadow: 2px 2px 3px 3px #38668F;
 }
 /*Connector styles on hover*/
  .tree li div.node-body:hover+ul li::after, .tree li div.node-body:hover+ul li::before, .tree li a:hover+ul::before, .tree li a:hover+ul ul::before {

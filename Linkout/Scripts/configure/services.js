@@ -282,24 +282,65 @@ angular.module('configure.services', ['ngResource'])
                 return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=19&id=' + id; //&e=T
             },
             modelLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=20&id=' + id; 
+                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=20&id=' + id;
             },
             bodyLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=21&id=' + id; 
+                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=21&id=' + id;
             },
             trimLink: function (id) {
                 return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=69&id=' + id;
             },
             carLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=63&id=' + id; 
+                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=63&id=' + id;
             },
             patternLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=13&id=' + id; 
+                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=13&id=' + id;
             },
             invItemLink: function (id) {
                 return 'https://system.sandbox.netsuite.com/app/common/item/item.nl?id=' + id;  //&e=T
             }
         };
+    } ])
+
+    .factory('Stopwatch', [function () {
+
+        var newStopwatch = function (start) {
+            var watch = {};
+
+            watch.startTime = start || new Date();
+
+            watch.stopTime = null;
+            watch.stop = function (end) {
+                watch.stopTime = end || new Date();
+            }
+
+            watch.getSeconds = function () {
+                if (!watch.stopTime) {
+                    return 0;
+                }
+                return Math.floor(Math.round((watch.stopTime.getTime() - watch.startTime.getTime()) / 1000));
+            }
+
+            watch.getMinutes = function () {
+                return Math.floor(watch.getSeconds() / 60);
+            }
+            watch.getHours = function () {
+                return Math.floor(watch.getSeconds() / 60 / 60);
+            }
+            watch.getDays = function () {
+                return Math.floor(watch.getHours() / 24);
+            }
+            watch.elapsedStr = function () {
+                watch.stop();
+                return watch.getHours() + ":" + watch.getMinutes() + ":" + watch.getSeconds();
+            }
+
+            return watch;
+        };
+
+        return function (start) {
+            return newStopwatch(start);
+        }
     } ])
 
 ;

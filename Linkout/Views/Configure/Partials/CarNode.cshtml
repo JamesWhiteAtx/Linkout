@@ -11,12 +11,15 @@
         </span>
         <span ng-show="node.isLoading" class="loading">...</span>
     </div>
-    <div class="node-body" ng-click="nodeSelect(node)">
-        {{node.type}} {{node.display}} 
+    <div class="node-body btn" ng-class="{'btn-primary': node.selected, 'selected': node.selected}" ng-click="nodeSelect(node)">
+        {{node.type}} {{node.display}}
     </div>
-
+@*    <div class="btn" ng-class="{btn-success: node.selected}" >
+        {{node.type}} {{node.display}}
+    </div>
+*@
     <ul class="tree">
-        <li ng-repeat="node in node.kids" ng-show="node.showing()"  ng-include src="'Configure/Partials/Node'">
+        <li ng-repeat="node in node.kids" ng-show="node.showing()" ng-include src="'Configure/Partials/CarNode'">
         </li>
     </ul>
 </section>

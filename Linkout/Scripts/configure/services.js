@@ -120,6 +120,7 @@ angular.module('configure.services', ['ngResource'])
                 apiSrvc(
                     parm,
                     function (result) {
+                        var typeDisplay = result.type;
                         return $.map(result.list, function (item) {
 
                             if ((item.id) && (item.name)) {
@@ -127,7 +128,7 @@ angular.module('configure.services', ['ngResource'])
 
                                 var parentData = parentNode.data;
                                 for (var name in parentData) {
-                                    if (parentData.hasOwnProperty(name) && (typeof parentData[name] !== "function")) {
+                                    if (parentData.hasOwnProperty(name) && (!angular.isFunction(parentData[name]))) {
                                         data[name] = parentData[name];
                                     }
                                 };
@@ -138,7 +139,7 @@ angular.module('configure.services', ['ngResource'])
                                 data[type + 'id'] = item.id;
                                 data[type + 'name'] = item.name;
 
-                                var newNode = NodeService.newNode(item.display, data, nodeSrvc);
+                                var newNode = NodeService.newNode(typeDisplay + ' ' + item.display, data, nodeSrvc);
                                 return newNode;
                             }
                         });
@@ -342,6 +343,5 @@ angular.module('configure.services', ['ngResource'])
             return newStopwatch(start);
         }
     } ])
-
 ;
 

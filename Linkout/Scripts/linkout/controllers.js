@@ -8,7 +8,7 @@ linkout
     };
 } ])
 .controller('LinkoutCtrl', ['$scope', '$location', '$dialog', 'ProductPrice', function ($scope, $location, $dialog, ProductPrice) {
-    var t = 
+    var t =
     '<div class="modal-header">' +
     '<h3>Why Professional Installation?</h3>' +
     '</div>' +
@@ -17,8 +17,8 @@ linkout
     '<img alt="" src="\/Images\/Linkout\/testimonials.png" class="img-polaroid"/>' +
     '</div>' +
     '<p>There is nothing quite as satisfying as building or fixing something yourself. However, there are some things that are better left to the professionals. While Roadwire\'s products help deliver the ultimate driving experience, the greatest and most long-lasting enjoyment comes when they are properly installed.</p>' +
-    '<p>For this reason, Roadwire has bundled professional installation into all of its product packages. Roadwire has partnered with InstallerNet, the largest independent installation network in the country, to match you with qualified, top-rated, local restylers that can help you get the most out of your Roadwire products. When you make a purchase on eBay, you will receive an InstallCard. Simply visit the website on the back of the card or call the number, enter the code, and schedule your install. It is that easy. If you run in to any problems, InstallerNet\'s friendly installation coordinators can assist you with any questions you may have.</p>'+
-    '<p>Now, Roadwire and InstallerNet have removed the hassle from buying products on eBay. We have bundled the product, professional installation, free shipping, and our industry-leading 3 year/36,000 mile warranty into one low price. Buy with confidence knowing you are getting the best deal, direct from the manufacturer to you!</p>'+
+    '<p>For this reason, Roadwire has bundled professional installation into all of its product packages. Roadwire has partnered with InstallerNet, the largest independent installation network in the country, to match you with qualified, top-rated, local restylers that can help you get the most out of your Roadwire products. When you make a purchase on eBay, you will receive an InstallCard. Simply visit the website on the back of the card or call the number, enter the code, and schedule your install. It is that easy. If you run in to any problems, InstallerNet\'s friendly installation coordinators can assist you with any questions you may have.</p>' +
+    '<p>Now, Roadwire and InstallerNet have removed the hassle from buying products on eBay. We have bundled the product, professional installation, free shipping, and our industry-leading 3 year/36,000 mile warranty into one low price. Buy with confidence knowing you are getting the best deal, direct from the manufacturer to you!</p>' +
     '</div>' +
     '<div class="modal-footer">' +
     '<button ng-click="close(result)" class="btn btn-primary" >Close</button>' +
@@ -43,7 +43,7 @@ linkout
         });
     };
 
-    
+
     $scope.breadcrumbs = [];
 
     $scope.clearCrumbs = function () {
@@ -280,8 +280,24 @@ linkout
     $scope.addCrumb("Select Heater Option");
 } ])
 
-.controller('LeatherCtrl', ['$scope', '$location', 'Makes', 'Years', 'Models', 'Bodies', 'Trims', 'Cars', 'Ptrns', 'IntCols', 'RecCols', 'AllCols', 'ProductPrice',
-    function ($scope, $location, Makes, Years, Models, Bodies, Trims, Cars, Ptrns, IntCols, RecCols, AllCols, ProductPrice) {
+.controller('LeatherCtrl', ['$scope', '$location', 'Makes', 'Years', 'Models', 'Bodies', 'Trims', 'Cars', 'Ptrns', 'IntCols', 'RecCols', 'AllCols', 'ProductPrice', 'UniqueProps',
+    function ($scope, $location, Makes, Years, Models, Bodies, Trims, Cars, Ptrns, IntCols, RecCols, AllCols, ProductPrice, UniqueProps) {
+
+//        var objs = [
+//        { p1: 1, p2: '1', p3: '1' },
+//        { p1: 1, p2: '1', p3: '1' },
+//        { p1: 2, p2: '1', p3: '1' },
+//        { p1: 1, p2: '1', p3: '1' },
+//        { p1: 1, p2: '1', p3: '1' },
+//        { p1: 1, p2: '1', p3: '1' }
+//        ];
+//        var propList = [
+//            { display: 'pee1', name: 'p1' },
+//            { display: 'pee2', name: 'p2' },
+//            { display: 'pee3', name: 'p3' },
+//        ];
+//        var r = UniqueProps(objs, propList);
+//        var z = r;
 
         function addAppProps(obj) {
             return $.extend(obj, {
@@ -297,7 +313,7 @@ linkout
             return addAppProps(obj);
         }
 
-        function loadList(srvc, parm, crumb, srcArr, trgArr, selProp, itemFcn, errFcn) {
+        function loadList(srvc, parm, crumb, srcArr, trgArr, selProp, itemFcn, arrFcn) {
             var slctProp = selProp + 'Idx';
             $scope[selProp] = makeIdName();
             $scope[slctProp] = null;
@@ -327,7 +343,7 @@ linkout
                         var idx = 0;
                         $scope[trgArr] = $.map(data[srcArr], function (item) {
                             idx = idx + 1;
-                            if (itemFcn) {
+                            if (typeof itemFcn === "function") {
                                 item.slctId = idx;
                                 return itemFcn(item);
                             } else {
@@ -338,6 +354,9 @@ linkout
                             }
                         });
                         if (angular.isArray($scope[trgArr])) {
+                            if (typeof arrFcn === "function") {
+                                arrFcn($scope[trgArr]);
+                            }
                             if ($scope[trgArr].length > 0) {
                                 if ($scope[trgArr].length === 1) {
                                     $scope[selProp] = $scope[trgArr][0];
@@ -348,20 +367,15 @@ linkout
                                 $scope.addCrumb(crumb);
                             }
                         }
-                    
                     } else {
                         $scope[trgArr] = [];
                     }
-                    
+
                     $scope[selProp].isLoading = false;
                 },
-                
+
                 function (data, status, headers, config) {
-                    if (errFcn) {
-                        $scope[trgArr] = errFcn(data, status, headers, config);
-                    } else {
-                        $scope[trgArr] = [];
-                    }
+                    $scope[trgArr] = [];
                     $scope[selProp].isLoading = false;
                 }
             );
@@ -471,7 +485,22 @@ linkout
                 if (newVal === oldVal) { return; };
                 scltProp('car', 'cars', newVal);
                 loadList(Ptrns, makeIdParm(["car"]), "Pattern",
-                    'patterns', 'ptrns', 'ptrn', null, null);
+                    'patterns', 'ptrns', 'ptrn', null,
+                        function (arr) {
+
+                            var propList = [
+                                { display: 'Note', name: 'specialnotes' },
+                                { display: 'Leather', name: 'leacontname' },
+                                { display: 'Airbags', name: 'airbagname' },
+                                { display: 'Rows', name: 'rowsname' },
+                                { display: 'Insert', name: 'insertstylename' }
+                            ];
+
+                            var r = UniqueProps(arr, propList);
+                            var z = r;
+
+                        }
+                    );
             });
             unWatchPtrn = $scope.$watch('ptrn', function (newVal, oldVal) {
                 if (newVal === oldVal) { return; };
@@ -779,6 +808,7 @@ linkout
         }
 
     } ])
+
 .controller('ConfirmCtrl', ['$scope', function ($scope) {
     $scope.clearCrumbs();
     $scope.addCrumb("Select Product");

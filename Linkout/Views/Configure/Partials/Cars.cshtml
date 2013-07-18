@@ -38,8 +38,7 @@
     <div id="node-details" class="fill-body well">
         <table class="table table-condensed" ng-show="selectNode">
             <tr>
-                <th>{{selectNode.type}}</th>
-                <th>{{selectNode.display}}</th>
+                <th colspan="2">{{selectNode.display}}</th>
             </tr>
             <tr ng-repeat="link in selectNode.links" >
                 <td colspan="2">

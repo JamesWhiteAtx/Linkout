@@ -73,6 +73,12 @@ namespace Linkout
             );
 
             config.Routes.MapHttpRoute(
+                name: "ProductApi",
+                routeTemplate: "product/{id}",
+                defaults: new { controller = "Product", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "LeatherPriceApi",
                 routeTemplate: "price/leather/{rows}",
                 defaults: new { controller = "Price", action = "Leather" }

@@ -131,38 +131,21 @@ ul.breadcrumb.lo-crumbs
     float: none;
     display: inline-block;
 }
-/**********************
-.inner-item {
-    text-align: center;
-    background-color: #000;
-}
-.inner-item img {
-    margin: 0 auto;
-}    
 
-.carousel-caption {
-    padding-bottom: 25px;
-    padding-left: 30px;
-    padding-right: 40px;
+div.sel-ptrn-colr
+{
+    margin: 0 5px 10px 15px;
+    padding: 0 10px 0 15px;
+    max-width: 680px;
+    border-left: 1px solid #F1F1F1;
+    border-right: 1px solid #F1F1F1;
 }
 
-.carousel-indicators.middle {
-    left: 0;
-    right: 0;
-    top: auto;
-    bottom: 5px;
-    text-align: center;
-}
-.carousel-indicators.middle li {
-    float: none;
-    display: inline-block;
-}
-*/
 div.select-box 
 {
     cursor: pointer;
     min-width: 130px;
-    min-height: 135px;
+    /*min-height: 135px;*/
     float: left;
     margin: 5px 5px 5px 5px;
     padding: 5px 5px 5px 5px;
@@ -215,12 +198,18 @@ div.select-box div.box-descr
 {
     font-weight: bold;
 }
-div.select-box img
+div.select-box img, div.select-box div.details
 {
     border-right: 1px solid white;
     border-bottom: 1px solid white;
     border-left: 1px solid gray;
     border-top: 1px solid gray;
+}
+div.select-box div.details
+{
+    padding: 3px;
+    /*background-color: #F1F1F1;*/
+    margin: 2px 5px 2px 5px;
 }
 
 li.checkout
@@ -284,6 +273,7 @@ div#sel-leather
 
 div.sel-select 
 {
+    margin-left: 10px;
     width: 150px;
 }
 
@@ -342,16 +332,6 @@ div.ptrn-info.selected
     box-shadow: 3px 3px 5px 5px #38668F;
 }
 
-/*div.ptrn-info table 
-{
-    width: 100%;
-}
-div.ptrn-info caption {
-    caption-side:top;
-    text-align: left;
-    font-weight: bold;
-}*/
-
 div.ptrn-info div.ptrn-descr
 {
     font-weight: bold;
@@ -390,9 +370,10 @@ div.lea-colors .loading-large
     height: 40px;
 }
 
-div#sel-col div#btn-next
+div#sel-leather div#btn-next
 {
-    margin: 20px 20px 20px 20px;    
+    max-width: 250px;
+    margin: 0 20px 20px 20px;    
 }
 
 div.schedule .form-horizontal .control-label

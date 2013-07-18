@@ -719,7 +719,7 @@
     <Content Include="Views\Mock\Index.cshtml" />
     <Content Include="Views\Mock\Product.cshtml" />
     <Content Include="Views\View1.cshtml" />
-    <Content Include="Views\Configure\Partials\Pricing.cshtml" />
+    <Content Include="Views\Configure\Partials\Products.cshtml" />
     <Content Include="Views\Linkout\Partials\Faq.cshtml" />
     <Content Include="Views\Linkout\Partials\about.cshtml" />
     <Content Include="Views\Linkout\Partials\Videos.cshtml" />

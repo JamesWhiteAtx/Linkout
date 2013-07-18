@@ -1,5 +1,6 @@
-﻿<div id="sel-leather" class="row">
-    <div id="sel-car" class="span3">
+﻿<div id="sel-leather" class="container">
+
+    <div id="sel-car" class="pull-left">
         <h4 class="sel-caption">Find Your Vehicle</h4>
         <div sel-car-select sec-title="Makes" sec-name="Make" sec-model="make" slct-model="makeIdx" sec-list="makes" sec-id="slct-makes"></div>
         <div sel-car-select sec-title="Years" sec-name="Year" sec-model="year" slct-model="yearIdx" sec-list="years" sec-id="slct-years"></div>
@@ -9,55 +10,146 @@
         <div sel-car-select sec-title="Cars" sec-name="Car Option" sec-model="car" slct-model="carIdx" sec-list="cars" sec-id="slct-cars" sec-only-opts="true"></div>
     </div>
 
-    <div class="span8 well" ng-hide="car.id">
-        <h4>Select Your Leather Seats</h4>
-        <img alt="Leather Car Seats" src="@Url.Content("~/Images/Linkout/interior-black.png")" class="img-rounded"/>
-        <h4>The trused choice of car dealers</h4>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-        <strong><a href ng-click="installInfo()"><i class="icon-info-sign"></i> Professional Installation Included</a></strong>
-    </div>
+    <div class="sel-ptrn-colr pull-left">
+        <div class="well" ng-hide="car.id">
+            <h4>Select Your Leather Seats</h4>
+            <img alt="Leather Car Seats" src="@Url.Content("~/Images/Linkout/interior-black.png")" class="img-rounded"/>
+            <h4>The trused choice of car dealers</h4>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <strong><a href ng-click="installInfo()"><i class="icon-info-sign"></i> Professional Installation Included</a></strong>
+        </div>
 
-
-    <div id="sel-product" class="span9">
-    
-        <div id="sel-ptrn" ng-show="car.id" ng-class="{selected: ptrn.isSelected}" class="row">
+        <div id="sel-product" ng-show="car.id" >
+            @*patterns*@
+            <div id="sel-ptrn" ng-class="{selected: ptrn.isSelected}">
+                <div ng-show="ptrns.isLoading" class="loading">Loading...</div>
             
-            <div ng-show="ptrns.isLoading" class="loading">Loading...</div>
+                <div ng-show="!ptrns.isLoading && ptrn.id && (ptrns.length > 1)">
+                    <h4> {{ptrn.seldescr}} <i class="seat-config-info icon-question-sign"></i> </h4>
+                    <hr />
+                </div>
             
-            <div ng-show="!ptrns.isLoading && ptrn.id && (ptrns.length > 1)">
-                <div><strong><span class="seat-config-info" >Seat Configuration</span></strong> <i class="seat-config-info icon-question-sign"></i> </div> 
-                <h5> {{ptrn.seldescr}} <i class="seat-config-info icon-question-sign"></i> </h5>
+                <div ng-show="!ptrns.isLoading && (!ptrn.id) && (ptrns.length > 1)">
+                    <h4 class="sel-caption">Select Seat Configuration Option <i class="seat-config-info icon-question-sign"></i></h4> 
+                    <ul class="inline">
+                        <li ng-repeat="p in ptrns" ng-click="pickPtrn($index)" title="{{p.name}}">
+                            <div class="select-box" ng-class="{selected: p.id == ptrn.id}">
+                                <div class="box-descr">{{p.seldescr}}</div>
+                                <div class="details">
+                                    <table>
+                                        <tbody>
+                                            <tr ng-repeat="u in p.uniques" >
+                                                <td>{{u.display}}:</td><td> {{u.value}}</td>
+                                            </tr>
+                                            <tr ng-hide="(p.uniques) && (p.uniques.length < 1)"><td>Pattern:</td><td> {{p.name}}</td></tr>
+                                        </tbody>
+                                    </table>              
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
             
-            <div ng-show="!ptrns.isLoading && (!ptrn.id) && (ptrns.length > 1)">
-                @*<h4 class="sel-caption">Select Seat Configuration</h4> *@
-                <div><strong><span class="seat-config-info" >Seat Configuration</span></strong> <i class="seat-config-info icon-question-sign"></i> </div> 
-                <div ng-repeat="p in ptrns" class="ptrn-info" ng-class="{selected: p.id == ptrn.id}"  ng-click="pickPtrn($index)" >
-                    <div class="ptrn-descr">{{p.seldescr}}</div>
-                    <table>
-                        <tbody>
-                            <tr><th>Pattern</th><td>{{p.name}}</td></tr>
-                            <tr><th>Leather</th><td>{{p.leacontname}}</td></tr>
-                            <tr><th>Airbags</th><td>{{p.airbagname}}</td></tr>
-                            @*<tr><th>Rows</th><td>{{p.rowsname}}</td></tr>*@
-                            <tr><th>Insert</th><td>{{p.insertstylename}}</td></tr>
-                            <tr ng-show="p.specialnotes"><th>Note</th><td>{{p.specialnotes}}</td></tr>
-                        </tbody>
-                    </table>
+            @*int colors*@
+            <div id="sel-int" ng-show="ptrn.id && (intCols.length > 1)">
+                <h4 class="sel-caption">Match Factory Interior Color</h4>        
+                <div sel-car-select sec-title="Interior Colors" sec-name="Interior Color" sec-model="intCol" slct-model="intColIdx" sec-list="intCols" sec-id="slct-int-cols" sec-only-opts="true"></div>
+                <hr />
+            </div>
+            
+            @*seat colors*@
+            <div id="sel-col" ng-show="intCol.id">
+                <h4 class="sel-caption" ng-show="leaCols.length > 1" >Select Your Seat Color</h4>
+                <h4 class="sel-caption" ng-hide="leaCols.length > 1" >Seat Color</h4>
+    
+                <div class="lea-colors pull-left">
+                    <div ng-show="leaCol.isLoading" class="loading-large"></div>
+                    <ul class="inline">
+                        <li ng-repeat="col in leaCols" ng-click="pickColor($index)" title="{{col.name}}">
+                            <div class="select-box" ng-class="{selected: col.id == leaCol.id}">
+                                <div class="box-descr">{{col.leacolorname}}</div>
+                                <div>
+                                    <img id="{{col.name}}" ng-src="{{col.colorurl}}" alt="{{col.name}}">
+                                </div>
+                                <div>
+                                    {{col.rectype}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
+    
+    <div id="btn-next" class="btn-next pull-left" ng-show="leaCol.id">
+        <h4>Your Seat</h4>
+        <table ng-show="ptrn.price">
+            <tr><td>{{leaCol.leacolorname}} {{ptrn.seldescr}}</td><td>{{ptrn.price | currency}}</td></tr>
+        </table>
+        <button class="btn btn-large btn-primary" type="button" ng-click="routeConfirm()" ng-show="pickedSchedule()">
+            Complete Order
+            <i class="icon-arrow-right icon-white"></i>
+        </button>
+        <button class="btn btn-large btn-primary" type="button" ng-click="schedInstall()" ng-hide="pickedSchedule()">
+            Schedule Installation
+            <i class="icon-arrow-right icon-white"></i>
+        </button>
+    </div>
+</div>
 
+<div class="hero-unit red-banner"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#leather-offer").tooltip({
+            'title': 'Roadwire offers the finest leather interiors in the business. Take a look at our excellent offers!',
+            'placement': 'bottom'
+        });
+        $(".seat-config-info").tooltip({
+            'title': 'This expalins seat configuration in comprehensive manner',
+            'placement': 'bottom'
+        });
+    });
+</script>
+
+@*
+    <div id="sel-product" class="pull-left" ng-show="false" >
+        <div id="sel-ptrn" ng-class="{selected: ptrn.isSelected}" class="row">
+            <div ng-show="ptrns.isLoading" class="loading">Loading...</div>
+            <div ng-show="!ptrns.isLoading && ptrn.id && (ptrns.length > 1)">
+                <h4> {{ptrn.seldescr}} <i class="seat-config-info icon-question-sign"></i> </h4>
+            </div>
+            
+            <div ng-show="!ptrns.isLoading && (!ptrn.id) && (ptrns.length > 1)">
+                <h4 class="sel-caption">Select Seat Configuration Option <i class="seat-config-info icon-question-sign"></i></h4> 
+                <ul class="inline">
+                    <li ng-repeat="p in ptrns" ng-click="pickPtrn($index)" title="{{p.name}}">
+                        <div class="select-box" ng-class="{selected: p.id == ptrn.id}">
+                            <div class="box-descr">{{p.seldescr}}</div>
+                            <div class="details">
+                                <table>
+                                    <tbody>
+                                        <tr ng-repeat="u in p.uniques" >
+                                            <td>{{u.display}}:</td><td> {{u.value}}</td>
+                                        </tr>
+                                        <tr ng-hide="(p.uniques) && (p.uniques.length < 1)"><td>Pattern:</td><td> {{p.name}}</td></tr>
+                                    </tbody>
+                                </table>              
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div id="sel-int" class="row" ng-show="ptrn.id && (intCols.length > 1)">
             <h4 class="sel-caption">Match Factory Interior Color</h4>        
             <sel-car-select sec-title="Interior Colors" sec-name="Interior Color" sec-model="intCol" slct-model="intColIdx" sec-list="intCols" sec-id="slct-int-cols" sec-only-opts="true"></sel-car-select>
         </div>
-
-        <div id="sel-col" class="row" ng-show="intCol.id">
-
+        <div id="sel-colx" class="row" ng-show="intCol.id">
             <h4 class="sel-caption" ng-show="leaCols.length > 1" >Select Your Seat Color</h4>
             <h4 class="sel-caption" ng-hide="leaCols.length > 1" >Seat Color</h4>
-    
             <div class="lea-colors pull-left">
                 <div ng-show="leaCol.isLoading" class="loading-large"></div>
                 <ul class="inline">
@@ -74,7 +166,6 @@
                     </li>
                 </ul>
             </div>
-
             <div id="btn-next" class="btn-next pull-right" ng-show="leaCol.id" >
                 <table ng-show="ptrn.price">
                     <tr><td>{{leaCol.leacolorname}} {{ptrn.seldescr}}</td><td>{{ptrn.price | currency}}</td></tr>
@@ -92,55 +183,4 @@
         </div>
 
     </div>
-
-</div>
-<div class="hero-unit red-banner"></div>
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        //alert("happending");
-        $("#leather-offer").tooltip({
-            'title': 'Roadwire offers the finest leather interiors in the business. Take a look at our excellent offers!',
-            'placement': 'bottom'
-        });
-        $(".seat-config-info").tooltip({
-            'title': 'This expalins seat configuration in comprehensive manner',
-            'placement': 'bottom'
-        });
-    });
-</script>
-
-@*<div ng-show="car.id" id="sel-ptrn" class="row" ng-class="{selected: ptrn.isSelected}">
-    <h4 class="sel-caption">Select Seat Configuration</h4>        
-    <div class="row">
-        <div class="span2">
-            <div class="btn-group">
-                <button class="btn" type="button" 
-                    ng-click="ptrn.isSelecting = !ptrn.isSelecting" 
-                    ng-disabled="ptrn.isLoading || ptrns.length == 0"
-                    focus-it="ptrn.shouldFocus"
-                    >
-                    Select Configuration  <span class="caret"></span>
-                </button>
-            </div>
-        </div>
-        <div class="span10">
-            <div collapse="ptrn.isSelecting">{{ptrn.seldescr}}</div>
-            <div collapse="!ptrn.isSelecting">
-                <div ng-repeat="p in ptrns" class="pull-left ptrn-info" ng-class="{selected: p.id == ptrn.id}"  ng-click="pickPtrn($index)" >
-                    <table>
-                        <caption>{{p.seldescr}}</caption>
-                        <tbody>
-                            <tr><th>Rows</th><td>{{p.rowsname}}</td></tr>
-                            <tr><th>Insert</th><td>{{p.insertstylename}}</td></tr>
-                            <tr><th>Airbags</th><td>{{p.airbagname}}</td></tr>
-                            <tr ng-show="p.specialnotes"><th>Note</th><td>{{p.specialnotes}}</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 *@

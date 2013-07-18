@@ -7,8 +7,8 @@ configure
     $scope.routeMenu = function () {
         $location.path('/menu');
     }
-    $scope.routePricing = function () {
-        $location.path('/pricing');
+    $scope.routeProducts = function () {
+        $location.path('/products');
     }
     $scope.routeCars = function () {
         $location.path('/cars');
@@ -20,16 +20,40 @@ configure
 } ])
 .controller('MenuCtrl', ['$scope', function ($scope) { } ])
 
-.controller('PricingCtrl', ['$scope', 'ProductList', function ($scope, ProductList) {
-
+.controller('ProductsCtrl', ['$scope', 'ProductList', 'Product', function ($scope, ProductList, Product) {
+    $scope.modified = false;
     $scope.listing = {};
 
+    var unWatchListing;
+    function setListingWatch() {
+        freeListingWatch();
+
+        unWatchListing = $scope.$watch('listing', function (newVal, oldVal) {
+            if (!$scope.firstWatch) {
+                $scope.modified = true;
+            };
+            $scope.firstWatch = false;
+        }, true);
+
+    }
+    function freeListingWatch() {
+        if (unWatchListing) {
+            unWatchListing();
+        };
+    }
+
     $scope.loadListing = function () {
-        ProductList.loadListing().then(function (listing) {
-            $scope.listing = listing;
-        }, function (err) {
-            $scope.listing = null;
-        });
+        freeListingWatch();
+        $scope.modified = false;
+        ProductList.loadListing().then(
+            function (listing) {
+                $scope.listing = listing;
+                $scope.firstWatch = true;
+                setListingWatch();
+            },
+            function (err) {
+                $scope.listing = null;
+            });
     }
 
     $scope.clearListing = function () {
@@ -38,6 +62,10 @@ configure
 
     $scope.cacheListing = function () {
         ProductList.cacheListing($scope.listing);
+    }
+
+    $scope.saveListing = function () {
+        Product.save({description:'hot cake', price: 123.34})
     }
 
     $scope.loadListing();

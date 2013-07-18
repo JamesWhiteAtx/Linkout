@@ -8,6 +8,12 @@ using Newtonsoft.Json;
 
 namespace Linkout.Controllers
 {
+    public class ProdDTO
+    {
+        public string Description { get; set; }
+        public string Price { get; set; }
+    }
+
     public class ProductController : ApiController
     {
         private IProductService _productService;
@@ -26,5 +32,18 @@ namespace Linkout.Controllers
         {
             return _jsonHttpResponseService.GetObjectHttpResponseMessage(_productService.Listing());
         }
+
+        // POST product
+        public void Post([FromBody]ProdDTO prod)
+        {
+            var save = prod;
+        }
+
+        // POST product/5
+        public void Post(int id, [FromBody]ProdDTO prod)
+        {
+            var update = prod;
+        }
+
     }
 }

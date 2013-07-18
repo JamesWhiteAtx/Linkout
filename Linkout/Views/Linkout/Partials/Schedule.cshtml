@@ -9,12 +9,11 @@
     </div>
 
     <div class="prod-schedule" ng-show="pickedProduct()" >
+        <div class="pull-right">
+            <h4><a href ng-click="installInfo()"><i class="icon-info-sign"></i> The Advantages of Professional Installation </a></h4>
+        </div>
 
-        @*<div id="products-section">
-            id: {{leather.leaCol.id}} leather: {{leather.leaCol.name}}
-        </div>*@
-
-        <div id="zip-section">
+        <div id="zip-section" class="clearfix">
             <form ng-submit="loadInstallers()" name="zipForm" class="form-inline" novalidate="novalidate">
                 
                 <label class="control-label" for="inputIcon"><strong>Enter Your Zipcode</strong></label>

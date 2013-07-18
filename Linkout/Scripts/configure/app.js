@@ -8,10 +8,10 @@ var configure = angular.module('configure', ['linkout.services', 'configure.serv
             templateUrl: '/Configure/Partials/Menu',
             controller: "MenuCtrl"
         });
-        $routeProvider.when('/pricing', {
-            title: 'pricing',
-            templateUrl: '/configure/Partials/Pricing',
-            controller: "PricingCtrl"
+        $routeProvider.when('/products', {
+            title: 'products',
+            templateUrl: '/configure/Partials/Products',
+            controller: "ProductsCtrl"
         });
         $routeProvider.when('/cars', {
             title: 'cars',

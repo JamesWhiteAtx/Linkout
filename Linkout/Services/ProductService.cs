@@ -10,6 +10,7 @@ namespace Linkout
     public interface IProductService
     {
         IEnumerable<ProductModel> Listing();
+        void Update(int id, string description, decimal price);
     }
 
     public class ProductService : IProductService
@@ -35,6 +36,20 @@ namespace Linkout
                         };
 
             return prods; 
+        }
+
+        public void Update(int id, string description, decimal price)
+        {
+            var prod = (from p in _linkoutEntities.CostcoProducts
+                        where p.ID == id
+                        select p).FirstOrDefault();
+            
+            if (prod != null) { 
+                prod.Description = description;
+                prod.Price = price;
+
+                _linkoutEntities.SaveChanges();
+            }
         }
 
     }

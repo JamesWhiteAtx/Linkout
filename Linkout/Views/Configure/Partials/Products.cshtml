@@ -4,6 +4,10 @@
     {
         margin: 10px 0 0 0;
     }
+    button.btn[disabled] 
+    {
+        cursor: not-allowed;
+    }
 </style>
 
 <h4>Costco Product Listing</h4>
@@ -12,20 +16,12 @@
 <section id="products-listing">
 
     <div class="row">
-        <div class="span2 offset10">
-            <button class="btn btn-primary" type="button" ng-disabled="!modified" ng-click="saveListing()">
-             <i class="icon-save"></i> Save 
-            </button>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="span2"><strong>Product</strong></div>
         <div class="span6"><strong>Description</strong></div>
         <div class="span2"><strong>Price</strong></div>
         <div class="span2 text-right"><strong>Discount</strong></div>
     </div>
-    <form name="prodForm" class="form-inline" ng-repeat="p in listing.prodList">
+    <form name="prodForm" class="form-inline" ng-repeat="p in listing.prodList" ng-controller="ProdController">
         <div class="row">
             <div class="span2"> {{$index+1}}) <strong>{{p.type}}</strong> </div>
             <div class="span6"> <input type="text" class="span6" ng-model="p.description" placeholder="Descripton" /> </div>
@@ -38,7 +34,14 @@
             <div class="span2 text-right"> <span ng-show="p.discount()">{{p.discount() | currency}}</span> </div>
         </div>
     </form>
-
+    <hr />
+    <div class="row">
+        <div class="span2">
+            <button class="btn btn-large btn-primary" type="button" ng-disabled="!listing.isListChanged() || anyInvalidForms()" ng-click="saveListing()">
+             <i class="icon-save"></i> Save 
+            </button>
+        </div>
+    </div>
 
 </section>
 

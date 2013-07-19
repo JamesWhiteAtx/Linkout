@@ -5,15 +5,10 @@ using System.Text;
 using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
+using Linkout.Models;
 
 namespace Linkout.Controllers
 {
-    public class ProdDTO
-    {
-        public string Description { get; set; }
-        public string Price { get; set; }
-    }
-
     public class ProductController : ApiController
     {
         private IProductService _productService;
@@ -34,15 +29,15 @@ namespace Linkout.Controllers
         }
 
         // POST product
-        public void Post([FromBody]ProdDTO prod)
+        public void Post([FromBody]ProdDescrPriceModel prod)
         {
             var save = prod;
         }
 
         // POST product/5
-        public void Post(int id, [FromBody]ProdDTO prod)
+        public void Post(int id, [FromBody]ProdDescrPriceModel prod)
         {
-            var update = prod;
+            _productService.Update(id, prod.Description, prod.Price);
         }
 
     }

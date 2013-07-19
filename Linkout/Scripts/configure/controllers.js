@@ -21,35 +21,30 @@ configure
 .controller('MenuCtrl', ['$scope', function ($scope) { } ])
 
 .controller('ProductsCtrl', ['$scope', 'ProductList', 'Product', function ($scope, ProductList, Product) {
-    $scope.modified = false;
     $scope.listing = {};
 
-    var unWatchListing;
-    function setListingWatch() {
-        freeListingWatch();
+    $scope.invalidForms = [];
 
-        unWatchListing = $scope.$watch('listing', function (newVal, oldVal) {
-            if (!$scope.firstWatch) {
-                $scope.modified = true;
-            };
-            $scope.firstWatch = false;
-        }, true);
-
+    $scope.addInvalidForm = function (id) {
+        var idx = $scope.invalidForms.indexOf(id);
+        if (idx == -1) {
+            $scope.invalidForms.push(id);
+        }
     }
-    function freeListingWatch() {
-        if (unWatchListing) {
-            unWatchListing();
-        };
+    $scope.delInvalidForm = function (id) {
+        var idx = $scope.invalidForms.indexOf(id);
+        if (idx != -1) {
+            $scope.invalidForms.splice(idx, 1);
+        }
+    }
+    $scope.anyInvalidForms = function () {
+        return (($scope.invalidForms) && ($scope.invalidForms.length > 0));
     }
 
     $scope.loadListing = function () {
-        freeListingWatch();
-        $scope.modified = false;
         ProductList.loadListing().then(
             function (listing) {
                 $scope.listing = listing;
-                $scope.firstWatch = true;
-                setListingWatch();
             },
             function (err) {
                 $scope.listing = null;
@@ -57,6 +52,7 @@ configure
     }
 
     $scope.clearListing = function () {
+        $scope.listing = {};
         ProductList.clearListing();
     }
 
@@ -65,10 +61,37 @@ configure
     }
 
     $scope.saveListing = function () {
-        Product.save({description:'hot cake', price: 123.34})
+        var prod;
+        var saved = false;
+        for (var i = 0; i < $scope.listing.prodList.length; i++) {
+            prod = $scope.listing.prodList[i];
+            if (prod.isChanged()) {
+                Product.save({ id: prod.id }, { description: prod.description, price: prod.price });
+                saved = true;
+            }
+        };
+        if (saved) {
+            $scope.clearListing();
+            $scope.loadListing();
+        }
+
     }
 
     $scope.loadListing();
+} ])
+
+.controller('ProdController', ['$scope', function ($scope) {
+    $scope.$watch(
+        function () { return { description: $scope.p.description, price: $scope.p.price }; },
+        function (newVal, oldVal) {
+            if ($scope.prodForm.$valid) {
+                $scope.delInvalidForm($scope.p.id);
+            } else {
+                $scope.addInvalidForm($scope.p.id);
+            }
+        },
+        true
+    );
 } ])
 
 .controller('CarsCtrl', ['$scope', function ($scope) {

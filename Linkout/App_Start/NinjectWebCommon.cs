@@ -70,7 +70,7 @@ namespace Linkout.App_Start
             kernel.Bind<IJsonWebResponseService>().To<JsonWebResponseService>();
             kernel.Bind<INetSuiteUriService>().To<NetSuiteUriService>();
             kernel.Bind<IConfigurationService>().To<ConfigurationService>();
-            kernel.Bind<IPriceService>().To<PriceService>();
+            //kernel.Bind<IPriceService>().To<PriceService>();
             kernel.Bind<IProductService>().To<ProductService>();
         }        
     }

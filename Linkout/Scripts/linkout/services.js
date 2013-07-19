@@ -160,20 +160,20 @@ angular.module('linkout.services', ['ngResource'])
         return $resource('/schedule/installers/:zipcode', { zipcode: '@zipcode' });
     } ])
 
-    .factory('ProductPrice', ['$http', function ($http) {
-        return {
-            leather: function (rows) {
-                return $http.get('/price/leather/' + rows, { cache: true });
-            },
-            heater: function () {
-                return $http.get('/price/heater');
-            }
-        };
-    } ])
+//    .factory('ProductPrice', ['$http', function ($http) {
+//        return {
+//            leather: function (rows) {
+//                return $http.get('/price/leather/' + rows, { cache: true });
+//            },
+//            heater: function () {
+//                return $http.get('/price/heater');
+//            }
+//        };
+//    } ])
 
-    .factory('Product', ['$resource', function($resource) {
-        return $resource('/product/:id', {id: '@id'});
-    }])
+    .factory('Product', ['$resource', function ($resource) {
+        return $resource('/product/:id', { id: '@id' });
+    } ])
 
     .factory('ProductList', ['$http', '$q', '$cacheFactory', 'ProductDefn', function ($http, $q, $cacheFactory, ProductDefn) {
         var listingKey = 'prod_list_key';
@@ -220,16 +220,56 @@ angular.module('linkout.services', ['ngResource'])
 
     } ])
 
+
     .factory('ProductDefn', [function () {
         var makeProduct = function (typ) {
-            return {
+
+            var origProp = function (name) {
+                return prod.hasOwnProperty(name)
+                && !angular.isFunction(prod[name])
+                && !angular.isArray(prod[name]);
+            }
+
+            var prod = {
                 type: typ,
-                discription: '',
+                id: '',
+                code: '',
+                description: '',
                 price: '',
                 ccItemId: '',
-                ccUrl: '',
-                discount: function () { return 0; }
+                ccUrl: ''
             };
+            prod.discount = function () { return 0; },
+
+            prod.updateChanged = function () {
+                prod.origVals = {
+                    type: prod.type,
+                    id: prod.id,
+                    code: prod.code,
+                    description: prod.description,
+                    price: prod.price,
+                    ccItemId: prod.ccItemId,
+                    ccUrl: prod.ccUrl
+                };
+            };
+
+            prod.isChanged = function () {
+                var changed = false;
+                if (prod.origVals) {
+                    for (var name in prod.origVals) {
+                        if (origProp(name)) {
+                            if (prod.origVals[name] != prod[name]) {
+                                changed = true;
+                                break;
+                            }
+                        }
+                    };
+                };
+                return changed;
+            };
+
+            prod.updateChanged();
+            return prod;
         };
         var makeList = function () {
             var self = {};
@@ -256,36 +296,48 @@ angular.module('linkout.services', ['ngResource'])
                 function assgn(prod) {
                     prod.description = srcObj.Description;
                     prod.price = srcObj.Price;
+
                     prod.id = srcObj.ID;
                     prod.code = srcObj.Code;
-                }
 
+                    prod.updateChanged();
+                };
+
+                var prod = self.findProd(rows, heaters);
+                if (prod) {
+                    assgn(prod);
+                }
+            }
+
+            self.findProd = function (rows, heaters) {
+                var prod = null;
                 if ((!rows) && (heaters == 1)) {
-                    assgn(self.h1);
+                    prod = self.h1;
                 } else if ((!rows) && (heaters == 2)) {
-                    assgn(self.h2);
+                    prod = self.h2;
 
                 } else if ((rows == 1) && (!heaters)) {
-                    assgn(self.l1);
+                    prod = self.l1;
                 } else if ((rows == 1) && (heaters == 1)) {
-                    assgn(self.l1h1);
+                    prod = self.l1h1;
                 } else if ((rows == 1) && (heaters == 2)) {
-                    assgn(self.l1h2);
+                    prod = self.l1h2;
 
                 } else if ((rows == 2) && (!heaters)) {
-                    assgn(self.l2);
+                    prod = self.l2;
                 } else if ((rows == 2) && (heaters == 1)) {
-                    assgn(self.l2h1);
+                    prod = self.l2h1;
                 } else if ((rows == 2) && (heaters == 2)) {
-                    assgn(self.l2h2);
+                    prod = self.l2h2;
 
                 } else if ((rows == 3) && (!heaters)) {
-                    assgn(self.l3);
+                    prod = self.l3;
                 } else if ((rows == 3) && (heaters == 1)) {
-                    assgn(self.l3h1);
+                    prod = self.l3h1;
                 } else if ((rows == 3) && (heaters == 2)) {
-                    assgn(self.l3h2);
-                }
+                    prod = self.l3h2;
+                };
+                return prod;
             };
 
             function safeNum(v) {
@@ -327,6 +379,19 @@ angular.module('linkout.services', ['ngResource'])
             };
 
             self.prodList = [];
+
+            self.isListChanged = function () {
+                var changed = false;
+                var prod;
+                for (var i = 0; i < self.prodList.length; i++) {
+                    prod = self.prodList[i];
+                    if (prod.isChanged()) {
+                        changed = true;
+                        break;
+                    }
+                };
+                return changed;
+            };
 
             self.prodList.push(self.h1);
             self.prodList.push(self.h2);

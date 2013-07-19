@@ -7,7 +7,7 @@ linkout
         dialog.close(result);
     };
 } ])
-.controller('LinkoutCtrl', ['$scope', '$location', '$dialog', 'ProductPrice', function ($scope, $location, $dialog, ProductPrice) {
+.controller('LinkoutCtrl', ['$scope', '$location', '$dialog', 'ProductList', function ($scope, $location, $dialog, ProductList) {
     var t =
     '<div class="modal-header">' +
     '<h3>Why Professional Installation?</h3>' +
@@ -105,7 +105,6 @@ linkout
         }
     }
 
-
     $scope.pickedDriver = function () {
         if (($scope.heater) && ($scope.heater.driver)) {
             return true;
@@ -172,30 +171,114 @@ linkout
     $scope.driverDescr = 'Driver Side Seat Heater';
     $scope.passengerDescr = 'Passenger Side Seat Heater';
 
-    ProductPrice.heater()
-    .success(function (data, status, headers, config) {
-        $scope.heaterPrice = data.Price;
-    })
-    .error(function (data, status, headers, config) {
-        delete $scope.heaterPrice;
-    });
+    ProductList.loadListing().then(
+        function (listing) {
 
-    $scope.productPriceTotal = function () {
-        var total = 0;
-        if ($scope.heater) {
-            if ($scope.heater.driver) {
-                total = total + $scope.heaterPrice;
-            }
-            if ($scope.heater.passenger) {
-                total = total + $scope.heaterPrice;
-            }
-        }
-        if ($scope.pickedLeather()) {
-            total = total + $scope.leather.ptrn.price;
-        }
-        return total;
+        },
+        function (err) {
+
+        });
+    //    .success(function (data, status, headers, config) {
+    //        $scope.heaterPrice = data.Price;
+    //    })
+    //    .error(function (data, status, headers, config) {
+    //        delete $scope.heaterPrice;
+    //    });
+
+    var resetInvoice = function (descr, amount) {
+        $scope.invoice = { leather: [], heater: [], discount: [], total: [] };
     }
 
+    resetInvoice();
+
+    var makeInvoiceLine = function (descr, amount) {
+        return { description: descr, amount: amount };
+    }
+
+
+    var calcInvoice = function () {
+        ProductList.loadListing().then(
+            function (listing) {
+
+                resetInvoice();
+
+                var heaters = 0;
+                var drv = $scope.pickedDriver()
+                var psg = $scope.pickedPassenger()
+
+                var totProd;
+                var hd;
+                if (drv) {
+                    heaters = 1;
+                    $scope.invoice.heater.push(makeInvoiceLine($scope.driverDescr, listing.h1.price));
+                    totProd = listing.h1;
+                }
+                if (psg) {
+                    heaters = 1;
+                    $scope.invoice.heater.push(makeInvoiceLine($scope.passengerDescr, listing.h1.price));
+                    totProd = listing.h1;
+                }
+                if (drv && psg) {
+                    heaters = 2;
+                    hd = listing.h2.discount();
+                    if (hd > 0) {
+                        $scope.invoice.heater.push(makeInvoiceLine('Multi Heaters Discount', hd * -1));
+                    }
+                    totProd = listing.h2;
+                }
+
+                var baseLea;
+                var ld;
+                if ($scope.pickedLeather()) {
+
+                    baseLea = listing.findProd($scope.leather.ptrn.rowsname, 0);
+                    totProd = listing.findProd($scope.leather.ptrn.rowsname, heaters);
+
+                    $scope.invoice.leather.push(
+                        makeInvoiceLine(
+                            $scope.leather.leaCol.leacolorname + ' ' + $scope.leather.ptrn.seldescr
+                            ,
+                            baseLea.price
+                        )
+                    );
+
+                    ld = totProd.discount();
+                    if (ld > 0) {
+                        $scope.invoice.discount.push(makeInvoiceLine('Leather Heater Combo Discount', ld * -1));
+                    }
+                };
+
+                if (totProd) {
+                    $scope.invoice.total.push(makeInvoiceLine('Total', totProd.price));
+                };
+
+            },
+            function (err) {
+                resetInvoice();
+            });
+    }
+
+    $scope.$watch(
+        function () { return { d: $scope.pickedDriver(), p: $scope.pickedPassenger(), l: $scope.leather.ptrn }; },
+        function () {
+            calcInvoice();
+        }, true);
+
+    //    $scope.productPriceTotal = function () {
+    //        var total = 0;
+    //        if ($scope.heater) {
+    //            if ($scope.heater.driver) {
+    //                total = total + $scope.heaterPrice;
+    //            }
+    //            if ($scope.heater.passenger) {
+    //                total = total + $scope.heaterPrice;
+    //            }
+    //        }
+    //        if ($scope.pickedLeather()) {
+    //            total = total + $scope.leather.ptrn.price;
+    //        }
+    //        return total;
+    //    }
 
     $scope.memberInfo = function () {
         if (
@@ -280,24 +363,8 @@ linkout
     $scope.addCrumb("Select Heater Option");
 } ])
 
-.controller('LeatherCtrl', ['$scope', '$location', 'Makes', 'Years', 'Models', 'Bodies', 'Trims', 'Cars', 'Ptrns', 'IntCols', 'RecCols', 'AllCols', 'ProductPrice', 'UniqueProps',
-    function ($scope, $location, Makes, Years, Models, Bodies, Trims, Cars, Ptrns, IntCols, RecCols, AllCols, ProductPrice, UniqueProps) {
-
-//        var objs = [
-//        { p1: 1, p2: '1', p3: '1' },
-//        { p1: 1, p2: '1', p3: '1' },
-//        { p1: 2, p2: '1', p3: '1' },
-//        { p1: 1, p2: '1', p3: '1' },
-//        { p1: 1, p2: '1', p3: '1' },
-//        { p1: 1, p2: '1', p3: '1' }
-//        ];
-//        var propList = [
-//            { display: 'pee1', name: 'p1' },
-//            { display: 'pee2', name: 'p2' },
-//            { display: 'pee3', name: 'p3' },
-//        ];
-//        var r = UniqueProps(objs, propList);
-//        var z = r;
+.controller('LeatherCtrl', ['$scope', '$location', 'Makes', 'Years', 'Models', 'Bodies', 'Trims', 'Cars', 'Ptrns', 'IntCols', 'RecCols', 'AllCols', 'UniqueProps', 'ProductList',
+    function ($scope, $location, Makes, Years, Models, Bodies, Trims, Cars, Ptrns, IntCols, RecCols, AllCols, UniqueProps, ProductList) {
 
         function addAppProps(obj) {
             return $.extend(obj, {
@@ -508,14 +575,18 @@ linkout
                 loadList(IntCols, makeIdParm(["car", "ptrn"]), "Match Interior",
                     'colors', 'intCols', 'intCol', null, null);
 
+                var prod;
                 if (($scope.ptrn) && ($scope.ptrn.rowsname)) {
-                    ProductPrice.leather($scope.ptrn.rowsname)
-                    .success(function (data, status, headers, config) {
-                        $scope.ptrn.price = data.Price;
-                    })
-                    .error(function (data, status, headers, config) {
-                        delete $scope.ptrn.price;
-                    });
+                    delete $scope.ptrn.price;
+                    ProductList.loadListing().then(
+                        function (listing) {
+                            prod = listing.findProd($scope.ptrn.rowsname, 0);
+                            if (prod) {
+                                $scope.ptrn.price = prod.price;
+                            }
+                        },
+                        function (err) { }
+                    );
                 }
             });
             unWatchPtrnFocus = $scope.$watch('ptrn.shouldFocus', function (newVal, oldVal) {

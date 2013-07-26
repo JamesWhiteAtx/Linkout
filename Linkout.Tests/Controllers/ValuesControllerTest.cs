@@ -7,7 +7,6 @@ using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Linkout;
 using Linkout.Controllers;
-using Linkout.Services;
 using Moq;
 
 namespace Linkout.Tests

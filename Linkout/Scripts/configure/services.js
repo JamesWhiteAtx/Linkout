@@ -225,9 +225,20 @@ angular.module('configure.services', ['ngResource'])
             node.canCollapse = function () {
                 return (node.hasKids() && node.expanded);
             }
-            node.kidsError = function () {
-                return (node.canHaveKids() && node.loaded && !node.hasKids());
+            //node.kidsError = function () {
+            //    return (node.canHaveKids() && node.loaded && !node.hasKids());
+            //}
+
+            node.exlapseState = function () {
+                if (node.canCollapse()) {
+                    return -1;
+                } else if (node.canExpand()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
             }
+
             node.expand = function () {
                 if (node.isLoading) {
                     return;

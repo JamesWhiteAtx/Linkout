@@ -1,28 +1,66 @@
-﻿<h2>Car Patterns Error Report</h2>
+﻿<div class="clearfix"> 
+    <div class="pull-right well" >
 
-<div class="pull-right" >
-    <label class="checkbox inline" ng:repeat="level in levels">
-        <input type="checkbox" ng-disabled="reportRunning()" ng-model="level.checked"> {{level.type}}
-    </label>
-    <div>errors: {{errs.length}}  elapsed: {{elapStr}}</div>
-</div>
+        <label class="checkbox inline">
+            <input type="checkbox" ng-model="limitMakes" ng-disabled="reportRunning()" ng-click="openMksDlg()"> Limit Makes
+        </label>
+
+        <label class="checkbox inline" ng-repeat="level in levels | limitTo: ((levels.length-1)*-1)">
+            <input type="checkbox" ng-disabled="reportRunning()" ng-model="level.checked"> {{level.type}}
+        </label>
+        <hr />
+        <div> <span>Errors: {{errs.length || 0}}</span>  <div class="pull-right" ng-show="elapStr">Elapsed: {{elapStr}}</div></div>
+    </div>
+
+    @*
+        <button class="btn" ng-click="open()">Open me!</button>
+    *@
+        <div modal="mksDlgOpen" close="closeMksDlg()" options="mksDlgOpts">
+            <div class="modal-header">
+                <h3>Limit Report to Selected Makes</h3>
+                <div>
+                    <button class="btn btn-link" ng-click="checkAllMks()"><i class="icon-check"></i> Select All</button>
+                    <button class="btn btn-link" ng-click="unCheckMks()"><i class="icon-check-empty"></i> Clear All</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <ul class="unstyled">
+                    <li ng-repeat="make in makes.list">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="make.checked"> {{make.name}} include:{{make.included}}
+                        </label>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="okMksDlg()"><i class="icon-ok"></i> Save</button>
+                <button class="btn" ng-click="cancelMksDlg()">Cancel</button>
+            </div>
+        </div>
+
+    @*stack: {{maxStack}} async: {{maxAsync}} *@
 
 
-<button class="btn btn-success" type="button" ng-hide="reportRunning()" ng-click="runReport()">
-     <i class="icon-play"></i>
-    <span ng-show="started">Re-</span>Run Report
-</button>
-<button class="btn btn-success" type="button" ng-show="reportRunning() && paused" ng-click="resumeReport()">
-    <i class="icon-play"></i>
-    Resume Report
-</button>
-<button class="btn btn-warning" type="button" ng-show="reportRunning() && !paused" ng-click="pauseReport()">
-    <i class="icon-pause"></i>
-    Pause Report
-</button>
+    <div class="pull-left" >
+        <h2>Car Patterns Error Report</h2>
 
-@*stack: {{maxStack}} async: {{maxAsync}} *@
-
+        <div>    
+            <button class="btn btn-success" type="button" ng-hide="reportRunning()" ng-click="runReport()">
+                 <i class="icon-play"></i>
+                <span ng-show="started">Re-</span>Run Report
+            </button>
+            <button class="btn btn-success" type="button" ng-show="reportRunning() && paused" ng-click="resumeReport()">
+                <i class="icon-play"></i>
+                Resume Report
+            </button>
+            <button class="btn btn-warning" type="button" ng-show="reportRunning() && !paused" ng-click="pauseReport()">
+                <i class="icon-pause"></i>
+                Pause Report
+            </button>
+        </div>
+    </div>
+</div> 
 
 <div> 
     <span ng-show="reportRunning() && paused">Paused</span> 
@@ -35,6 +73,7 @@
         {{currStack.bodyname}}
         {{currStack.trimname}}
         {{currStack.carname}}
+        {{currStack.display}}
     </span> 
 </div>
 

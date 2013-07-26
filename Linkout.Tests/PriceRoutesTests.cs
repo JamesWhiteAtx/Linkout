@@ -10,28 +10,28 @@ namespace Linkout.Tests
     public class PriceRoutesTests
     {
         //global for the test run
-        private static TestContext context;
+        //private static TestContext context;
 
-        [ClassInitialize()]
-        public static void InitializeRoutesTest(TestContext testContext)
-        {
-            context = TestHelpers.InitializeRoutesTest(testContext);
-        }
+        //[ClassInitialize()]
+        //public static void InitializeRoutesTest(TestContext testContext)
+        //{
+        //    context = TestHelpers.InitializeRoutesTest(testContext);
+        //}
 
-        [TestMethod]
-        public void PriceLeatherRouteMapsToPriceControllerLeatherMethod()
-        {
-            var routeData = TestHelpers.GetRouteData(context, "http://site.com/price/leather/2");
-            Assert.AreEqual(routeData.Values["controller"], "Price");
-            Assert.AreEqual(routeData.Values["action"], "Leather");
-        }
+        //[TestMethod]
+        //public void PriceLeatherRouteMapsToPriceControllerLeatherMethod()
+        //{
+        //    var routeData = TestHelpers.GetRouteData(context, "http://site.com/price/leather/2");
+        //    Assert.AreEqual(routeData.Values["controller"], "Price");
+        //    Assert.AreEqual(routeData.Values["action"], "Leather");
+        //}
 
-        [TestMethod]
-        public void PriceHeaterRouteMapsToPriceControllerHeaterMethod()
-        {
-            var routeData = TestHelpers.GetRouteData(context, "http://site.com/price/heater");
-            Assert.AreEqual(routeData.Values["controller"], "Price");
-            Assert.AreEqual(routeData.Values["action"], "Heater");
-        }
+        //[TestMethod]
+        //public void PriceHeaterRouteMapsToPriceControllerHeaterMethod()
+        //{
+        //    var routeData = TestHelpers.GetRouteData(context, "http://site.com/price/heater");
+        //    Assert.AreEqual(routeData.Values["controller"], "Price");
+        //    Assert.AreEqual(routeData.Values["action"], "Heater");
+        //}
     }
 }

@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net.Http;
 using Moq;
 using Linkout;
-using Linkout.Services;
 using Linkout.Controllers;
 
 namespace Linkout.Tests
@@ -26,13 +25,13 @@ namespace Linkout.Tests
             return selSrvc.Object;
         }
 
-        public static T MakeSelCtrl<T>() where T : SelectorController, new()
-        {
-            SelectorController ctrl = new T();
-            ctrl.SelectorService = MakeMockService();
-            ctrl.NetSuiteUriService = new NetSuiteUriService();
-            return (T)ctrl;
-        }
+        //public static T MakeSelCtrl<T>() where T : SelectorController, new()
+        //{
+        //    SelectorController ctrl = new T();
+        //    ctrl.SelectorService = MakeMockService();
+        //    ctrl.NetSuiteUriService = new NetSuiteUriService();
+        //    return (T)ctrl;
+        //}
 
         public static HttpResponseMessage GetMockServiceResponse(INetSuiteUriService bldr)
         {

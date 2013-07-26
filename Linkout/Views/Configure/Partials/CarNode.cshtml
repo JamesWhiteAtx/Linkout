@@ -3,21 +3,17 @@
 }
 
 <section>
-    <div class="btn" ng-click="node.explapse()" ng-show="node.canHaveKids()">
-        <span ng-hide="node.isLoading">
-            <i class="icon-caret-right icon-large" title="expand" ng-show="node.canExpand()"></i>
-            <i class="icon-caret-down icon-large" title="collapse" ng-show="node.canCollapse()"></i>
-            <i class="icon-frown icon-large" title="error" ng-show="node.kidsError()"></i>
+    <div class="btn" ng-click="node.explapse()" ng-show="node.canHaveKids()" ng-switch on="node.isLoading">
+        <span ng-switch-when="false" ng-switch on="node.exlapseState()">
+            <i class="icon-caret-right icon-large" title="expand" ng-switch-when="1"></i>
+            <i class="icon-caret-down icon-large" title="collapse" ng-switch-when="-1"></i>
+            <i class="icon-frown icon-large" title="error" ng-switch-default></i>
         </span>
-        <span ng-show="node.isLoading" class="loading">...</span>
+        <span ng-switch-when="true" class="loading">...</span>
     </div>
     <div class="node-body btn" ng-class="{'btn-primary': node.selected, 'selected': node.selected}" ng-click="nodeSelect(node)">
         {{node.display}}
     </div>
-@*    <div class="btn" ng-class="{btn-success: node.selected}" >
-        {{node.type}} {{node.display}}
-    </div>
-*@
     <ul class="tree">
         <li ng-repeat="node in node.kids" ng-show="node.showing()" ng-include src="'Configure/Partials/CarNode'">
         </li>

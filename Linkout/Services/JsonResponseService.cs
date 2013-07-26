@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Net;
 using System.IO;
 
-namespace Linkout.Services
+namespace Linkout
 {
     public interface IJsonWebResponseService
     {

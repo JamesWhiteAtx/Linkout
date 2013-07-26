@@ -59,23 +59,26 @@ namespace Linkout
                 routeTemplate: "selector/ptrn/{ptrnid}/allcols",
                 defaults: new { controller = "AllCols", action = "Get" }
             );
-
             config.Routes.MapHttpRoute(
                 name: "ScheuleApi",
                 routeTemplate: "schedule/installers/{zipcode}",
                 defaults: new { controller = "Installers", action = "Get", zipcode = RouteParameter.Optional }
             );
-
             config.Routes.MapHttpRoute(
                 name: "ProductListingApi",
                 routeTemplate: "product/listing",
                 defaults: new { controller = "Product", action = "Listing" }
             );
-
             config.Routes.MapHttpRoute(
                 name: "ProductApi",
                 routeTemplate: "product/{id}",
                 defaults: new { controller = "Product", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "NetSuiteApi",
+                routeTemplate: "netsuite/{type}",
+                defaults: new { controller = "NetSuite", type = RouteParameter.Optional }
             );
 
             //config.Routes.MapHttpRoute(

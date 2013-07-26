@@ -4,7 +4,7 @@ using System.Web.Configuration;
 using System.Configuration;
 
 
-namespace Linkout.Services
+namespace Linkout
 {
     public interface IConfigurationService
     {

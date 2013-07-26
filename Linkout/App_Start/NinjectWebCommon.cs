@@ -13,8 +13,9 @@ namespace Linkout.App_Start
 
 	using System.Web.Http;
 	using NinjectWebApi;
-    using Linkout.Services;
+    using Linkout;
     using CST.Security.Data;
+    using System.Configuration;
 
 
     public static class NinjectWebCommon 
@@ -68,10 +69,18 @@ namespace Linkout.App_Start
 
             kernel.Bind<IJsonHttpResponseService>().To<JsonHttpResponseService>();
             kernel.Bind<IJsonWebResponseService>().To<JsonWebResponseService>();
-            kernel.Bind<INetSuiteUriService>().To<NetSuiteUriService>();
             kernel.Bind<IConfigurationService>().To<ConfigurationService>();
             //kernel.Bind<IPriceService>().To<PriceService>();
             kernel.Bind<IProductService>().To<ProductService>();
+
+            kernel.Bind<INetSuiteUriService>().To<NetSuiteUriService>();
+
+            kernel.Bind<INetsuiteUriService>().ToMethod(
+                m => {
+                    NetSuiteConfiguration nsSect = ConfigurationManager.GetSection("NetSuiteSection") as NetSuiteConfiguration;
+                    return nsSect.Uri;
+                }
+            );
         }        
     }
 }

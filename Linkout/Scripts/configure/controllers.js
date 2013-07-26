@@ -97,6 +97,9 @@ configure
 .controller('CarsCtrl', ['$scope', function ($scope) {
 } ])
 
+.controller('DropdownCtrl', ['$scope', function ($scope) {
+} ])
+
 .controller("TreeCtrl", ['$scope', 'TreeService', 'NetsuiteLinks', function ($scope, TreeService, NetsuiteLinks) {
     $scope.tree = TreeService.rootNode("node0");
     $scope.tree.loadKids();
@@ -179,7 +182,7 @@ function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList
     $scope.levels = [
         { type: 'Make',
             checked: true,
-            srvc: MakeList
+            srvc: getCurMakeList
         },
         { type: 'Year',
             checked: true,
@@ -277,8 +280,12 @@ function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList
             function (result) {
                 if (angular.isArray(result.list) || ((result.list.length > 0))) {
                     var childStack = [];
+                    var child;
                     for (var i = 0; ((i < result.list.length)); i++) { // && (i < 5)
-                        childStack.push(makeRun(idx + 1, parm, data, result.list[i]));
+                        child = result.list[i];
+                        if (!(child.included === false)) {
+                            childStack.push(makeRun(idx + 1, parm, data, child));
+                        }
                     };
                     delay.resolve(childStack);
                 } else {
@@ -397,5 +404,85 @@ function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList
         runNextLevel();
     }
 
+    $scope.limitMakes = false;
+
+    var checkMks = function (check) {
+        getCurMakeList().then(
+            function (result) {
+                for (var i = 0; ((i < $scope.makes.list.length)); i++) {
+                    $scope.makes.list[i].checked = check;
+                };
+            }
+        );
+    }
+    $scope.unCheckMks = function () {
+        checkMks(false);
+    }
+    $scope.checkAllMks = function () {
+        checkMks(true);
+    }
+
+    $scope.openMksDlg = function (result) {
+        getCurMakeList().then(
+            function (result) {
+                for (var i = 0; ((i < $scope.makes.list.length)); i++) {
+                    $scope.makes.list[i].checked = $scope.makes.list[i].included || false;
+                };
+                $scope.mksDlgOpen = true;
+            }
+        );
+    };
+    $scope.closeMksDlg = function (result) {
+        $scope.mksDlgOpen = false;
+    }
+    $scope.okMksDlg = function (result) {
+        getCurMakeList().then(
+            function (result) {
+                for (var i = 0; ((i < $scope.makes.list.length)); i++) {
+                    $scope.makes.list[i].included = $scope.makes.list[i].checked || false;
+                };
+                $scope.mksDlgOpen = false;
+            }
+        );
+    }
+    $scope.cancelMksDlg = function (result) {
+        $scope.mksDlgOpen = false;
+    }
+
+    $scope.mksDlgOpts = {
+        backdropFade: true,
+        dialogFade: true
+    }
+
+    $scope.makes;
+
+    function getCurMakeList() {
+        var delay = $q.defer();
+        if ($scope.makes) {
+            delay.resolve($scope.makes);
+        } else {
+            MakeList({}).then(
+                function (result) {
+                    $scope.makes = result;
+
+                    for (var i = 0; ((i < $scope.makes.list.length)); i++) {
+                        $scope.makes.list[i].included = true;
+                        $scope.makes.list[i].checked = true;
+                    };
+
+                    delay.resolve($scope.makes);
+                },
+                function (result) {
+                    $scope.makes = [];
+                    delay.reject(result);
+                }
+            );
+        };
+        return delay.promise;
+    };
+
+    $scope.checkAllMks();
+
 } ])
+
 ;

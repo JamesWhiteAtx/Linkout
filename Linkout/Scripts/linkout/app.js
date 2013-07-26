@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on services and directives
-var linkout = angular.module('linkout', ['ui.bootstrap', 'linkout.services', 'linkout.directives']) //'ui.bootstrap', 'linkout.filters'
+var linkout = angular.module('linkout', ['ui.bootstrap', 'linkout.services', 'linkout.directives']) //'linkout.filters'
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/type', {
             title: 'type',

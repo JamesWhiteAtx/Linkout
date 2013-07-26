@@ -7,7 +7,7 @@ using System.Web.Security;
 //using CST.Localization;
 using CST.Security;
 using CST.Security.Data;
-using Linkout.Services;
+using Linkout;
 
 namespace Linkout.Controllers
 {

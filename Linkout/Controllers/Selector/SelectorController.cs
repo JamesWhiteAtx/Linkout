@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.IO;
-using Linkout.Services;
+using Linkout;
 using Ninject;
 
 namespace Linkout.Controllers

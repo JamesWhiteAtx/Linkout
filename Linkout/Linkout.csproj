@@ -140,6 +140,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkoutController.cs" />
     <Compile Include="Controllers\MockController.cs" />
+    <Compile Include="Controllers\NetSuiteController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\Schedule\InstallersController.cs" />
     <Compile Include="Controllers\Selector\AllColsController.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Models\MockProduct.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Services\JsonHttpResponseService.cs" />
+    <Compile Include="Services\NetSuiteConfiguration.cs" />
     <Compile Include="Services\PriceService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

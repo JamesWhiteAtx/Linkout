@@ -23,6 +23,14 @@ var configure = angular.module('configure', ['ui.bootstrap', 'linkout.services',
             templateUrl: '/configure/Partials/CarPatterns',
             controller: "CarPatternsCtrl"
         });
+
+
+        $routeProvider.when('/test', {
+            title: 'test',
+            templateUrl: '/configure/Partials/test',
+            controller: "TestCtrl"
+        });
+
         $routeProvider.otherwise({ redirectTo: '/menu' });
     } ])
 ;

@@ -22,7 +22,7 @@ namespace Linkout
         }
     }
 
-    public interface INetsuiteUriService
+    public interface INetsuiteConfigService
     {
         string Scheme { get; set; }
         string FormsHost { get; set; }
@@ -37,7 +37,7 @@ namespace Linkout
         string HVal { get; set; }
     }
 
-    public class UriElement : ConfigurationElement, INetsuiteUriService
+    public class UriElement : ConfigurationElement, INetsuiteConfigService
     {
         public UriElement()
         {

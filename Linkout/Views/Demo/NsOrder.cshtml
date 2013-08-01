@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "Demo Order";
+}
+
+@section styles {
+    <link href="/css/demo.css" rel="stylesheet">    
+
+    <style>
+        .btn.sel-opt
+        {
+            text-align: left;
+            padding-top: 1px;
+            padding-bottom: 1px;
+        }
+        ul.inline .btn.sel-opt
+        {
+            width: 150px;
+        }
+        label
+        {
+            display:inline;
+        }
+    </style>
+}
+
+<div id="nsorder-cont" class="container ng-cloak" ng-controller="NsOrderCtrl">
+    <h2>Demo NetSuite Order</h2>
+
+    @* --------------------- Order Header --------------------- *@
+    <div class="well">
+        <h3>Header</h3>
+        <label for="carinput">Car</label>
+        <div class="input-append">
+            <input id="carinput" type="text" placeholder="Enter Car" ng-model="currentCar.display" ng-readonly="true" />
+            <button class="btn" ng-click="clearCar()"><i class="icon-remove" title="clear car"></i></button>
+            <button class="btn" ng-click="openCarDlg()"><i class="icon-search" title="lookup car"></i></button>
+        </div>
+    </div>
+
+    @* --------------------- Order Lines --------------------- *@
+    <div class="well">
+        <h3>Order Lines</h3>
+
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Desciption</th>
+                <th>Pattern</th>
+                <th>Color</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="line in lines">
+                <td>
+                    <div class="input-append">
+                        <input type="text" class="input-small" placeholder="Enter Item" ng-model="line.name" ng-readonly="true" />
+                        <button class="btn" ng-show="currentCar" ng-click="lookupPattern($index)"><i class="icon-search" title="find kit for car"></i></button>
+                    </div>
+                </td>
+                <td>
+                    <input id="qty" type="number" class="input-small" placeholder="Qty" ng-model="line.qty" />
+                </td>
+                <td>{{line.description}}</td>
+                <td>{{line.pattern}}</td>
+                <td>{{line.color}}</td>
+                <td>
+                    <button class="btn" title="Delete Line" ng-click="deleteLine($index)"><i class="icon-remove"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <hr />
+        <div class="btn-group">
+          <button class="btn" title="Add Line" ng-click="addLine()"><i class="icon-plus"></i> Add</button>
+          <button class="btn" title="Add kit for car" ng-click="addKitForCar()" ng-disabled="!(currentCar)"><i class="icon-ambulance"></i> Add For Car</button>
+          <button class="btn" title="Clear All Lines" ng-click="clearLines()" ng-disabled="lines.length < 1"><i class="icon-remove"></i> Clear Rows</button>
+        </div>
+    </div>
+
+    @* --------------------- Car Selector Dialog --------------------- *@
+    <div modal="CarSelOpen" close="closeCarDlg()" options="dlgOpts" style="display: none">
+        <div class="modal-header">
+            <h3>Select Car - {{carType}}</h3>
+            <button class="btn btn-mini" ng-disabled="carLoading" ng-show="carLevel > 0" ng-click="prevCarLevel()">
+                <i class="icon-arrow-left" title="previous"></i>
+            </button>
+            <button class="btn btn-mini" ng-disabled="carLoading" ng-show="carLevel > 0" ng-click="setCarLevel(0)">
+                <i class="icon-undo" title="reload"></i>
+            </button>
+            <button ng-repeat="choice in carSelections" class="btn btn-mini" ng-click="thisCarLevel($index)">
+                {{choice.display}}
+            </button>
+
+        </div>
+        <div class="modal-body">
+            <div ng-show="carLoading" class="loading">...</div>
+            <ul ng-class="{'inline': carLevel < 2, 'unstyled': carLevel > 1}">
+                <li ng-repeat="item in carList">
+                    <button class="btn btn-link sel-opt" ng-click="selectCar(item)">
+                        {{item.display}} 
+                    </button> 
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="okCarDlg()" ng-disabled="!isCarSelected()"><i class="icon-ok"></i> OK</button>
+            <button class="btn" ng-click="cancelCarDlg()">Cancel</button>
+        </div>
+    </div>
+
+    @* --------------------- Kit Selector Dialog --------------------- *@
+    <div modal="KitSelOpen" close="closeKitDlg()" options="dlgOpts" style="display: none">
+        <div class="modal-header">
+            <h3>Select Kit - {{kitType}}</h3>
+            <button class="btn btn-mini" ng-disabled="kitLoading" ng-show="kitLevel > 0" ng-click="prevKitLevel()">
+                <i class="icon-arrow-left" title="previous"></i>
+            </button>
+            <button class="btn btn-mini" ng-disabled="kitLoading" ng-show="kitLevel > 0" ng-click="setKitLevel(0)">
+                <i class="icon-undo" title="reload"></i>
+            </button>
+            <button ng-repeat="choice in kitSelections" class="btn btn-mini" ng-click="thisKitLevel($index)">
+                {{choice.display}}
+            </button>
+
+        </div>
+        <div class="modal-body">
+            <div ng-show="kitLoading" class="loading">...</div>
+            <ul class="unstyled">
+                <li ng-repeat="item in kitList">
+                    <button class="btn btn-link sel-opt" ng-click="selectKit(item)">
+                        {{item.display}} 
+                    </button> 
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="okKitDlg()" ng-disabled="!isKitSelected()"><i class="icon-ok"></i> OK</button>
+            <button class="btn" ng-click="cancelKitDlg()">Cancel</button>
+        </div>
+    </div>
+
+</div>
+
+@section scripts {
+    <script src="/Scripts/linkout/services.js"></script>
+    <script src="/Scripts/configure/services.js"></script>
+    <script src="/Scripts/demo/app.js"></script>
+    <script src="/Scripts/demo/controllers.js"></script>
+
+    <script type='text/javascript'>
+    //    $(document).keydown(function () {
+            //alert('Handler for .keydown() called.');
+        //});
+    </script>
+}

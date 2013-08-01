@@ -111,11 +111,13 @@
     <Compile Include="SelectorRoutesTests.cs" />
     <Compile Include="SelectorTester.cs" />
     <Compile Include="TestHelpers.cs" />
+    <Compile Include="UriServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\Test.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

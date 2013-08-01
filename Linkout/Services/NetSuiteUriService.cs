@@ -8,6 +8,17 @@ namespace Linkout
     //var url = "https://forms.sandbox.netsuite.com/app/site/hosting/scriptlet.nl?script=32&deploy=1&compid=801095&h=20a61f1484463b5b9654&type=makes";
     //var url = "https://forms.sandbox.netsuite.com/app/site/hosting/scriptlet.nl?script=7&deploy=1&compid=801095&h=d8da884e8430a0278dc1&stage=getmakes";
 
+    public class UriService : UriBuilder
+    {
+        public UriService AddQuery(string name, string value)
+        {
+            var queryString = HttpUtility.ParseQueryString(this.Query);
+            queryString.Add(name, value);
+            this.Query = queryString.ToString();
+            return this;
+        }
+    }
+    
     public interface INetSuiteUriService
     {
         NetSuiteUriService AddQuery(string name, string value);
@@ -16,7 +27,7 @@ namespace Linkout
 
     public class NetSuiteUriService : UriBuilder, INetSuiteUriService
     {
-        public static readonly string NsBaseUri = "https://forms.sandbox.netsuite.com/app/site/hosting/scriptlet.nl";
+        //public static readonly string NsBaseUri = "https://forms.sandbox.netsuite.com/app/site/hosting/scriptlet.nl";
         public static readonly string NsScriptName = "script";
         //public static readonly string NsScriptVal = "32";
         public static readonly string NsDeployName = "deploy";
@@ -29,10 +40,9 @@ namespace Linkout
         public static readonly string NsRecTypeName = "rectype";
         public static readonly string NsIdName = "id";
 
+        private INetsuiteConfigService _uriService;
 
-        private INetsuiteUriService _uriService;
-
-        public NetSuiteUriService(INetsuiteUriService uriService)
+        public NetSuiteUriService(INetsuiteConfigService uriService)
             //: base(NsBaseUri)
         {
             _uriService = uriService;

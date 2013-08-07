@@ -6,6 +6,8 @@ namespace Linkout
 {
     public class NetSuiteConfiguration : ConfigurationSection
     {
+        public static readonly string ConfigSectionName = "NetSuiteSection";
+
         ConfigurationProperty _Uri;
 
         public NetSuiteConfiguration()
@@ -22,7 +24,7 @@ namespace Linkout
         }
     }
 
-    public interface INetsuiteConfigService
+    public interface INetSuiteConfigService
     {
         string Scheme { get; set; }
         string FormsHost { get; set; }
@@ -35,9 +37,16 @@ namespace Linkout
         string SelDeployVal { get; set; }
         string CompidVal { get; set; }
         string HVal { get; set; }
+
+        string MakeCustRecId { get; set; }
+        string ModelCustRecId { get; set; }
+        string BodyCustRecId { get; set; }
+        string TrimCustRecId { get; set; }
+        string CarCustRecId { get; set; }
+        string PatternCustRecId { get; set; }
     }
 
-    public class UriElement : ConfigurationElement, INetsuiteConfigService
+    public class UriElement : ConfigurationElement, INetSuiteConfigService
     {
         public UriElement()
         {
@@ -53,6 +62,13 @@ namespace Linkout
             _SelScriptVal = new ConfigurationProperty("selScriptVal", typeof(string), "<UNDEFINED>");
             _SelDeployVal = new ConfigurationProperty("selDeployVal", typeof(string), "<UNDEFINED>");
 
+            _MakeCustRecId = new ConfigurationProperty("makeCustRecId", typeof(string), "<UNDEFINED>");
+            _ModelCustRecId = new ConfigurationProperty("modelCustRecId", typeof(string), "<UNDEFINED>");
+            _BodyCustRecId = new ConfigurationProperty("bodyCustRecId", typeof(string), "<UNDEFINED>");
+            _TrimCustRecId = new ConfigurationProperty("trimCustRecId", typeof(string), "<UNDEFINED>");
+            _CarCustRecId = new ConfigurationProperty("carCustRecId", typeof(string), "<UNDEFINED>");
+            _PatternCustRecId = new ConfigurationProperty("patternCustRecId", typeof(string), "<UNDEFINED>");
+
             this.Properties.Add(_Scheme);
             this.Properties.Add(_FormsHost);
             this.Properties.Add(_SysHost);
@@ -63,6 +79,12 @@ namespace Linkout
             this.Properties.Add(_SelDeployVal);
             this.Properties.Add(_CompidVal);
             this.Properties.Add(_HVal);
+            this.Properties.Add(_MakeCustRecId);
+            this.Properties.Add(_ModelCustRecId);
+            this.Properties.Add(_BodyCustRecId);
+            this.Properties.Add(_TrimCustRecId);
+            this.Properties.Add(_CarCustRecId);
+            this.Properties.Add(_PatternCustRecId);
         }
 
         ConfigurationProperty _Scheme; 
@@ -94,6 +116,24 @@ namespace Linkout
 
         ConfigurationProperty _SelDeployVal;
         public string SelDeployVal { get { return (string)this[_SelDeployVal]; } set { this[_SelDeployVal] = value; } }
+
+        ConfigurationProperty _MakeCustRecId;
+        public string MakeCustRecId { get { return (string)this[_MakeCustRecId]; } set { this[_MakeCustRecId] = value; } }
+
+        ConfigurationProperty _ModelCustRecId;
+        public string ModelCustRecId { get { return (string)this[_ModelCustRecId]; } set { this[_ModelCustRecId] = value; } }
+
+        ConfigurationProperty _BodyCustRecId;
+        public string BodyCustRecId { get { return (string)this[_BodyCustRecId]; } set { this[_BodyCustRecId] = value; } }
+        
+        ConfigurationProperty _TrimCustRecId;
+        public string TrimCustRecId { get { return (string)this[_TrimCustRecId]; } set { this[_TrimCustRecId] = value; } }
+
+        ConfigurationProperty _CarCustRecId;
+        public string CarCustRecId { get { return (string)this[_CarCustRecId]; } set { this[_CarCustRecId] = value; } }
+
+        ConfigurationProperty _PatternCustRecId;
+        public string PatternCustRecId { get { return (string)this[_PatternCustRecId]; } set { this[_PatternCustRecId] = value; } }
     }
 
 }

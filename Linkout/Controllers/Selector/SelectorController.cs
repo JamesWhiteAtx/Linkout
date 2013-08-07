@@ -16,16 +16,16 @@ namespace Linkout.Controllers
         public IJsonWebResponseService SelectorService { get; set; }
 
         [Inject]
-        public INetSuiteUriService NetSuiteUriService { get; set; }
+        public INetSuiteUriSelectorService NetSuiteUriSelectorService { get; set; }
 
         public HttpResponseMessage JsonResponse()
         {
-            return SelectorService.GetSelectorJson(NetSuiteUriService.Uri);
+            return SelectorService.GetSelectorJson(NetSuiteUriSelectorService.Uri);
         }
 
-        public NetSuiteUriService AddQuery(string name, string value)
+        public void AddQuery(string name, string value)
         {
-            return NetSuiteUriService.AddQuery(name, value);
+            NetSuiteUriSelectorService.AddQuery(name, value);
         }
 
     }

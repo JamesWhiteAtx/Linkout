@@ -37,5 +37,11 @@ namespace Linkout.Tests
             return routes.GetRouteData(request);
         }
 
+        public static IHttpRouteData PostRouteData(TestContext testContext, string url)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            HttpRouteCollection routes = (HttpRouteCollection)testContext.Properties["routes"];
+            return routes.GetRouteData(request);
+        }
     }
 }

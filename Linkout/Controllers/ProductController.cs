@@ -21,7 +21,7 @@ namespace Linkout.Controllers
         }
 
         //
-        // GET: /Product/
+        // GET: /Product/Listing
         [HttpGet]
         public HttpResponseMessage Listing()
         {

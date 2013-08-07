@@ -25,5 +25,13 @@ namespace Linkout.Tests
             Assert.AreEqual(routeData.Values["controller"], "Product");
             Assert.AreEqual(routeData.Values["action"], "Listing");
         }
+
+        [TestMethod]
+        public void ProductGetRouteMapsToProductControllerListingMethod()
+        {
+            var routeData = TestHelpers.PostRouteData(context, "http://site.com/product/1");
+            Assert.AreEqual(routeData.Values["controller"], "Product");
+            Assert.AreEqual(routeData.Values["id"], "1");
+        }
     }
 }

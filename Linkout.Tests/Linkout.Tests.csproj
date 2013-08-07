@@ -101,7 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PriceApisTests.cs" />
-    <Compile Include="PriceRoutesTests.cs" />
     <Compile Include="ProductApiTests.cs" />
     <Compile Include="ProductControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,7 +116,7 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\Test.config" />
+    <Content Include="Config\Testx.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

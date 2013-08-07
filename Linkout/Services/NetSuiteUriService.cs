@@ -18,51 +18,172 @@ namespace Linkout
             return this;
         }
     }
-    
-    public interface INetSuiteUriService
+
+    public class NetSuiteUriBase : UriService
     {
-        NetSuiteUriService AddQuery(string name, string value);
+        private INetSuiteConfigService _nsConfigService;
+        protected INetSuiteConfigService NsConfigService { get { return _nsConfigService; } }
+
+        public NetSuiteUriBase(INetSuiteConfigService nsConfigService)
+        {
+            _nsConfigService = nsConfigService;
+        }
+    }
+
+    public class NetSuiteUriScriptBase : NetSuiteUriBase
+    {
+        public static readonly string NsScriptName = "script";
+        public static readonly string NsDeployName = "deploy";
+        public static readonly string NsCompidName = "compid";
+        public static readonly string NsHName = "h";
+
+        public NetSuiteUriScriptBase(INetSuiteConfigService nsConfigService)
+            : base(nsConfigService)
+        {
+            this.Scheme = NsConfigService.Scheme;
+            this.Host = NsConfigService.FormsHost;
+            this.Path = NsConfigService.ScriptPath;
+        }
+    }
+
+    public interface INetSuiteUriSelectorService
+    {
+        UriService AddQuery(string name, string value);
         Uri Uri { get; }
     }
 
-    public class NetSuiteUriService : UriBuilder, INetSuiteUriService
+    public class NetSuiteUriScriptSelector : NetSuiteUriScriptBase, INetSuiteUriSelectorService
     {
-        //public static readonly string NsBaseUri = "https://forms.sandbox.netsuite.com/app/site/hosting/scriptlet.nl";
-        public static readonly string NsScriptName = "script";
-        //public static readonly string NsScriptVal = "32";
-        public static readonly string NsDeployName = "deploy";
-        //public static readonly string NsDeployVal = "1";
-        public static readonly string NsCompidName = "compid";
-        //public static readonly string NsCompidVal = "801095";
-        public static readonly string NsHName = "h";
-        //public static readonly string NsHVal = "20a61f1484463b5b9654";
-
-        public static readonly string NsRecTypeName = "rectype";
-        public static readonly string NsIdName = "id";
-
-        private INetsuiteConfigService _uriService;
-
-        public NetSuiteUriService(INetsuiteConfigService uriService)
-            //: base(NsBaseUri)
+        public NetSuiteUriScriptSelector(INetSuiteConfigService nsConfigService)
+            : base(nsConfigService)
         {
-            _uriService = uriService;
+            this.AddQuery(NsScriptName, NsConfigService.SelScriptVal)
+                .AddQuery(NsDeployName, NsConfigService.SelDeployVal)
+                .AddQuery(NsCompidName, NsConfigService.CompidVal)
+                .AddQuery(NsHName, NsConfigService.HVal);
+        }
+    }
 
-            this.Scheme = uriService.Scheme;
-            this.Host = uriService.FormsHost;
-            this.Path = uriService.ScriptPath;
-            this.AddQuery(NsScriptName, uriService.SelScriptVal)
-                .AddQuery(NsDeployName, uriService.SelDeployVal)
-                .AddQuery(NsCompidName, uriService.CompidVal)
-                .AddQuery(NsHName, uriService.HVal);
+    public class NetSuiteUriSystemBase : NetSuiteUriBase
+    {
+        public NetSuiteUriSystemBase(INetSuiteConfigService nsConfigService)
+            : base(nsConfigService)
+        {
+            this.Scheme = nsConfigService.Scheme;
+            this.Host = nsConfigService.SysHost;
+        }
+    }
+
+    public class NetSuiteUriCustRecord : NetSuiteUriSystemBase
+    {
+        public static readonly string NsRecTypeName = "rectype";
+        public static readonly string NsRecIDName = "id";
+
+        public NetSuiteUriCustRecord(INetSuiteConfigService nsConfigService)
+            : base(nsConfigService)
+        {
+            this.Path = NsConfigService.CustRecPath;
         }
 
-        public NetSuiteUriService AddQuery(string name, string value)
-        {
-            var queryString = HttpUtility.ParseQueryString(this.Query);
-            queryString.Add(name, value);
-            this.Query = queryString.ToString();
+        public NetSuiteUriCustRecord SetTypeID(string type, string id=null) 
+        { 
+            AddQuery(NsRecTypeName, type);
+            AddQuery(NsRecIDName, id);
             return this;
         }
 
+        public string GetTypeIDUrl(string type, string id = null)
+        {
+            return SetTypeID(type, id).Uri.AbsoluteUri;
+        }
+
+        public string GetUrlMake(string id=null)
+        {
+            return GetTypeIDUrl(NsConfigService.MakeCustRecId);
+        }
+        public string GetUrlModel(string id = null)
+        {
+            return GetTypeIDUrl(NsConfigService.ModelCustRecId);
+        }
+        public string GetUrlBody(string id = null)
+        {
+            return GetTypeIDUrl(NsConfigService.BodyCustRecId);
+        }
+        public string GetUrlTrim(string id = null)
+        {
+            return GetTypeIDUrl(NsConfigService.TrimCustRecId);
+        }
+        public string GetUrlCar(string id = null)
+        {
+            return GetTypeIDUrl(NsConfigService.CarCustRecId);
+        }
+        public string GetUrlPattern(string id = null)
+        {
+            return GetTypeIDUrl(NsConfigService.PatternCustRecId);
+        }
     }
+
+    public class NetSuiteUriItem : NetSuiteUriSystemBase
+    { 
+        public static readonly string NsItemIDName = "id";
+
+        public NetSuiteUriItem(INetSuiteConfigService nsConfigService)
+            : base(nsConfigService)
+        {
+            this.Path = NsConfigService.ItemPath;
+        }
+
+        public NetSuiteUriItem SetID(string id = null)
+        {
+            AddQuery(NsItemIDName, id);
+            return this;
+        }
+    }
+
+    //public interface INetSuiteUriService
+    //{
+    //    NetSuiteUriService AddQuery(string name, string value);
+    //    Uri Uri { get; }
+    //}
+
+    //public class NetSuiteUriService : UriBuilder, INetSuiteUriService
+    //{
+    //    //public static readonly string NsBaseUri = "https://forms.sandbox.netsuite.com/app/site/hosting/scriptlet.nl";
+    //    public static readonly string NsScriptName = "script";
+    //    //public static readonly string NsScriptVal = "32";
+    //    public static readonly string NsDeployName = "deploy";
+    //    //public static readonly string NsDeployVal = "1";
+    //    public static readonly string NsCompidName = "compid";
+    //    //public static readonly string NsCompidVal = "801095";
+    //    public static readonly string NsHName = "h";
+    //    //public static readonly string NsHVal = "20a61f1484463b5b9654";
+
+    //    public static readonly string NsRecTypeName = "rectype";
+    //    public static readonly string NsIdName = "id";
+
+    //    private INetsuiteConfigService _uriService;
+
+    //    public NetSuiteUriService(INetsuiteConfigService uriService)
+    //        //: base(NsBaseUri)
+    //    {
+    //        _uriService = uriService;
+
+    //        this.Scheme = uriService.Scheme;
+    //        this.Host = uriService.FormsHost;
+    //        this.Path = uriService.ScriptPath;
+    //        this.AddQuery(NsScriptName, uriService.SelScriptVal)
+    //            .AddQuery(NsDeployName, uriService.SelDeployVal)
+    //            .AddQuery(NsCompidName, uriService.CompidVal)
+    //            .AddQuery(NsHName, uriService.HVal);
+    //    }
+
+    //    public NetSuiteUriService AddQuery(string name, string value)
+    //    {
+    //        var queryString = HttpUtility.ParseQueryString(this.Query);
+    //        queryString.Add(name, value);
+    //        this.Query = queryString.ToString();
+    //        return this;
+    //    }
+
+    //}
 }

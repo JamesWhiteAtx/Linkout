@@ -156,12 +156,10 @@
     <Compile Include="Controllers\Selector\TrimsController.cs" />
     <Compile Include="Controllers\Selector\YearsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Controllers\PriceController.cs" />
     <Compile Include="Models\MockProduct.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Services\JsonHttpResponseService.cs" />
     <Compile Include="Services\NetSuiteConfiguration.cs" />
-    <Compile Include="Services\PriceService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -670,7 +668,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Demo\Parials\" />
+    <Folder Include="Views\Demo\Partials\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

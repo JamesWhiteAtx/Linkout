@@ -81,17 +81,6 @@ namespace Linkout
                 defaults: new { controller = "NetSuite", type = RouteParameter.Optional }
             );
 
-            //config.Routes.MapHttpRoute(
-            //    name: "LeatherPriceApi",
-            //    routeTemplate: "price/leather/{rows}",
-            //    defaults: new { controller = "Price", action = "Leather" }
-            //);
-            //config.Routes.MapHttpRoute(
-            //    name: "HeaterPriceApi",
-            //    routeTemplate: "price/heater",
-            //    defaults: new { controller = "Price", action = "Heater" }
-            //);
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

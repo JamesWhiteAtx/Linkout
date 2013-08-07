@@ -73,11 +73,11 @@ namespace Linkout.App_Start
             //kernel.Bind<IPriceService>().To<PriceService>();
             kernel.Bind<IProductService>().To<ProductService>();
 
-            kernel.Bind<INetSuiteUriService>().To<NetSuiteUriService>();
+            kernel.Bind<INetSuiteUriSelectorService>().To<NetSuiteUriScriptSelector>();
 
-            kernel.Bind<INetsuiteConfigService>().ToMethod(
+            kernel.Bind<INetSuiteConfigService>().ToMethod(
                 m => {
-                    NetSuiteConfiguration nsSect = ConfigurationManager.GetSection("NetSuiteSection") as NetSuiteConfiguration;
+                    NetSuiteConfiguration nsSect = ConfigurationManager.GetSection(NetSuiteConfiguration.ConfigSectionName) as NetSuiteConfiguration;
                     return nsSect.Uri;
                 }
             );

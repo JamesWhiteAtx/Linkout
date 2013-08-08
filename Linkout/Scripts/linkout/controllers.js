@@ -363,8 +363,8 @@ linkout
     $scope.addCrumb("Select Heater Option");
 } ])
 
-.controller('LeatherCtrl', ['$scope', '$location', 'Makes', 'Years', 'Models', 'Bodies', 'Trims', 'Cars', 'Ptrns', 'IntCols', 'RecCols', 'AllCols', 'UniqueProps', 'ProductList',
-    function ($scope, $location, Makes, Years, Models, Bodies, Trims, Cars, Ptrns, IntCols, RecCols, AllCols, UniqueProps, ProductList) {
+.controller('LeatherCtrl', ['$scope', '$location', '$http', 'Makes', 'Years', 'Models', 'Bodies', 'Trims', 'Cars', 'Ptrns', 'IntCols', 'RecCols', 'AllCols', 'UniqueProps', 'ProductList',
+    function ($scope, $location, $http, Makes, Years, Models, Bodies, Trims, Cars, Ptrns, IntCols, RecCols, AllCols, UniqueProps, ProductList) {
 
         function addAppProps(obj) {
             return $.extend(obj, {
@@ -498,7 +498,11 @@ linkout
 
         function makeColItem(item) {
             if (item.swatchimgurl) {
-                item.colorurl = 'https://system.sandbox.netsuite.com' + item.swatchimgurl;
+                $http.get('/netsuite/imgbase', { cache: true })
+                    .success(function (data) {
+                        item.colorurl = data + item.swatchimgurl; //'https://system.sandbox.netsuite.com'
+                    })
+                    .error(function (data) { item.colorurl = '/Content/Images/img_not_avail.png';});
             } else {
                 item.colorurl = '/Content/Images/img_not_avail.png';
             }

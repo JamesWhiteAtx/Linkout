@@ -75,6 +75,8 @@ namespace Linkout.App_Start
 
             kernel.Bind<INetSuiteUriSelectorService>().To<NetSuiteUriScriptSelector>();
 
+            kernel.Bind<INetSuiteUriService>().To<NetSuiteUriService>();
+
             kernel.Bind<INetSuiteConfigService>().ToMethod(
                 m => {
                     NetSuiteConfiguration nsSect = ConfigurationManager.GetSection(NetSuiteConfiguration.ConfigSectionName) as NetSuiteConfiguration;

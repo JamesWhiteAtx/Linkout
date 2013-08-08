@@ -288,28 +288,32 @@ angular.module('configure.services', ['ngResource'])
         };
     } ])
 
-    .factory('NetsuiteLinks', ['$http', function ($http) {
+    .factory('NSMakeLink', ['$resource', function ($resource) {
+        return $resource('/netsuite/custrecmake');
+    } ])
+
+    .factory('NetsuiteLinks', ['$http', '$resource', function ($http, $resource) {
         return {
             makeLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=19&id=' + id; //&e=T
+                return $http.get('/netsuite/custrecmake', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=19&id=' + id; //&e=T
             },
             modelLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=20&id=' + id;
+                return $http.get('/netsuite/custrecmodel', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=20&id=' + id;
             },
             bodyLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=21&id=' + id;
+                return $http.get('/netsuite/custrecbody', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=21&id=' + id;
             },
             trimLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=69&id=' + id;
+                return $http.get('/netsuite/custrectrim', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=69&id=' + id;
             },
             carLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=63&id=' + id;
+                return $http.get('/netsuite/custreccar', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=63&id=' + id;
             },
             patternLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=13&id=' + id;
+                return $http.get('/netsuite/custrecpattern', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=13&id=' + id;
             },
             invItemLink: function (id) {
-                return 'https://system.sandbox.netsuite.com/app/common/item/item.nl?id=' + id;  //&e=T
+                return $http.get('/netsuite/item', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/item/item.nl?id=' + id;  //&e=T
             }
         };
     } ])

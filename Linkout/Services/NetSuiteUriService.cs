@@ -140,11 +140,71 @@ namespace Linkout
         }
     }
 
-    //public interface INetSuiteUriService
-    //{
-    //    NetSuiteUriService AddQuery(string name, string value);
-    //    Uri Uri { get; }
-    //}
+    public interface INetSuiteUriService
+    {
+        string getUrlImageHost();
+        string getUrlCustRecMake(string id = null);
+        string getUrlCustRecModel(string id = null);
+        string getUrlCustRecBody(string id = null);
+        string getUrlCustRecTrim(string id = null);
+        string getUrlCustRecCar(string id = null);
+        string getUrlCustRecPattern(string id = null);
+        string getUrlItem(string id = null);
+    }
+
+    public class NetSuiteUriService : INetSuiteUriService
+    {
+        private INetSuiteConfigService _nsConfigService;
+        //protected INetSuiteConfigService NsConfigService { get { return _nsConfigService; } }
+
+        public NetSuiteUriService(INetSuiteConfigService nsConfigService)
+        {
+            _nsConfigService = nsConfigService;
+        }
+
+        public string getUrlImageHost()
+        {
+            NetSuiteUriSystemBase bldr = new NetSuiteUriSystemBase(_nsConfigService);
+            return bldr.Uri.AbsoluteUri;
+        }
+
+        public string getUrlCustRecMake(string id = null)
+        {
+            NetSuiteUriCustRecord bldr = new NetSuiteUriCustRecord(_nsConfigService);
+            return bldr.GetUrlMake(id);
+        }
+        public string getUrlCustRecModel(string id = null)
+        {
+            NetSuiteUriCustRecord bldr = new NetSuiteUriCustRecord(_nsConfigService);
+            return bldr.GetUrlModel(id);
+        }
+        public string getUrlCustRecBody(string id = null)
+        {
+            NetSuiteUriCustRecord bldr = new NetSuiteUriCustRecord(_nsConfigService);
+            return bldr.GetUrlBody(id);
+        }
+        public string getUrlCustRecTrim(string id = null)
+        {
+            NetSuiteUriCustRecord bldr = new NetSuiteUriCustRecord(_nsConfigService);
+            return bldr.GetUrlTrim(id);
+        }
+        public string getUrlCustRecCar(string id = null)
+        {
+            NetSuiteUriCustRecord bldr = new NetSuiteUriCustRecord(_nsConfigService);
+            return bldr.GetUrlCar(id);
+        }
+        public string getUrlCustRecPattern(string id = null)
+        {
+            NetSuiteUriCustRecord bldr = new NetSuiteUriCustRecord(_nsConfigService);
+            return bldr.GetUrlPattern(id);
+        }
+        public string getUrlItem(string id = null)
+        {
+            NetSuiteUriItem bldr = new NetSuiteUriItem(_nsConfigService);
+            bldr.SetID(id);
+            return bldr.Uri.AbsoluteUri;
+        }
+    }
 
     //public class NetSuiteUriService : UriBuilder, INetSuiteUriService
     //{

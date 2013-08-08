@@ -116,7 +116,6 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\Testx.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

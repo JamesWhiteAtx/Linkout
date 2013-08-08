@@ -131,33 +131,38 @@ configure
 
                 if (name === 'makeid') {
                     link = {
-                        linkurl: NetsuiteLinks.makeLink(d[name]),
+                        promise: NetsuiteLinks.makeLink,
                         name: 'Netsuite Make'
-                    }
+                    };
                 }
                 else if (name === 'carid') {
                     link = {
-                        linkurl: NetsuiteLinks.carLink(d[name]),
+                        promise: NetsuiteLinks.carLink,
                         name: 'Netsuite Car'
                     }
                 }
                 else if (name === 'ptrnid') {
                     link = {
-                        linkurl: NetsuiteLinks.patternLink(d[name]),
+                        promise: NetsuiteLinks.patternLink,
                         name: 'Netsuite Pattern'
                     }
                 }
                 else if (name === 'invitemid') {
                     link = {
-                        linkurl: NetsuiteLinks.invItemLink(d[name]),
+                        promise: NetsuiteLinks.invItemLink,
                         name: 'Netsuite Leather Kit'
                     }
                 } else {
-                    link = null;
+                    link = undefined;
                 }
 
                 if (link) {
-                    $scope.selectNode.links.push(link);
+                    (function (link, id) {
+                        link.promise(id).success(function (data) {
+                            link.linkurl = data;
+                            $scope.selectNode.links.push(link);
+                        });
+                    } (link, d[name]));
                 }
 
             }

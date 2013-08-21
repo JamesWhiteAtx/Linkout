@@ -105,6 +105,18 @@ configure
     $scope.tree.loadKids();
     $scope.tree.expanded = true;
 
+    function linkPromise(promise, id, name) {
+        promise(id)
+            .then(
+                function (url) {
+                    $scope.selectNode.links.push({ name: name, linkurl: url });
+                },
+                function (err) {
+                    alert(err);
+                }
+            );
+    };
+
     $scope.nodeSelect = function (node) {
         if (!node) {
             return;
@@ -118,7 +130,7 @@ configure
         $scope.selectNode = { type: node.type, name: node.name, display: node.display, links: [], details: [], lastSelected: node };
 
         var d = node.data;
-        var link;
+        //var link = {};
         var detail;
         for (var name in d) {
             if (d.hasOwnProperty(name) && (typeof d[name] !== "function")) {
@@ -130,39 +142,21 @@ configure
                 $scope.selectNode.details.push(detail);
 
                 if (name === 'makeid') {
-                    link = {
-                        promise: NetsuiteLinks.makeLink,
-                        name: 'Netsuite Make'
-                    };
+                    linkPromise(NetsuiteLinks.makeLink, d[name], 'Netsuite Make');
                 }
                 else if (name === 'carid') {
-                    link = {
-                        promise: NetsuiteLinks.carLink,
-                        name: 'Netsuite Car'
-                    }
+                    linkPromise(NetsuiteLinks.carLink, d[name], 'Netsuite Car');
                 }
                 else if (name === 'ptrnid') {
-                    link = {
-                        promise: NetsuiteLinks.patternLink,
-                        name: 'Netsuite Pattern'
-                    }
+                    linkPromise(NetsuiteLinks.patternLink, d[name], 'Netsuite Custom Pattern');
                 }
                 else if (name === 'invitemid') {
-                    link = {
-                        promise: NetsuiteLinks.invItemLink,
-                        name: 'Netsuite Leather Kit'
-                    }
-                } else {
-                    link = undefined;
+                    linkPromise(NetsuiteLinks.invItemLink, d[name], 'Netsuite Leather Item');
+                    linkPromise(NetsuiteLinks.storeItemLink, d[name], 'Web Store Kit');
                 }
-
-                if (link) {
-                    (function (link, id) {
-                        link.promise(id).success(function (data) {
-                            link.linkurl = data;
-                            $scope.selectNode.links.push(link);
-                        });
-                    } (link, d[name]));
+                else if (name === 'ptrnitemid') {
+                    linkPromise(NetsuiteLinks.invItemLink, d[name], 'Netsuite Pattern Item');
+                    linkPromise(NetsuiteLinks.storeItemLink, d[name], 'Web Store Pattern');
                 }
 
             }

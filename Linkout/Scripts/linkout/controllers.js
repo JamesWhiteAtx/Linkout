@@ -577,7 +577,7 @@ linkout
                 if (newVal === oldVal) { return; };
                 $scope.ptrn.isSelecting = false;
                 loadList(IntCols, makeIdParm(["car", "ptrn"]), "Match Interior",
-                    'colors', 'intCols', 'intCol', null, null);
+                    'intColors', 'intCols', 'intCol', null, null);
 
                 var prod;
                 if (($scope.ptrn) && ($scope.ptrn.rowsname)) {

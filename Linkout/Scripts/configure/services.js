@@ -292,31 +292,62 @@ angular.module('configure.services', ['ngResource'])
         return $resource('/netsuite/custrecmake');
     } ])
 
-    .factory('NetsuiteLinks', ['$http', '$resource', function ($http, $resource) {
+    .factory('NetsuiteLinks', ['$http', '$resource', '$q', function ($http, $resource, $q) {
+        function NsStrUrlGet(httpPromise, id) {
+            var delay = $q.defer();
+            httpPromise.then(
+                    function (result) {
+                        var url = result.data + id;
+                        delay.resolve(url);
+                    },
+                    function (err) {
+                        delay.reject(err);
+                    }
+                );
+            return delay.promise;
+        };
+        function NsPartsUrlGet(httpPromise, id) {
+            var delay = $q.defer();
+            httpPromise.then(
+                    function (result) {
+                        var url = result.data.prefix + id + result.data.suffix;
+                        delay.resolve(url);
+                    },
+                    function (err) {
+                        delay.reject(err);
+                    }
+                );
+            //delay.resolve('http://shopping.sandbox.netsuite.com/s.nl/c.801095/it.A/id.' + id + '/.f');
+            return delay.promise;
+        };
         return {
             makeLink: function (id) {
-                return $http.get('/netsuite/custrecmake', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=19&id=' + id; //&e=T
+                return NsStrUrlGet($http.get('/netsuite/custrecmake', { cache: true }), id);
             },
             modelLink: function (id) {
-                return $http.get('/netsuite/custrecmodel', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=20&id=' + id;
+                return NsStrUrlGet($http.get('/netsuite/custrecmodel', { cache: true }), id);
             },
             bodyLink: function (id) {
-                return $http.get('/netsuite/custrecbody', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=21&id=' + id;
+                return NsStrUrlGet($http.get('/netsuite/custrecbody', { cache: true }), id);
             },
             trimLink: function (id) {
-                return $http.get('/netsuite/custrectrim', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=69&id=' + id;
+                return NsStrUrlGet($http.get('/netsuite/custrectrim', { cache: true }), id);
             },
             carLink: function (id) {
-                return $http.get('/netsuite/custreccar', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=63&id=' + id;
+                return NsStrUrlGet($http.get('/netsuite/custreccar', { cache: true }), id);
             },
             patternLink: function (id) {
-                return $http.get('/netsuite/custrecpattern', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/custom/custrecordentry.nl?rectype=13&id=' + id;
+                return NsStrUrlGet($http.get('/netsuite/custrecpattern', { cache: true }), id);
             },
             invItemLink: function (id) {
-                return $http.get('/netsuite/item', { cache: true });     // return 'https://system.sandbox.netsuite.com/app/common/item/item.nl?id=' + id;  //&e=T
+                return NsStrUrlGet($http.get('/netsuite/item', { cache: true }), id);
+            }, 
+            storeItemLink: function (id) {
+                return NsPartsUrlGet($http.get('/netsuite/webstoreitem', { cache: true }), id);
             }
         };
     } ])
+
 
     .factory('Stopwatch', [function () {
 

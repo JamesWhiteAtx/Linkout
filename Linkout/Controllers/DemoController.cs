@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Linkout.Controllers
 {
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class DemoController : Controller
     {
         public ActionResult Index()
@@ -15,6 +15,7 @@ namespace Linkout.Controllers
             return Redirect("https://www.roadwire.com");
         }
 
+        [Authorize]
         public ActionResult NsOrder()
         {
             return View();

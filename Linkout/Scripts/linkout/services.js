@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('linkout.services', ['ngResource'])
+angular.module('linkout.services', ['ngResource']) 
     .value('version', '0.1')
 
     .factory('SelApiList', ['$q', function ($q) {
@@ -125,7 +125,7 @@ angular.module('linkout.services', ['ngResource'])
     } ])
     .factory('IntColList', ['SelApiList', 'IntCols', function (SelApiList, IntCols) {
         return function (parm, listTransform) {
-            return SelApiList(IntCols, parm, 'colors', 'Interior Color', listTransform,
+            return SelApiList(IntCols, parm, 'intColors', 'Interior Color', listTransform,
                 function (item) { item.display = item.name + ' (' + item.id + ')'; });
         }
     } ])

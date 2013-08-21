@@ -99,27 +99,27 @@ namespace Linkout
 
         public string GetUrlMake(string id=null)
         {
-            return GetTypeIDUrl(NsConfigService.MakeCustRecId);
+            return GetTypeIDUrl(NsConfigService.MakeCustRecId, id);
         }
         public string GetUrlModel(string id = null)
         {
-            return GetTypeIDUrl(NsConfigService.ModelCustRecId);
+            return GetTypeIDUrl(NsConfigService.ModelCustRecId, id);
         }
         public string GetUrlBody(string id = null)
         {
-            return GetTypeIDUrl(NsConfigService.BodyCustRecId);
+            return GetTypeIDUrl(NsConfigService.BodyCustRecId, id);
         }
         public string GetUrlTrim(string id = null)
         {
-            return GetTypeIDUrl(NsConfigService.TrimCustRecId);
+            return GetTypeIDUrl(NsConfigService.TrimCustRecId, id);
         }
         public string GetUrlCar(string id = null)
         {
-            return GetTypeIDUrl(NsConfigService.CarCustRecId);
+            return GetTypeIDUrl(NsConfigService.CarCustRecId, id);
         }
         public string GetUrlPattern(string id = null)
         {
-            return GetTypeIDUrl(NsConfigService.PatternCustRecId);
+            return GetTypeIDUrl(NsConfigService.PatternCustRecId, id);
         }
     }
 

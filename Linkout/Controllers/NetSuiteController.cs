@@ -23,42 +23,49 @@ namespace Linkout.Controllers
         public HttpResponseMessage Get(string type)
         {
             string typeStr = type.Trim().ToLower();
-            string url = String.Empty;
             
             if (typeStr == "imgbase") 
             {
-                url = _nsService.getUrlImageHost();
+                return _jsonHttpResponseService.GetStringHttpResponseMessage(_nsService.getUrlImageHost());
             }
             else if (typeStr == "custrecmake") 
             {
-                url = _nsService.getUrlCustRecMake();
+                return _jsonHttpResponseService.GetStringHttpResponseMessage(_nsService.getUrlCustRecMake());
             }
             else if (typeStr == "custrecmodel")
             {
-                url = _nsService.getUrlCustRecModel();
+                return _jsonHttpResponseService.GetStringHttpResponseMessage(_nsService.getUrlCustRecModel());
             }
             else if (typeStr == "custrecbody")
             {
-                url = _nsService.getUrlCustRecBody();
+                return _jsonHttpResponseService.GetStringHttpResponseMessage(_nsService.getUrlCustRecBody());
             }
             else if (typeStr == "custrectrim")
             {
-                url = _nsService.getUrlCustRecTrim();
+                return _jsonHttpResponseService.GetStringHttpResponseMessage(_nsService.getUrlCustRecTrim());
             }
             else if (typeStr == "custreccar")
             {
-                url = _nsService.getUrlCustRecCar();
+                return _jsonHttpResponseService.GetStringHttpResponseMessage(_nsService.getUrlCustRecCar());
             }
             else if (typeStr == "custrecpattern")
             {
-                url = _nsService.getUrlCustRecPattern();
+                return _jsonHttpResponseService.GetStringHttpResponseMessage(_nsService.getUrlCustRecPattern());
             }
             else if (typeStr == "item")
             {
-                url = _nsService.getUrlItem();
+                return _jsonHttpResponseService.GetStringHttpResponseMessage(_nsService.getUrlItem());
             }
 
-            return _jsonHttpResponseService.GetStringHttpResponseMessage(url);
+            else if (typeStr == "webstoreitem")
+            {
+                var x = _jsonHttpResponseService.GetObjectHttpResponseMessage(new { prefix = "http://shopping.sandbox.netsuite.com/s.nl/c.801095/it.A/id.", suffix = "/.f" });
+                return x;
+            }
+            else {
+                return _jsonHttpResponseService.GetStringHttpResponseMessage(String.Empty);
+            }
+            
         }
     }
 }

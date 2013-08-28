@@ -49,7 +49,7 @@ angular.module('configure.services', ['ngResource'])
                 return delay.promise;
             }
         }
-    } ])
+    } ]) 
     .factory('CarService', ['KidService', 'PtrnList', 'PtrnService', function (KidService, PtrnList, PtrnService) {
         return {
             type: 'car',
@@ -63,7 +63,7 @@ angular.module('configure.services', ['ngResource'])
             type: 'trim',
             loadKids: function (parentNode) {
                 return KidService.loadKids(parentNode, CarList,
-                    { makeid: parentNode.data.makeid, yearid: parentNode.data.yearid, modelid: parentNode.data.modelid, bodyid: parentNode.data.bodyid, trimid: parentNode.data.trimid },
+                    { makeid: parentNode.data.makeid, year: parentNode.data.yearname, modelid: parentNode.data.modelid, bodyid: parentNode.data.bodyid, trimid: parentNode.data.trimid },
                     CarService);
             }
         }
@@ -73,7 +73,7 @@ angular.module('configure.services', ['ngResource'])
             type: 'body',
             loadKids: function (parentNode) {
                 return KidService.loadKids(parentNode, TrimList,
-                    { makeid: parentNode.data.makeid, yearid: parentNode.data.yearid, modelid: parentNode.data.modelid, bodyid: parentNode.data.bodyid },
+                    { makeid: parentNode.data.makeid, year: parentNode.data.yearname, modelid: parentNode.data.modelid, bodyid: parentNode.data.bodyid },
                     TrimService);
             }
         }
@@ -83,7 +83,7 @@ angular.module('configure.services', ['ngResource'])
             type: 'model',
             loadKids: function (parentNode) {
                 return KidService.loadKids(parentNode, BodyList,
-                    { makeid: parentNode.data.makeid, yearid: parentNode.data.yearid, modelid: parentNode.data.modelid },
+                    { makeid: parentNode.data.makeid, year: parentNode.data.yearname, modelid: parentNode.data.modelid },
                     BodyService);
             }
         }
@@ -92,7 +92,7 @@ angular.module('configure.services', ['ngResource'])
         return {
             type: 'year',
             loadKids: function (parentNode) {
-                return KidService.loadKids(parentNode, ModelList, { makeid: parentNode.data.makeid, yearid: parentNode.data.yearid }, ModelService);
+                return KidService.loadKids(parentNode, ModelList, { makeid: parentNode.data.makeid, year: parentNode.data.yearname }, ModelService);
             }
         }
     } ])

@@ -75,16 +75,16 @@ angular.module('linkout.services', ['ngResource'])
     } ])
 
     .factory('Models', ['$resource', function ($resource) {
-        return $resource('/selector/make/:makeid/year/:yearid/models', { makeid: '@makeid', yearid: '@yearid' });
+        return $resource('/selector/make/:makeid/year/:year/models', { makeid: '@makeid', year: '@year' });
     } ])
     .factory('ModelList', ['SelApiList', 'Models', function (SelApiList, Models) {
         return function (parm, listTransform) {
             return SelApiList(Models, parm, 'models', 'Model', listTransform);
         }
-    } ])
+    } ]) 
 
     .factory('Bodies', ['$resource', function ($resource) {
-        return $resource('/selector/make/:makeid/year/:yearid/model/:modelid/bodies', { makeid: '@makeid', yearid: '@yearid', modelid: '@modelid' });
+        return $resource('/selector/make/:makeid/year/:year/model/:modelid/bodies', { makeid: '@makeid', year: '@year', modelid: '@modelid' });
     } ])
     .factory('BodyList', ['SelApiList', 'Bodies', function (SelApiList, Bodies) {
         return function (parm, listTransform) {
@@ -93,7 +93,7 @@ angular.module('linkout.services', ['ngResource'])
     } ])
 
     .factory('Trims', ['$resource', function ($resource) {
-        return $resource('/selector/make/:makeid/year/:yearid/model/:modelid/body/:bodyid/trims', { makeid: '@makeid', yearid: '@yearid', modelid: '@modelid', bodyid: '@bodyid' });
+        return $resource('/selector/make/:makeid/year/:year/model/:modelid/body/:bodyid/trims', { makeid: '@makeid', year: '@year', modelid: '@modelid', bodyid: '@bodyid' });
     } ])
     .factory('TrimList', ['SelApiList', 'Trims', function (SelApiList, Trims) {
         return function (parm, listTransform) {
@@ -102,7 +102,7 @@ angular.module('linkout.services', ['ngResource'])
     } ])
 
     .factory('Cars', ['$resource', function ($resource) {
-        return $resource('/selector/make/:makeid/year/:yearid/model/:modelid/body/:bodyid/trim/:trimid/cars', { makeid: '@makeid', yearid: '@yearid', modelid: '@modelid', bodyid: '@bodyid', trimid: '@trimid' });
+        return $resource('/selector/make/:makeid/year/:year/model/:modelid/body/:bodyid/trim/:trimid/cars', { makeid: '@makeid', year: '@year', modelid: '@modelid', bodyid: '@bodyid', trimid: '@trimid' });
     } ])
     .factory('CarList', ['SelApiList', 'Cars', function (SelApiList, Cars) {
         return function (parm, listTransform) {

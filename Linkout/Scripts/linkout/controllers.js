@@ -462,11 +462,20 @@ linkout
                 var parmObj = {};
                 for (var i = 0; i < parms.length; i++) {
                     var root = parms[i];
-                    var parm = root.toLowerCase() + 'id';
+                    var parm;
+                    if (root === 'year') {
+                        parm = 'year';
+                    } else {
+                        parm = root.toLowerCase() + 'id';
+                    };
                     parmObj[parm] = null;
                     var selObj = $scope[root];
                     if (selObj) {
-                        parmObj[parm] = selObj.id;
+                        if (root === 'year') {
+                            parmObj[parm] = selObj.name;
+                        } else {
+                            parmObj[parm] = selObj.id;
+                        }
                     }
                 }
                 return parmObj;
@@ -502,7 +511,7 @@ linkout
                     .success(function (data) {
                         item.colorurl = data + item.swatchimgurl; //'https://system.sandbox.netsuite.com'
                     })
-                    .error(function (data) { item.colorurl = '/Content/Images/img_not_avail.png';});
+                    .error(function (data) { item.colorurl = '/Content/Images/img_not_avail.png'; });
             } else {
                 item.colorurl = '/Content/Images/img_not_avail.png';
             }

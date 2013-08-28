@@ -162,7 +162,7 @@ configure
             }
         };
     }
-} ])
+} ]) 
 
 .controller("CarPatternsCtrl", ['$q', '$scope', 'MakeList', 'YearList', 'ModelList', 'BodyList', 'TrimList', 'CarList', 'PtrnList', 'IntColList', 'NetsuiteLinks', 'Stopwatch',
 function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList, PtrnList, IntColList, NetsuiteLinks, Stopwatch) {
@@ -192,8 +192,8 @@ function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList
         { type: 'Model',
             checked: true,
             srvc: ModelList,
-            parmFcn: function (year) { return { yearid: year.id} },
-            dataFcn: function (year) { return { yearname: year.name} }
+            parmFcn: function (year) { return { year: year.name} },
+            dataFcn: function (year) { return { yearid: year.id, yearname: year.name} }
         },
         { type: 'Body',
             checked: true,

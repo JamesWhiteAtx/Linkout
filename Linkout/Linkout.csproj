@@ -138,6 +138,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigureController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
+    <Compile Include="Controllers\DownloadController.cs" />
+    <Compile Include="Controllers\EbayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkoutController.cs" />
     <Compile Include="Controllers\MockController.cs" />
@@ -651,6 +653,9 @@
     <Content Include="Scripts\jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery\_references.js" />
     <Content Include="Scripts\modernizr\modernizr-2.6.2.js" />
+    <Content Include="Scripts\roadwire_ebay\app.js" />
+    <Content Include="Scripts\roadwire_ebay\controllers.js" />
+    <Content Include="Scripts\roadwire_ebay\services.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -735,6 +740,12 @@
     <Content Include="Views\Demo\_Layout.cshtml" />
     <Content Include="Views\Demo\_ViewStart.cshtml" />
     <Content Include="Views\Demo\Index.cshtml" />
+    <Content Include="Views\Download\Index.cshtml" />
+    <Content Include="Views\Ebay\Index.cshtml" />
+    <Content Include="Views\Ebay\_Layout.cshtml" />
+    <Content Include="Views\Ebay\_ViewStart.cshtml" />
+    <Content Include="Views\Ebay\Partials\Menu.cshtml" />
+    <Content Include="Views\Ebay\Partials\PaidUnshipped.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

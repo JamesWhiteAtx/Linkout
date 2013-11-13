@@ -20,7 +20,7 @@ namespace Linkout.Controllers
 
         public HttpResponseMessage JsonResponse()
         {
-            return SelectorService.GetSelectorJson(NetSuiteUriSelectorService.Uri);
+            return SelectorService.GetHttpJsonResponse(NetSuiteUriSelectorService.Uri);
         }
 
         public void AddQuery(string name, string value)

@@ -79,7 +79,7 @@ namespace Linkout.Tests
             HttpResponseMessage mockResp = new JsonHttpResponseService().GetStringHttpResponseMessage(responseFromServer);
 
             var selSrvc = new Mock<IJsonWebResponseService>();
-            selSrvc.Setup(srvc => srvc.GetSelectorJson(It.IsAny<Uri>())).Returns(mockResp);
+            selSrvc.Setup(srvc => srvc.GetHttpJsonResponse(It.IsAny<Uri>())).Returns(mockResp);
             ctrl.SelectorService = selSrvc.Object;
 
             HttpResponseMessage ctrlResp = ctrl.JsonResponse();

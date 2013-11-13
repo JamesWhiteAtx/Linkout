@@ -11,7 +11,7 @@ namespace Linkout.Controllers
     {
         public HttpResponseMessage Get(string ptrnid)
         {
-            AddQuery("type", "ptrncolors");
+            AddQuery("type", "ptrnkits");
             AddQuery("ptrnid", ptrnid);
             return JsonResponse();
         }

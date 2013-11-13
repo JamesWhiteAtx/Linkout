@@ -97,6 +97,16 @@ namespace Linkout
             bundles.Add(new StyleBundle("~/css/tree").Include(
                         "~/css/tree.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/roadwire-ebay").Include(
+                        "~/Scripts/roadwire_ebay/app.js",
+                        //"~/Scripts/roadwire_ebay/services.js",
+                        //"~/Scripts/roadwire_ebay/filters.js",
+                        //"~/Scripts/roadwire_ebay/directives.js",
+                        "~/Scripts/roadwire_ebay/controllers.js",
+                        "~/Scripts/roadwire_ebay/services.js"));
+
+            //bundles.Add(new StyleBundle("~/css/roadwire-ebay").Include("~/css/configure.css"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

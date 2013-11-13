@@ -25,7 +25,7 @@ namespace Linkout.Controllers
             }
             else
             {
-                return Redirect("https://www.roadwire.com");
+                return Redirect("http://www.roadwire.com");
             }
         }
     }

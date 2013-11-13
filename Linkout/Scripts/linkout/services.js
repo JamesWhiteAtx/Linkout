@@ -135,20 +135,20 @@ angular.module('linkout.services', ['ngResource'])
     } ])
     .factory('RecColList', ['SelApiList', 'RecCols', function (SelApiList, RecCols) {
         return function (parm, listTransform) {
-            return SelApiList(RecCols, parm, 'colors', 'Reccomended Color', listTransform,
+            return SelApiList(RecCols, parm, 'kits', 'Reccomended Color', listTransform,
                 function (item) {
                     item.display = item.leacolorname + ' (' + item.rectype + ')';
                     item.invitemid = item.id;
                 });
         }
-    } ])
+        } ])
 
     .factory('AllCols', ['$resource', function ($resource) {
         return $resource('/selector/ptrn/:ptrnid/allcols', { ptrnid: '@ptrnid' });
     } ])
     .factory('AllColList', ['SelApiList', 'AllCols', function (SelApiList, AllCols) {
         return function (parm, listTransform) {
-            return SelApiList(AllCols, parm, 'colors', 'Color', listTransform,
+            return SelApiList(AllCols, parm, 'kits', 'Color', listTransform,
                 function (item) {
                     item.display = item.leacolorname;
                     item.invitemid = item.id;

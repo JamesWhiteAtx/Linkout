@@ -11,7 +11,7 @@ namespace Linkout.Controllers
     {
         public HttpResponseMessage Get(string carid, string ptrnid, string intcolid)
         {
-            AddQuery("type", "ptrncolors");
+            AddQuery("type", "ptrnrecs");
             AddQuery("carid", carid);
             AddQuery("ptrnid", ptrnid);
             AddQuery("intcolid", intcolid);

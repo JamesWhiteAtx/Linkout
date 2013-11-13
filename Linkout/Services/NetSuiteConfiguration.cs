@@ -27,9 +27,11 @@ namespace Linkout
     public interface INetSuiteConfigService
     {
         string Scheme { get; set; }
-        string FormsHost { get; set; }
         string SysHost { get; set; }
+        string FormsHost { get; set; }
+        string RestHost { get; set; }
         string ScriptPath { get; set; }
+        string RestPath { get; set; }
         string CustRecPath { get; set; }
         string ItemPath { get; set; }
         
@@ -37,6 +39,11 @@ namespace Linkout
         string SelDeployVal { get; set; }
         string CompidVal { get; set; }
         string HVal { get; set; }
+        string EmailVal { get; set; }
+        string PassVal { get; set; }
+
+        bool DebugVal { get; set; }
+        string DebugCookieVal { get; set; }
 
         string MakeCustRecId { get; set; }
         string ModelCustRecId { get; set; }
@@ -51,13 +58,25 @@ namespace Linkout
         public UriElement()
         {
             _Scheme = new ConfigurationProperty("scheme", typeof(string), "<UNDEFINED>");
-            _FormsHost = new ConfigurationProperty("formsHost", typeof(string), "<UNDEFINED>");
             _SysHost = new ConfigurationProperty("sysHost", typeof(string), "<UNDEFINED>");
+            _FormsHost = new ConfigurationProperty("formsHost", typeof(string), "<UNDEFINED>");
+            _RestHost = new ConfigurationProperty("restHost", typeof(string), "<UNDEFINED>");
             _ScriptPath = new ConfigurationProperty("scriptPath", typeof(string), "<UNDEFINED>");
+            _RestPath = new ConfigurationProperty("restPath", typeof(string), "<UNDEFINED>");
             _CustRecPath = new ConfigurationProperty("custRecPath", typeof(string), "<UNDEFINED>");
             _ItemPath = new ConfigurationProperty("itemPath", typeof(string), "<UNDEFINED>");
             _CompidVal = new ConfigurationProperty("compidVal", typeof(string), "<UNDEFINED>");
             _HVal = new ConfigurationProperty("hVal", typeof(string), "<UNDEFINED>");
+            _EmailVal = new ConfigurationProperty("emailVal", typeof(string), "<UNDEFINED>");
+            _PassVal = new ConfigurationProperty("passVal", typeof(string), "<UNDEFINED>");
+
+            //_DebugVal = new ConfigurationProperty("debugVal", typeof(bool), "<UNDEFINED>");
+
+
+            _DebugVal = new ConfigurationProperty("debugVal", typeof(bool), null, ConfigurationPropertyOptions.None);
+        
+
+            _DebugCookieVal = new ConfigurationProperty("debugCookieVal", typeof(string), "<UNDEFINED>");
 
             _SelScriptVal = new ConfigurationProperty("selScriptVal", typeof(string), "<UNDEFINED>");
             _SelDeployVal = new ConfigurationProperty("selDeployVal", typeof(string), "<UNDEFINED>");
@@ -70,15 +89,23 @@ namespace Linkout
             _PatternCustRecId = new ConfigurationProperty("patternCustRecId", typeof(string), "<UNDEFINED>");
 
             this.Properties.Add(_Scheme);
-            this.Properties.Add(_FormsHost);
             this.Properties.Add(_SysHost);
+            this.Properties.Add(_FormsHost);
+            this.Properties.Add(_RestHost);
             this.Properties.Add(_ScriptPath);
+            this.Properties.Add(_RestPath);
             this.Properties.Add(_CustRecPath);
             this.Properties.Add(_ItemPath);
             this.Properties.Add(_SelScriptVal);
             this.Properties.Add(_SelDeployVal);
             this.Properties.Add(_CompidVal);
             this.Properties.Add(_HVal);
+            this.Properties.Add(_EmailVal);
+            this.Properties.Add(_PassVal);
+
+            this.Properties.Add(_DebugVal);
+            this.Properties.Add(_DebugCookieVal);
+            
             this.Properties.Add(_MakeCustRecId);
             this.Properties.Add(_ModelCustRecId);
             this.Properties.Add(_BodyCustRecId);
@@ -89,16 +116,22 @@ namespace Linkout
 
         ConfigurationProperty _Scheme; 
         public string Scheme { get { return (string)this[_Scheme]; } set { this[_Scheme] = value; } }
-        
+
+        ConfigurationProperty _SysHost;
+        public string SysHost { get { return (string)this[_SysHost]; } set { this[_SysHost] = value; } }
+
         ConfigurationProperty _FormsHost; 
         public string FormsHost { get { return (string)this[_FormsHost]; } set { this[_FormsHost] = value; } }
-        
-        ConfigurationProperty _SysHost; 
-        public string SysHost { get { return (string)this[_SysHost]; } set { this[_SysHost] = value; } }
-        
+
+        ConfigurationProperty _RestHost;
+        public string RestHost { get { return (string)this[_RestHost]; } set { this[_RestHost] = value; } }
+
         ConfigurationProperty _ScriptPath; 
         public string ScriptPath { get { return (string)this[_ScriptPath]; } set { this[_ScriptPath] = value; } }
-        
+
+        ConfigurationProperty _RestPath;
+        public string RestPath { get { return (string)this[_RestPath]; } set { this[_RestPath] = value; } }
+
         ConfigurationProperty _CustRecPath; 
         public string CustRecPath { get { return (string)this[_CustRecPath]; } set { this[_CustRecPath] = value; } }
         
@@ -110,6 +143,19 @@ namespace Linkout
         
         ConfigurationProperty _HVal; 
         public string HVal { get { return (string)this[_HVal]; } set { this[_HVal] = value; } }
+
+        ConfigurationProperty _EmailVal;
+        public string EmailVal { get { return (string)this[_EmailVal]; } set { this[_EmailVal] = value; } }
+        
+        ConfigurationProperty _PassVal;
+        public string PassVal { get { return (string)this[_PassVal]; } set { this[_PassVal] = value; } }
+
+        ConfigurationProperty _DebugVal;
+        public bool DebugVal { get { return (bool)this[_DebugVal]; } set { this[_DebugVal] = value; } }
+
+        ConfigurationProperty _DebugCookieVal;
+        public string DebugCookieVal { get { return (string)this[_DebugCookieVal]; } set { this[_DebugCookieVal] = value; } }
+
 
         ConfigurationProperty _SelScriptVal;
         public string SelScriptVal { get { return (string)this[_SelScriptVal]; } set { this[_SelScriptVal] = value; } }

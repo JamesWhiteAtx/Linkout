@@ -69,7 +69,7 @@ namespace Linkout.Tests
         public static IJsonWebResponseService MakeMockService()
         {
             var selSrvc = new Mock<IJsonWebResponseService>();
-            selSrvc.Setup(srvc => srvc.GetSelectorJson(It.IsAny<Uri>()))
+            selSrvc.Setup(srvc => srvc.GetHttpJsonResponse(It.IsAny<Uri>()))
                     .Returns((Uri uri) => HRM(uri));
             return selSrvc.Object;
         }
@@ -84,7 +84,7 @@ namespace Linkout.Tests
 
         public static HttpResponseMessage GetMockServiceResponse(INetSuiteUriSelectorService bldr)
         {
-            return MakeMockService().GetSelectorJson(bldr.Uri);
+            return MakeMockService().GetHttpJsonResponse(bldr.Uri);
         }
 
     }

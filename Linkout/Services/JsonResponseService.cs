@@ -10,7 +10,10 @@ namespace Linkout
 {
     public interface IJsonWebResponseService
     {
-        HttpResponseMessage GetSelectorJson(Uri uri);
+        string GetServerJsonResponse(Uri uri, string method, WebHeaderCollection headers);
+        string GetServerJsonResponse(Uri uri);
+        HttpResponseMessage GetHttpJsonResponse(Uri uri, string method, WebHeaderCollection headers);
+        HttpResponseMessage GetHttpJsonResponse(Uri uri);
     }
 
     public class JsonWebResponseService : IJsonWebResponseService
@@ -22,12 +25,9 @@ namespace Linkout
             _jsonHttpResponseService = jsonHttpResponseService;
         }
 
-        public HttpResponseMessage GetSelectorJson(Uri uri)
+        public string ResponseFromServer(WebRequest request)
         {
             string responseFromServer = String.Empty;
-            WebRequest request = WebRequest.Create(uri);
-            request.Method = "GET";
-            request.ContentType = "application/json; charset=utf-8";
             using (WebResponse response = request.GetResponse())
             {
                 using (Stream dataStream = response.GetResponseStream())
@@ -36,7 +36,41 @@ namespace Linkout
                     responseFromServer = reader.ReadToEnd();
                 }
             }
+            return responseFromServer;
+        }
+
+        public string GetServerJsonResponse(Uri uri, string method, WebHeaderCollection headers)
+        {
+            WebRequest request = WebRequest.Create(uri);
+            
+            request.Method = method;
+            request.ContentType = "application/json; charset=utf-8";
+
+            if (headers != null)
+            {
+                foreach (string name in headers)
+                {
+                    request.Headers.Add(name, headers[name]);
+                }
+            }
+            
+            return ResponseFromServer(request);
+        }
+
+        public string GetServerJsonResponse(Uri uri)
+        {
+            return GetServerJsonResponse(uri, "GET", null);
+        }
+
+        public HttpResponseMessage GetHttpJsonResponse(Uri uri, string method, WebHeaderCollection headers)
+        {
+            string responseFromServer = GetServerJsonResponse(uri, method, headers);
             return _jsonHttpResponseService.GetStringHttpResponseMessage(responseFromServer);
+        }
+
+        public HttpResponseMessage GetHttpJsonResponse(Uri uri)
+        {
+            return GetHttpJsonResponse(uri, "GET", null);
         }
     }
 }

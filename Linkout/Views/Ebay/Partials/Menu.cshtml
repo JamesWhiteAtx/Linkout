@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Menu";
+}
+
+<h2>Menu</h2>
+
+<div class="well" style="max-width: 340px; padding: 8px 0;">
+    <ul class="nav nav-list">
+        <li class="nav-header">Ebay Options</li>
+
+        <li ng-class="{active: title=='menu'}"> <a href ng-click="routeMenu()">Menu</a></li>
+        <li ng-class="{active: title=='unshipped'}"> <a href ng-click="routeUnshipped()">Paid Awaiting Shipment</a></li>
+        
+    </ul>
+</div>

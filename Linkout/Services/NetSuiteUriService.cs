@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Net;
 
 namespace Linkout
 {
@@ -64,6 +65,72 @@ namespace Linkout
         }
     }
 
+    //https://rest.sandbox.netsuite.com/app/site/hosting/restlet.nl?script=33&deploy=1
+
+    public interface INetSuiteUriRestService
+    {
+        UriService AddQuery(string name, string value);
+        Uri Uri { get; }
+        string ScriptID { get; set; }
+        string DeployID { get; set; }
+        WebHeaderCollection MakeHeaders();
+    }
+
+    public class NetSuiteUriRest : NetSuiteUriBase, INetSuiteUriRestService
+    {
+        public static readonly string NsScriptName = "script";
+        public static readonly string NsDeployName = "deploy";
+
+        public NetSuiteUriRest(INetSuiteConfigService nsConfigService)
+            : base(nsConfigService)
+        {
+            this.Scheme = NsConfigService.Scheme;
+            this.Host = NsConfigService.RestHost;
+            this.Path = NsConfigService.RestPath;
+        }
+
+        private string _scriptID;
+
+        public string ScriptID {
+            get { return _scriptID; } 
+            set {
+                _scriptID = value;
+                AddQuery(NsScriptName, _scriptID);
+            }
+        }
+
+        private string _deployID;
+
+        public string DeployID {
+            get { return _deployID; }
+            set { 
+                _deployID = value;
+                AddQuery(NsDeployName, _deployID);
+            } 
+        }
+
+        public WebHeaderCollection MakeHeaders()
+        {
+            WebHeaderCollection headers = new WebHeaderCollection();
+
+            if (NsConfigService.DebugVal)
+            {
+                headers.Add("Cookie", NsConfigService.DebugCookieVal); 
+            }
+            else
+            {
+                headers.Add("Authorization", "NLAuth "
+                    + "nlauth_account=" + NsConfigService.CompidVal + ", "
+                    + "nlauth_email=" + NsConfigService.EmailVal + ", "
+                    + "nlauth_signature=" + NsConfigService.PassVal);
+            }
+
+            headers.Add("User-Agent-x", "SuiteScript-Call");
+            
+            return headers;
+        }
+    }
+    
     public class NetSuiteUriSystemBase : NetSuiteUriBase
     {
         public NetSuiteUriSystemBase(INetSuiteConfigService nsConfigService)

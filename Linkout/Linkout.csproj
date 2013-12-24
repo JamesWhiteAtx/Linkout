@@ -144,6 +144,7 @@
     <Compile Include="Controllers\LinkoutController.cs" />
     <Compile Include="Controllers\MockController.cs" />
     <Compile Include="Controllers\NetSuiteController.cs" />
+    <Compile Include="Controllers\NetSuiteFileController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\Schedule\InstallersController.cs" />
     <Compile Include="Controllers\Selector\AllColsController.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Models\MockProduct.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Services\HttpRespPassThruService.cs" />
     <Compile Include="Services\JsonHttpResponseService.cs" />
     <Compile Include="Services\NetSuiteConfiguration.cs" />
     <Compile Include="Global.asax.cs">
@@ -763,7 +765,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>60030</DevelopmentServerPort>
+          <DevelopmentServerPort>49490</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

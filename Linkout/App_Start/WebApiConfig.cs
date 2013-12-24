@@ -10,57 +10,128 @@ namespace Linkout
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
-                name: "MakesApi",
+                name: "SlctrMakesApi",
                 routeTemplate: "selector/makes",
                 defaults: new { controller = "Makes", action = "Get" }
             );
             config.Routes.MapHttpRoute(
-                name: "YearsApi",
+                name: "SlctrCtlgMakesApi",
+                routeTemplate: "selector/{ctlg}/makes",
+                defaults: new { controller = "Makes", action = "Get" },
+                constraints: new { ctlg = @"^[1-9]+$" }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "SlctrYearsApi",
                 routeTemplate: "selector/make/{makeid}/years",
                 defaults: new { controller = "Years", action = "Get" }
             );
             config.Routes.MapHttpRoute(
-                name: "ModelsApi",
+                name: "SlctrCtlgYearsApi",
+                routeTemplate: "selector/{ctlg}/make/{makeid}/years",
+                defaults: new { controller = "Years", action = "Get" },
+                constraints: new { ctlg = @"^[1-9]+$" }
+            );
+            
+            config.Routes.MapHttpRoute(
+                name: "SlctrModelsApi",
                 routeTemplate: "selector/make/{makeid}/year/{year}/models",
                 defaults: new { controller = "Models", action = "Get" }
             );
             config.Routes.MapHttpRoute(
-                name: "BodiesApi",
+                name: "SlctrCtlgModelsApi",
+                routeTemplate: "selector/{ctlg}/make/{makeid}/year/{year}/models",
+                defaults: new { controller = "Models", action = "Get" },
+                constraints: new { ctlg = @"^[1-9]+$" }
+            );
+            
+            config.Routes.MapHttpRoute(
+                name: "SlctrBodiesApi",
                 routeTemplate: "selector/make/{makeid}/year/{year}/model/{modelid}/bodies",
                 defaults: new { controller = "Bodies", action = "Get" }
             );
             config.Routes.MapHttpRoute(
-                name: "TrimsApi",
+                name: "SlctrCtlgBodiesApi",
+                routeTemplate: "selector/{ctlg}/make/{makeid}/year/{year}/model/{modelid}/bodies",
+                defaults: new { controller = "Bodies", action = "Get" },
+                constraints: new { ctlg = @"^[1-9]+$" }
+            );
+            
+            config.Routes.MapHttpRoute(
+                name: "SlctrTrimsApi",
                 routeTemplate: "selector/make/{makeid}/year/{year}/model/{modelid}/body/{bodyid}/trims",
                 defaults: new { controller = "Trims", action = "Get" }
             );
             config.Routes.MapHttpRoute(
-                name: "CarsApi",
+                name: "SlctrCtlgTrimsApi",
+                routeTemplate: "selector/{ctlg}/make/{makeid}/year/{year}/model/{modelid}/body/{bodyid}/trims",
+                defaults: new { controller = "Trims", action = "Get" },
+                constraints: new { ctlg = @"^[1-9]+$" }
+            );
+            
+            config.Routes.MapHttpRoute(
+                name: "SlctrCarsApi",
                 routeTemplate: "selector/make/{makeid}/year/{year}/model/{modelid}/body/{bodyid}/trim/{trimid}/cars",
                 defaults: new { controller = "Cars", action = "Get" }
             );
             config.Routes.MapHttpRoute(
-                name: "PtrnsApi",
+                name: "SlctrCtlgCarsApi",
+                routeTemplate: "selector/{ctlg}/make/{makeid}/year/{year}/model/{modelid}/body/{bodyid}/trim/{trimid}/cars",
+                defaults: new { controller = "Cars", action = "Get" },
+                constraints: new { ctlg = @"^[1-9]+$" }
+            );
+            
+            config.Routes.MapHttpRoute(
+                name: "SlctrPtrnsApi",
                 routeTemplate: "selector/car/{carid}/ptrns",
                 defaults: new { controller = "Ptrns", action = "Get" }
             );
             config.Routes.MapHttpRoute(
-                name: "IntColsApi",
+                name: "SlctrCtlgPtrnsApi",
+                routeTemplate: "selector/{ctlg}/car/{carid}/ptrns",
+                defaults: new { controller = "Ptrns", action = "Get" },
+                constraints: new { ctlg = @"^[1-9]+$" }
+            );
+            
+            config.Routes.MapHttpRoute(
+                name: "SlctrIntColsApi",
                 routeTemplate: "selector/car/{carid}/ptrn/{ptrnid}/intcols",
                 defaults: new { controller = "IntCols", action = "Get" }
             );
             config.Routes.MapHttpRoute(
-                name: "RecColsApi",
+                name: "SlctrCtlgIntColsApi",
+                routeTemplate: "selector/{ctlg}/car/{carid}/ptrn/{ptrnid}/intcols",
+                defaults: new { controller = "IntCols", action = "Get" },
+                constraints: new { ctlg = @"^[1-9]+$" }
+            );
+            
+            config.Routes.MapHttpRoute(
+                name: "SlctrRecColsApi",
                 routeTemplate: "selector/car/{carid}/ptrn/{ptrnid}/intcol/{intcolid}/reccols",
                 defaults: new { controller = "RecCols", action = "Get" }
             );
             config.Routes.MapHttpRoute(
-                name: "AllColsApi",
+                name: "SlctrCtlgRecColsApi",
+                routeTemplate: "selector/{ctlg}/car/{carid}/ptrn/{ptrnid}/intcol/{intcolid}/reccols",
+                defaults: new { controller = "RecCols", action = "Get" },
+                constraints: new { ctlg = @"^[1-9]+$" }
+            );
+            
+            config.Routes.MapHttpRoute(
+                name: "SlctrAllColsApi",
                 routeTemplate: "selector/ptrn/{ptrnid}/allcols",
                 defaults: new { controller = "AllCols", action = "Get" }
             );
             config.Routes.MapHttpRoute(
-                name: "ScheuleApi",
+                name: "SlctrCtlgAllColsApi",
+                routeTemplate: "selector/{ctlg}/ptrn/{ptrnid}/allcols",
+                defaults: new { controller = "AllCols", action = "Get" },
+                constraints: new { ctlg = @"^[1-9]+$" }
+            );
+
+            
+            config.Routes.MapHttpRoute(
+                name: "ScheduleApi",
                 routeTemplate: "schedule/installers/{zipcode}",
                 defaults: new { controller = "Installers", action = "Get", zipcode = RouteParameter.Optional }
             );
@@ -79,6 +150,12 @@ namespace Linkout
                 name: "NetSuiteApi",
                 routeTemplate: "netsuite/{type}",
                 defaults: new { controller = "NetSuite", type = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "NetSuiteFile",
+                routeTemplate: "netsuitefile/{id}",
+                defaults: new { controller = "NetSuiteFile", id = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(

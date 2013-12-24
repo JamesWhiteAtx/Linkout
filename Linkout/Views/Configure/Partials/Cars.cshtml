@@ -6,7 +6,7 @@
     .fill-body
     {
         position:fixed;
-        top:120px;
+        top:160px;
         bottom:5px;
         overflow: scroll;
     }
@@ -22,8 +22,16 @@
     }
 </style>
 
-
 <div ng-controller="TreeCtrl">
+    <div>
+        <select id="slct-int-cols" title="Interior Color" ng-model="ctlg">
+            <option value="" class="ng-binding">-- Select Catalog --</option>
+            <option value="1">Classic Cars</option>
+            <option value="3">eBay Listings</option>
+            <option value="2">The Other One</option>
+        </select>
+        {{ctlg}}
+    </div>
 
     <div id="tree-display" class="fill-body well">
 

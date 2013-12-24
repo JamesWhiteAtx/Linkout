@@ -9,9 +9,10 @@ namespace Linkout.Controllers
 {
     public class PtrnsController : SelectorController
     {
-        public HttpResponseMessage Get(string carid)
+        public HttpResponseMessage Get(string carid, int ctlg = 0)
         {
-            AddQuery("type", "carptrns");
+            SetType("carptrns");
+            SetCtlg(ctlg);
             AddQuery("carid", carid);
             return JsonResponse();
         }

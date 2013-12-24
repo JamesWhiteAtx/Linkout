@@ -9,13 +9,10 @@ namespace Linkout.Controllers
 {
     public class YearsController : SelectorController
     {
-        public HttpResponseMessage Get(string makeid)
+        public HttpResponseMessage Get(string makeid, int ctlg = 0)
         {
-            //SelectorBuilder ub = new SelectorBuilder();
-            //ub.AddQuery("type", "years");
-            //ub.AddQuery("makeid", makeid);
-            //return GetSelectorJson(ub.Uri);
-            AddQuery("type", "years");
+            SetType("years");
+            SetCtlg(ctlg);
             AddQuery("makeid", makeid);
             return JsonResponse();
         }

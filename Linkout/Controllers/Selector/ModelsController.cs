@@ -9,9 +9,10 @@ namespace Linkout.Controllers
 {
     public class ModelsController : SelectorController
     {
-        public HttpResponseMessage Get(string makeid, string year)
+        public HttpResponseMessage Get(string makeid, string year, int ctlg = 0)
         {
-            AddQuery("type", "models");
+            SetType("models");
+            SetCtlg(ctlg);
             AddQuery("makeid", makeid);
             AddQuery("year", year);
             return JsonResponse();

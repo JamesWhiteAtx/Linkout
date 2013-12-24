@@ -34,11 +34,15 @@ namespace Linkout
         string RestPath { get; set; }
         string CustRecPath { get; set; }
         string ItemPath { get; set; }
-        
+
+        string SelHVal { get; set; }
         string SelScriptVal { get; set; }
         string SelDeployVal { get; set; }
+        string FileHVal { get; set; }
+        string FileScriptVal { get; set; }
+        string FileDeployVal { get; set; }
+
         string CompidVal { get; set; }
-        string HVal { get; set; }
         string EmailVal { get; set; }
         string PassVal { get; set; }
 
@@ -66,20 +70,19 @@ namespace Linkout
             _CustRecPath = new ConfigurationProperty("custRecPath", typeof(string), "<UNDEFINED>");
             _ItemPath = new ConfigurationProperty("itemPath", typeof(string), "<UNDEFINED>");
             _CompidVal = new ConfigurationProperty("compidVal", typeof(string), "<UNDEFINED>");
-            _HVal = new ConfigurationProperty("hVal", typeof(string), "<UNDEFINED>");
             _EmailVal = new ConfigurationProperty("emailVal", typeof(string), "<UNDEFINED>");
             _PassVal = new ConfigurationProperty("passVal", typeof(string), "<UNDEFINED>");
 
             //_DebugVal = new ConfigurationProperty("debugVal", typeof(bool), "<UNDEFINED>");
-
-
             _DebugVal = new ConfigurationProperty("debugVal", typeof(bool), null, ConfigurationPropertyOptions.None);
-        
-
             _DebugCookieVal = new ConfigurationProperty("debugCookieVal", typeof(string), "<UNDEFINED>");
 
+            _SelHVal = new ConfigurationProperty("selHVal", typeof(string), "<UNDEFINED>");
             _SelScriptVal = new ConfigurationProperty("selScriptVal", typeof(string), "<UNDEFINED>");
             _SelDeployVal = new ConfigurationProperty("selDeployVal", typeof(string), "<UNDEFINED>");
+            _FileHVal = new ConfigurationProperty("fileHVal", typeof(string), "<UNDEFINED>");
+            _FileScriptVal = new ConfigurationProperty("fileScriptVal", typeof(string), "<UNDEFINED>");
+            _FileDeployVal = new ConfigurationProperty("fileDeployVal", typeof(string), "<UNDEFINED>");
 
             _MakeCustRecId = new ConfigurationProperty("makeCustRecId", typeof(string), "<UNDEFINED>");
             _ModelCustRecId = new ConfigurationProperty("modelCustRecId", typeof(string), "<UNDEFINED>");
@@ -96,10 +99,13 @@ namespace Linkout
             this.Properties.Add(_RestPath);
             this.Properties.Add(_CustRecPath);
             this.Properties.Add(_ItemPath);
+            this.Properties.Add(_SelHVal);
             this.Properties.Add(_SelScriptVal);
             this.Properties.Add(_SelDeployVal);
+            this.Properties.Add(_FileHVal);
+            this.Properties.Add(_FileScriptVal);
+            this.Properties.Add(_FileDeployVal);
             this.Properties.Add(_CompidVal);
-            this.Properties.Add(_HVal);
             this.Properties.Add(_EmailVal);
             this.Properties.Add(_PassVal);
 
@@ -141,9 +147,6 @@ namespace Linkout
         ConfigurationProperty _CompidVal; 
         public string CompidVal { get { return (string)this[_CompidVal]; } set { this[_CompidVal] = value; } }
         
-        ConfigurationProperty _HVal; 
-        public string HVal { get { return (string)this[_HVal]; } set { this[_HVal] = value; } }
-
         ConfigurationProperty _EmailVal;
         public string EmailVal { get { return (string)this[_EmailVal]; } set { this[_EmailVal] = value; } }
         
@@ -156,12 +159,23 @@ namespace Linkout
         ConfigurationProperty _DebugCookieVal;
         public string DebugCookieVal { get { return (string)this[_DebugCookieVal]; } set { this[_DebugCookieVal] = value; } }
 
+        ConfigurationProperty _SelHVal;
+        public string SelHVal { get { return (string)this[_SelHVal]; } set { this[_SelHVal] = value; } }
 
         ConfigurationProperty _SelScriptVal;
         public string SelScriptVal { get { return (string)this[_SelScriptVal]; } set { this[_SelScriptVal] = value; } }
 
         ConfigurationProperty _SelDeployVal;
         public string SelDeployVal { get { return (string)this[_SelDeployVal]; } set { this[_SelDeployVal] = value; } }
+
+        ConfigurationProperty _FileHVal;
+        public string FileHVal { get { return (string)this[_FileHVal]; } set { this[_FileHVal] = value; } }
+
+        ConfigurationProperty _FileScriptVal;
+        public string FileScriptVal { get { return (string)this[_FileScriptVal]; } set { this[_FileScriptVal] = value; } }
+
+        ConfigurationProperty _FileDeployVal;
+        public string FileDeployVal { get { return (string)this[_FileDeployVal]; } set { this[_FileDeployVal] = value; } }
 
         ConfigurationProperty _MakeCustRecId;
         public string MakeCustRecId { get { return (string)this[_MakeCustRecId]; } set { this[_MakeCustRecId] = value; } }

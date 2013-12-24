@@ -7,9 +7,10 @@ namespace Linkout.Controllers
 {
     public class MakesController : SelectorController
     {
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(int ctlg = 0)
         {
-            AddQuery("type", "makes");
+            SetType("makes");
+            SetCtlg(ctlg);
             return JsonResponse();
         }
     }

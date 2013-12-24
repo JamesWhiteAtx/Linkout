@@ -50,6 +50,8 @@ namespace Linkout
     public interface INetSuiteUriSelectorService
     {
         UriService AddQuery(string name, string value);
+        UriService SetType(string value);
+        UriService SetCtlg(int value);
         Uri Uri { get; }
     }
 
@@ -61,7 +63,49 @@ namespace Linkout
             this.AddQuery(NsScriptName, NsConfigService.SelScriptVal)
                 .AddQuery(NsDeployName, NsConfigService.SelDeployVal)
                 .AddQuery(NsCompidName, NsConfigService.CompidVal)
-                .AddQuery(NsHName, NsConfigService.HVal);
+                .AddQuery(NsHName, NsConfigService.SelHVal);
+        }
+
+        public UriService SetType(string value)
+        { 
+            return AddQuery("type", value);
+        }
+
+        public UriService SetCtlg(int value)
+        {
+            if (value > 0)
+            {
+                return AddQuery("ctlg", value.ToString());
+            }
+            else
+            {
+                return this;
+            }
+        }
+    }
+
+    public interface INetSuiteUriFileService
+    {
+        UriService AddQuery(string name, string value);
+        Uri Uri { get; }
+        Uri GetFileByIdUri(string id);
+    }
+
+    public class NetSuiteUriScriptFile : NetSuiteUriScriptBase, INetSuiteUriFileService
+    {
+        public NetSuiteUriScriptFile(INetSuiteConfigService nsConfigService)
+            : base(nsConfigService)
+        {
+            this.AddQuery(NsScriptName, NsConfigService.FileScriptVal)
+                .AddQuery(NsDeployName, NsConfigService.FileDeployVal)
+                .AddQuery(NsCompidName, NsConfigService.CompidVal)
+                .AddQuery(NsHName, NsConfigService.FileHVal);
+        }
+
+        public Uri GetFileByIdUri(string id)
+        {
+            return AddQuery("type", "file").AddQuery("id", id).Uri;
+            //return Uri;
         }
     }
 

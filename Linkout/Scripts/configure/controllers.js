@@ -101,11 +101,23 @@ configure
 } ])
 
 .controller("TreeCtrl", ['$scope', 'TreeService', 'NetsuiteLinks', function ($scope, TreeService, NetsuiteLinks) {
-    $scope.tree = TreeService.rootNode("node0");
-    $scope.tree.loadKids();
-    $scope.tree.expanded = true;
 
-    function linkPromise(promise, id, name) {
+    $scope.ctlg = '';
+    $scope.$watch('ctlg', function (newVal, oldVal) {
+        if (newVal !== oldVal) {
+            loadRoot();
+        };
+    });
+
+    var loadRoot = function () {
+        $scope.tree = TreeService.rootNode("node0", $scope.ctlg ? { ctlg: $scope.ctlg} : {});
+        $scope.tree.loadKids();
+        $scope.tree.expanded = true;
+    };
+
+    loadRoot();
+
+    var linkPromise = function (promise, id, name) {
         promise(id)
             .then(
                 function (url) {
@@ -162,7 +174,7 @@ configure
             }
         };
     }
-} ]) 
+} ])
 
 .controller("CarPatternsCtrl", ['$q', '$scope', 'MakeList', 'YearList', 'ModelList', 'BodyList', 'TrimList', 'CarList', 'PtrnList', 'IntColList', 'NetsuiteLinks', 'Stopwatch',
 function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList, PtrnList, IntColList, NetsuiteLinks, Stopwatch) {

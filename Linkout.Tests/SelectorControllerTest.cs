@@ -55,7 +55,7 @@ namespace Linkout.Tests
                 "?" + NetSuiteUriScriptBase.NsScriptName + "=" + cfg.SelScriptVal +
                 "&" + NetSuiteUriScriptBase.NsDeployName + "=" + cfg.SelDeployVal +
                 "&" + NetSuiteUriScriptBase.NsCompidName + "=" + cfg.CompidVal +
-                "&" + NetSuiteUriScriptBase.NsHName + "=" + cfg.HVal;
+                "&" + NetSuiteUriScriptBase.NsHName + "=" + cfg.SelHVal;
 
             Assert.AreEqual(nsUri, ctrl.NetSuiteUriSelectorService.Uri.ToString());
         }

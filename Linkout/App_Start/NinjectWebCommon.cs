@@ -74,6 +74,8 @@ namespace Linkout.App_Start
             kernel.Bind<IProductService>().To<ProductService>();
 
             kernel.Bind<INetSuiteUriSelectorService>().To<NetSuiteUriScriptSelector>();
+            kernel.Bind<INetSuiteUriFileService>().To<NetSuiteUriScriptFile>();
+            kernel.Bind<IHttpRespPassThruService>().To<HttpRespPassThruService>();
 
             kernel.Bind<INetSuiteUriService>().To<NetSuiteUriService>();
 

@@ -9,16 +9,10 @@ namespace Linkout.Controllers
 {
     public class BodiesController : SelectorController
     {
-        public HttpResponseMessage Get(string makeid, string year, string modelid)
+        public HttpResponseMessage Get(string makeid, string year, string modelid, int ctlg = 0)
         {
-            //SelectorBuilder ub = new SelectorBuilder();
-            //ub.AddQuery("type", "bodies");
-            //ub.AddQuery("makeid", makeid);
-            //ub.AddQuery("year", year);
-            //ub.AddQuery("modelid", modelid);
-            //return GetSelectorJson(ub.Uri);
-
-            AddQuery("type", "bodies");
+            SetType("bodies");
+            SetCtlg(ctlg);
             AddQuery("makeid", makeid);
             AddQuery("year", year);
             AddQuery("modelid", modelid);

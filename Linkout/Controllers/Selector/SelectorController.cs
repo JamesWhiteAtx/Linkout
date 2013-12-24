@@ -28,5 +28,16 @@ namespace Linkout.Controllers
             NetSuiteUriSelectorService.AddQuery(name, value);
         }
 
+        public void SetType(string value)
+        {
+            NetSuiteUriSelectorService.SetType(value);
+        }
+
+        public void SetCtlg(int value)
+        {
+            NetSuiteUriSelectorService.SetCtlg(value);
+        }
+
+
     }
 }

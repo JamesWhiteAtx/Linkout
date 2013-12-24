@@ -21,7 +21,7 @@ namespace Linkout.Tests
         public static readonly string ItemPath = "/app/common/item/item.nl";
 
         public static readonly string CompidVal = "801095";
-        public static readonly string HVal = "20a61f1484463b5b9654";
+        public static readonly string SelHVal = "20a61f1484463b5b9654";
 
         public static readonly string SelScriptVal = "32";
         public static readonly string SelDeployVal = "1";
@@ -46,7 +46,7 @@ namespace Linkout.Tests
             nsConfig.Uri.ItemPath = ItemPath;
 
             nsConfig.Uri.CompidVal = CompidVal;
-            nsConfig.Uri.HVal = HVal;
+            nsConfig.Uri.SelHVal = SelHVal;
 
             nsConfig.Uri.SelScriptVal = SelScriptVal;
             nsConfig.Uri.SelDeployVal = SelDeployVal;
@@ -87,6 +87,10 @@ namespace Linkout.Tests
             return MakeMockService().GetHttpJsonResponse(bldr.Uri);
         }
 
+        public static HttpResponseMessage GetMockServiceResponse(INetSuiteUriFileService bldr)
+        {
+            return MakeMockService().GetHttpJsonResponse(bldr.Uri);
+        }
     }
 
 }

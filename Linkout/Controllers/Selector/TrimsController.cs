@@ -9,17 +9,10 @@ namespace Linkout.Controllers
 {
     public class TrimsController : SelectorController
     {
-        public HttpResponseMessage Get(string makeid, string year, string modelid, string bodyid)
+        public HttpResponseMessage Get(string makeid, string year, string modelid, string bodyid, int ctlg = 0)
         {
-            //SelectorBuilder ub = new SelectorBuilder();
-            //ub.AddQuery("type", "trims");
-            //ub.AddQuery("makeid", makeid);
-            //ub.AddQuery("year", year);
-            //ub.AddQuery("modelid", modelid);
-            //ub.AddQuery("bodyid", bodyid);
-            //return GetSelectorJson(ub.Uri);
-
-            AddQuery("type", "trims");
+            SetType("trims");
+            SetCtlg(ctlg);
             AddQuery("makeid", makeid);
             AddQuery("year", year);
             AddQuery("modelid", modelid);

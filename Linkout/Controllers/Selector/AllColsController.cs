@@ -9,9 +9,10 @@ namespace Linkout.Controllers
 {
     public class AllColsController : SelectorController
     {
-        public HttpResponseMessage Get(string ptrnid)
+        public HttpResponseMessage Get(string ptrnid, int ctlg = 0)
         {
-            AddQuery("type", "ptrnkits");
+            SetType("ptrnkits");
+            SetCtlg(ctlg);
             AddQuery("ptrnid", ptrnid);
             return JsonResponse();
         }

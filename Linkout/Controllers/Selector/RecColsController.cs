@@ -9,9 +9,10 @@ namespace Linkout.Controllers
 {
     public class RecColsController : SelectorController
     {
-        public HttpResponseMessage Get(string carid, string ptrnid, string intcolid)
+        public HttpResponseMessage Get(string carid, string ptrnid, string intcolid, int ctlg = 0)
         {
-            AddQuery("type", "ptrnrecs");
+            SetType("ptrnrecs");
+            SetCtlg(ctlg);
             AddQuery("carid", carid);
             AddQuery("ptrnid", ptrnid);
             AddQuery("intcolid", intcolid);

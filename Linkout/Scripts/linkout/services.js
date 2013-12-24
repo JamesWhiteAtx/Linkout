@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('linkout.services', ['ngResource']) 
+angular.module('linkout.services', ['ngResource'])
     .value('version', '0.1')
 
     .factory('SelApiList', ['$q', function ($q) {
@@ -56,99 +56,122 @@ angular.module('linkout.services', ['ngResource'])
         };
     } ])
 
-    .factory('Makes', ['$resource', function ($resource) {
-        return $resource('/selector/makes');
+    .factory('SlctrRsrc', ['$resource', function ($resource) {
+        return function (path, defaults, parm) {
+            var root = '/selector/';
+            if (parm) {
+                if (parm.ctlg) {
+                    root = root + ':ctlg/';
+                } else {
+                    delete parm.ctlg;
+                };
+            };
+            return $resource(root + path.trim(), defaults);
+        };
+    } ])
+
+    .factory('Makes', ['$resource', 'SlctrRsrc', function ($resource, SlctrRsrc) {
+        return function (parm) { return SlctrRsrc('makes', null, parm); }
     } ])
     .factory('MakeList', ['SelApiList', 'Makes', function (SelApiList, Makes) {
         return function (parm, listTransform) {
-            return SelApiList(Makes, {}, "makes", 'Make', listTransform);
+            return SelApiList(Makes(parm), parm, "makes", 'Make', listTransform);
         }
     } ])
 
-    .factory('Years', ['$resource', function ($resource) {
-        return $resource('/selector/make/:makeid/years', { makeid: '@makeid' });
+    .factory('Years', ['$resource', 'SlctrRsrc', function ($resource, SlctrRsrc) {
+        //return $resource('/selector/make/:makeid/years', { makeid: '@makeid' });
+        return function (parm) { return SlctrRsrc('make/:makeid/years', { makeid: '@makeid' }, parm); };
     } ])
     .factory('YearList', ['SelApiList', 'Years', function (SelApiList, Years) {
         return function (parm, listTransform) {
-            return SelApiList(Years, parm, "years", 'Year', listTransform);
+            return SelApiList(Years(parm), parm, "years", 'Year', listTransform);
         }
     } ])
 
-    .factory('Models', ['$resource', function ($resource) {
-        return $resource('/selector/make/:makeid/year/:year/models', { makeid: '@makeid', year: '@year' });
+    .factory('Models', ['$resource', 'SlctrRsrc', function ($resource, SlctrRsrc) {
+        //return $resource('/selector/make/:makeid/year/:year/models', { makeid: '@makeid', year: '@year' });
+        return function (parm) { return SlctrRsrc('make/:makeid/year/:year/models', { makeid: '@makeid', year: '@year' }, parm); };
     } ])
     .factory('ModelList', ['SelApiList', 'Models', function (SelApiList, Models) {
         return function (parm, listTransform) {
-            return SelApiList(Models, parm, 'models', 'Model', listTransform);
+            return SelApiList(Models(parm), parm, 'models', 'Model', listTransform);
         }
-    } ]) 
+    } ])
 
-    .factory('Bodies', ['$resource', function ($resource) {
-        return $resource('/selector/make/:makeid/year/:year/model/:modelid/bodies', { makeid: '@makeid', year: '@year', modelid: '@modelid' });
+    .factory('Bodies', ['$resource', 'SlctrRsrc', function ($resource, SlctrRsrc) {
+        //return $resource('/selector/make/:makeid/year/:year/model/:modelid/bodies', { makeid: '@makeid', year: '@year', modelid: '@modelid' });
+        return function (parm) { return SlctrRsrc('make/:makeid/year/:year/model/:modelid/bodies', { makeid: '@makeid', year: '@year', modelid: '@modelid' }, parm); };
     } ])
     .factory('BodyList', ['SelApiList', 'Bodies', function (SelApiList, Bodies) {
         return function (parm, listTransform) {
-            return SelApiList(Bodies, parm, 'bodies', 'Body', listTransform);
+            return SelApiList(Bodies(parm), parm, 'bodies', 'Body', listTransform);
         }
     } ])
 
-    .factory('Trims', ['$resource', function ($resource) {
-        return $resource('/selector/make/:makeid/year/:year/model/:modelid/body/:bodyid/trims', { makeid: '@makeid', year: '@year', modelid: '@modelid', bodyid: '@bodyid' });
+    .factory('Trims', ['$resource', 'SlctrRsrc', function ($resource, SlctrRsrc) {
+        //return $resource('/selector/make/:makeid/year/:year/model/:modelid/body/:bodyid/trims', { makeid: '@makeid', year: '@year', modelid: '@modelid', bodyid: '@bodyid' });
+        return function (parm) { return SlctrRsrc('make/:makeid/year/:year/model/:modelid/body/:bodyid/trims', { makeid: '@makeid', year: '@year', modelid: '@modelid', bodyid: '@bodyid' }, parm); };
     } ])
     .factory('TrimList', ['SelApiList', 'Trims', function (SelApiList, Trims) {
         return function (parm, listTransform) {
-            return SelApiList(Trims, parm, 'trims', 'Trim', listTransform);
+            return SelApiList(Trims(parm), parm, 'trims', 'Trim', listTransform);
         }
     } ])
 
-    .factory('Cars', ['$resource', function ($resource) {
-        return $resource('/selector/make/:makeid/year/:year/model/:modelid/body/:bodyid/trim/:trimid/cars', { makeid: '@makeid', year: '@year', modelid: '@modelid', bodyid: '@bodyid', trimid: '@trimid' });
+    .factory('Cars', ['$resource', 'SlctrRsrc', function ($resource, SlctrRsrc) {
+        //return $resource('/selector/make/:makeid/year/:year/model/:modelid/body/:bodyid/trim/:trimid/cars', { makeid: '@makeid', year: '@year', modelid: '@modelid', bodyid: '@bodyid', trimid: '@trimid' });
+        return function (parm) { return SlctrRsrc('make/:makeid/year/:year/model/:modelid/body/:bodyid/trim/:trimid/cars', { makeid: '@makeid', year: '@year', modelid: '@modelid', bodyid: '@bodyid', trimid: '@trimid' }, parm); };
     } ])
     .factory('CarList', ['SelApiList', 'Cars', function (SelApiList, Cars) {
         return function (parm, listTransform) {
-            return SelApiList(Cars, parm, 'cars', 'Car', listTransform);
+            return SelApiList(Cars(parm), parm, 'cars', 'Car', listTransform);
         }
     } ])
 
-    .factory('Ptrns', ['$resource', function ($resource) {
-        return $resource('/selector/car/:carid/ptrns', { carid: '@carid' });
+    .factory('Ptrns', ['$resource', 'SlctrRsrc', function ($resource, SlctrRsrc) {
+        //return $resource('/selector/car/:carid/ptrns', { carid: '@carid' });
+        return function (parm) { return SlctrRsrc('car/:carid/ptrns', { carid: '@carid' }, parm); };
     } ])
     .factory('PtrnList', ['SelApiList', 'Ptrns', function (SelApiList, Ptrns) {
         return function (parm, listTransform) {
-            return SelApiList(Ptrns, parm, 'patterns', 'Pattern', listTransform,
+            return SelApiList(Ptrns(parm), parm, 'patterns', 'Pattern', listTransform,
                 function (item) { item.display = item.seldescr + ' (' + item.name + ')'; });
         }
     } ])
 
-    .factory('IntCols', ['$resource', function ($resource) {
-        return $resource('/selector/car/:carid/ptrn/:ptrnid/intcols', { carid: '@carid', ptrnid: '@ptrnid' });
+    .factory('IntCols', ['$resource', 'SlctrRsrc', function ($resource, SlctrRsrc) {
+        //return $resource('/selector/car/:carid/ptrn/:ptrnid/intcols', { carid: '@carid', ptrnid: '@ptrnid' });
+        return function (parm) { return SlctrRsrc('car/:carid/ptrn/:ptrnid/intcols', { carid: '@carid', ptrnid: '@ptrnid' }, parm); };
     } ])
     .factory('IntColList', ['SelApiList', 'IntCols', function (SelApiList, IntCols) {
         return function (parm, listTransform) {
-            return SelApiList(IntCols, parm, 'intColors', 'Interior Color', listTransform,
+            return SelApiList(IntCols(parm), parm, 'intColors', 'Interior Color', listTransform,
                 function (item) { item.display = item.name + ' (' + item.id + ')'; });
         }
     } ])
 
-    .factory('RecCols', ['$resource', function ($resource) {
-        return $resource('/selector/car/:carid/ptrn/:ptrnid/intcol/:intcolid/reccols', { carid: '@carid', ptrnid: '@ptrnid', intcolid: '@intcolid' });
+    .factory('RecCols', ['$resource', 'SlctrRsrc', function ($resource, SlctrRsrc) {
+        //return $resource('/selector/car/:carid/ptrn/:ptrnid/intcol/:intcolid/reccols', { carid: '@carid', ptrnid: '@ptrnid', intcolid: '@intcolid' });
+        return function (parm) { return SlctrRsrc('car/:carid/ptrn/:ptrnid/intcol/:intcolid/reccols', { carid: '@carid', ptrnid: '@ptrnid', intcolid: '@intcolid' }, parm); };
     } ])
     .factory('RecColList', ['SelApiList', 'RecCols', function (SelApiList, RecCols) {
         return function (parm, listTransform) {
-            return SelApiList(RecCols, parm, 'kits', 'Reccomended Color', listTransform,
+            return SelApiList(RecCols(parm), parm, 'kits', 'Reccomended Color', listTransform,
                 function (item) {
                     item.display = item.leacolorname + ' (' + item.rectype + ')';
                     item.invitemid = item.id;
                 });
         }
-        } ])
+    } ])
 
-    .factory('AllCols', ['$resource', function ($resource) {
-        return $resource('/selector/ptrn/:ptrnid/allcols', { ptrnid: '@ptrnid' });
+    .factory('AllCols', ['$resource', 'SlctrRsrc', function ($resource, SlctrRsrc) {
+        //return $resource('/selector/ptrn/:ptrnid/allcols', { ptrnid: '@ptrnid' });
+        return function (parm) { return SlctrRsrc('ptrn/:ptrnid/allcols', { ptrnid: '@ptrnid' }, parm); };
     } ])
     .factory('AllColList', ['SelApiList', 'AllCols', function (SelApiList, AllCols) {
         return function (parm, listTransform) {
-            return SelApiList(AllCols, parm, 'kits', 'Color', listTransform,
+            return SelApiList(AllCols(parm), parm, 'kits', 'Color', listTransform,
                 function (item) {
                     item.display = item.leacolorname;
                     item.invitemid = item.id;
@@ -159,17 +182,6 @@ angular.module('linkout.services', ['ngResource'])
     .factory('Installers', ['$resource', function ($resource) {
         return $resource('/schedule/installers/:zipcode', { zipcode: '@zipcode' });
     } ])
-
-//    .factory('ProductPrice', ['$http', function ($http) {
-//        return {
-//            leather: function (rows) {
-//                return $http.get('/price/leather/' + rows, { cache: true });
-//            },
-//            heater: function () {
-//                return $http.get('/price/heater');
-//            }
-//        };
-//    } ])
 
     .factory('Product', ['$resource', function ($resource) {
         return $resource('/product/:id', { id: '@id' });

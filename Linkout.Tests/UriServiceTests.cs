@@ -51,7 +51,7 @@ namespace Linkout.Tests
             AddBldrQuery(expectedUri, NetSuiteUriScriptBase.NsScriptName, SelectorTester.SelScriptVal);
             AddBldrQuery(expectedUri, NetSuiteUriScriptBase.NsDeployName, SelectorTester.SelDeployVal);
             AddBldrQuery(expectedUri, NetSuiteUriScriptBase.NsCompidName, SelectorTester.CompidVal);
-            AddBldrQuery(expectedUri, NetSuiteUriScriptBase.NsHName, SelectorTester.HVal);
+            AddBldrQuery(expectedUri, NetSuiteUriScriptBase.NsHName, SelectorTester.SelHVal);
             return expectedUri;
         }
 

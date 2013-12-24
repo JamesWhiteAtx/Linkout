@@ -9,9 +9,10 @@ namespace Linkout.Controllers
 {
     public class CarsController : SelectorController
     {
-        public HttpResponseMessage Get(string makeid, string year, string modelid, string bodyid, string trimid)
+        public HttpResponseMessage Get(string makeid, string year, string modelid, string bodyid, string trimid, int ctlg = 0)
         {
-            AddQuery("type", "cars");
+            SetType("cars");
+            SetCtlg(ctlg);
             AddQuery("makeid", makeid);
             AddQuery("year", year);
             AddQuery("modelid", modelid);

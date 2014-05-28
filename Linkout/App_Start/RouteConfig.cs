@@ -12,6 +12,7 @@ namespace Linkout
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{file}.js");
 
             routes.MapRoute(
                 name: "Partials",

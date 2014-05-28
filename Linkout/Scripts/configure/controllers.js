@@ -20,7 +20,9 @@ configure
 } ])
 .controller('MenuCtrl', ['$scope', function ($scope) { } ])
 
-.controller('ProductsCtrl', ['$scope', 'ProductList', 'Product', function ($scope, ProductList, Product) {
+.controller('ProductsCtrl', ['$scope', '$location', 'ProductList', 'Product', function ($scope, $location, ProductList, Product) {
+    $scope.id = $location.search().id;
+
     $scope.listing = {};
 
     $scope.invalidForms = [];

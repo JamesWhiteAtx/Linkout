@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace Linkout.Controllers
 {
-    public class ConfigureController : Controller
+    public class UtilController : Controller
     {
         //
-        // GET: /Configure/
+        // GET: /Util/
         [Authorize]
         public ActionResult Index()
         {
@@ -26,9 +26,9 @@ namespace Linkout.Controllers
             return Redirect(Url.Action("Index") + "#" + afterHash);
         }
 
-        // GET: /Configure/Products
+        // GET: /Configure/ItemCars
         [Authorize]
-        public ActionResult Products(string id)
+        public ActionResult ItemCars(string id)
         {
             return RedirectToHashActId(id);
         }

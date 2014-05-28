@@ -70,6 +70,12 @@ namespace Linkout
             bundles.Add(new ScriptBundle("~/bundles/angular-resource", "http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-resource.min.js") { CdnFallbackExpression = "window.angular" }
                         .Include("~/Scripts/angular/angular-resource.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/ng-grid")
+                        .Include("~/Scripts/angular/ng-grid-{version}.js"));
+
+            bundles.Add(new StyleBundle("~/css/angular/ng-grid").Include(
+                        "~/css/angular/ng-grid.css"));
+
             bundles.Add(new StyleBundle("~/css/linkout").Include(
                         "~/css/linkout.css"));
 
@@ -96,6 +102,18 @@ namespace Linkout
 
             bundles.Add(new StyleBundle("~/css/tree").Include(
                         "~/css/tree.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/util").Include(
+                        "~/Scripts/util/app.js",
+                        //"~/Scripts/util/services.js",
+                        //"~/Scripts/util/filters.js",
+                        //"~/Scripts/util/directives.js",
+                        //"~/Scripts/util/services.js",
+                        "~/Scripts/util/controllers.js"));
+
+            bundles.Add(new StyleBundle("~/css/util").Include(
+                        "~/css/util.css"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/roadwire-ebay").Include(
                         "~/Scripts/roadwire_ebay/app.js",

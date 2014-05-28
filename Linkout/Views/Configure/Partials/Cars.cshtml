@@ -2,26 +2,6 @@
     ViewBag.Title = "Cars";
 }
 
-<style>
-    .fill-body
-    {
-        position:fixed;
-        top:160px;
-        bottom:5px;
-        overflow: scroll;
-    }
-    #tree-display 
-    {
-        left:50px;
-        right: 400px;
-    }
-    #node-details 
-    {
-        right: 50px;
-        width:300px;
-    }
-</style>
-
 <div ng-controller="TreeCtrl">
     <div>
         <select id="slct-int-cols" title="Interior Color" ng-model="ctlg">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Linkout;
+using CST.Security.Data;
 
 namespace Linkout.Controllers
 {
@@ -19,14 +20,24 @@ namespace Linkout.Controllers
 
         public ActionResult Index()
         {
-            if (configService.GetWebSysCompilationSectionDebug())
-            {
+            //if (configService.GetWebSysCompilationSectionDebug())
+            //{
                 return View();
-            }
-            else
+            //}
+            //else
+            //{
+            //    return Redirect("http://www.roadwire.com");
+            //}
+        }
+
+        public ActionResult About()
+        {
+            using (SecurityEntities securityEntities = new SecurityEntities())
             {
-                return Redirect("http://www.roadwire.com");
+                ViewBag.DBName = securityEntities.DBNameObfuscate();
             }
+
+            return View();
         }
     }
 }

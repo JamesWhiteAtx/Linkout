@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Utilities";
+}
+
+@section styles {
+    @Styles.Render("~/css/util")
+}
+    <h1>Util Index</h1>
+
+    <div id="util-view" class="container">
+        <div ng-view></div>
+    </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/util")
+}

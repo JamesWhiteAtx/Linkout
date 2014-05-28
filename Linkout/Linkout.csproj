@@ -158,7 +158,9 @@
     <Compile Include="Controllers\Selector\SelectorController.cs" />
     <Compile Include="Controllers\Selector\TrimsController.cs" />
     <Compile Include="Controllers\Selector\YearsController.cs" />
+    <Compile Include="Controllers\UtilController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Models\MockProduct.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Services\HttpRespPassThruService.cs" />
@@ -175,10 +177,13 @@
     <Compile Include="Services\TestService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Css\angular\ng-grid.css" />
+    <Content Include="Css\angular\ng-grid.min.css" />
     <Content Include="Css\bootstrap\social-buttons.css" />
     <Content Include="Css\configure.css" />
     <Content Include="Css\Demo.css" />
     <Content Include="Css\tree.css" />
+    <Content Include="Css\util.css" />
     <Content Include="Images\Configure\NetSuite.ico" />
     <Content Include="Images\Linkout\auto_upholstery_thumbnail.png" />
     <Content Include="Images\Linkout\banner.jpg" />
@@ -323,6 +328,8 @@
     <Content Include="Scripts\angular\angular-scenario.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\ng-grid-2.0.7.js" />
+    <Content Include="Scripts\angular\ng-grid-2.0.7.min.js" />
     <Content Include="Scripts\angular\ui-bootstrap-tpls-0.4.0.js" />
     <Content Include="Scripts\angular\ui-bootstrap-tpls-0.4.0.min.js" />
     <Content Include="Scripts\configure\app.js" />
@@ -658,6 +665,8 @@
     <Content Include="Scripts\roadwire_ebay\app.js" />
     <Content Include="Scripts\roadwire_ebay\controllers.js" />
     <Content Include="Scripts\roadwire_ebay\services.js" />
+    <Content Include="Scripts\util\app.js" />
+    <Content Include="Scripts\util\controllers.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -666,6 +675,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
@@ -748,6 +758,12 @@
     <Content Include="Views\Ebay\_ViewStart.cshtml" />
     <Content Include="Views\Ebay\Partials\Menu.cshtml" />
     <Content Include="Views\Ebay\Partials\PaidUnshipped.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Util\Partials\ItemCars.cshtml" />
+    <Content Include="Views\Util\_Layout.cshtml" />
+    <Content Include="Views\Util\Index.cshtml" />
+    <Content Include="Views\Util\_ViewStart.cshtml" />
+    <Content Include="Views\Util\Partials\Menu.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

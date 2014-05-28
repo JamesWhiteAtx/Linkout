@@ -1,7 +1,7 @@
 'use strict';
 // Declare app level module which depends on services and directives and filters
 
-var configure = angular.module('configure', ['ui.bootstrap', 'linkout.services', 'configure.services']) //'configure.directives', 'configure.services', 'configure.filters', 'ui.bootstrap'
+var configure = angular.module('configure', ['ui.bootstrap', 'ngGrid', 'linkout.services', 'configure.services']) //'configure.directives', 'configure.services', 'configure.filters', 'ui.bootstrap'
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/menu', {
             title: 'menu',
@@ -23,7 +23,6 @@ var configure = angular.module('configure', ['ui.bootstrap', 'linkout.services',
             templateUrl: '/configure/Partials/CarPatterns',
             controller: "CarPatternsCtrl"
         });
-
 
         $routeProvider.when('/test', {
             title: 'test',

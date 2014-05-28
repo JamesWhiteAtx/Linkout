@@ -18,12 +18,12 @@ button.btn[disabled]
     bottom:5px;
     overflow: scroll;
 }
-#tree-display 
+#panel-left
 {
     left:50px;
     right: 400px;
 }
-#node-details 
+#panel-right
 {
     right: 50px;
     width:300px;

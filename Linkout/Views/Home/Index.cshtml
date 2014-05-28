@@ -20,25 +20,31 @@
 @if (Request.IsAuthenticated)
 {
     <li class="one">
-        <h5> @Html.ActionLink("Confgure", "Index", "Configure") </h5>
+        <h5> @Html.ActionLink("Util", "Index", "Util") </h5>
     </li>
     <li class="two">
+        <h5> @Html.ActionLink("Configure", "Index", "Configure") </h5>
+    </li>
+    <li class="three">
         <h5> @Html.ActionLink("Downloads", "Index", "Download") </h5>
     </li>
-
-    <li class="three">
+    <li class="four">
         <h5> @Html.ActionLink("Ebay", "Index", "Ebay") </h5>
     </li>
-    
-    
-    <li class="four">
+    <li class="five">
+        <h5> @Html.ActionLink("About", "About") </h5>
+    </li>
+    <li class="six">
         <h5> @Html.ActionLink("Log out ", "LogOff", "Account")  (User: @User.Identity.Name)</h5>
     </li>        
 }
 else
 {
     <li class="one">
-    <h5> @Html.ActionLink("Log In", "LogOn", "Account") </h5>
+        <h5> @Html.ActionLink("Log In", "LogOn", "Account") </h5>
+    </li>
+    <li class="two">
+        <h5> @Html.ActionLink("About", "About") </h5>
     </li>
 }
   

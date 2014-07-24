@@ -291,7 +291,9 @@ function ($q, $scope, MakeList, YearList, ModelList, BodyList, TrimList, CarList
 
         srvc(parm).then(
             function (result) {
-                if (angular.isArray(result.list) || ((result.list.length > 0))) {
+                if (data.trimname == '*') {
+                    delay.resolve($.extend({}, data, { message: 'Missing Trim Level' }));
+                } else if (angular.isArray(result.list) || ((result.list.length > 0))) {
                     var childStack = [];
                     var child;
                     for (var i = 0; ((i < result.list.length)); i++) { // && (i < 5)

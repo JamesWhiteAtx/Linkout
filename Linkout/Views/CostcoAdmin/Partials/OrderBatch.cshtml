@@ -1,0 +1,62 @@
+﻿<div ng-show="err">err: {{err}}</div>
+<div ng-show="msg">msg: {{msg}}</div>
+
+<div class="clearfix">
+    <h4 class="pull-left">Batch Number: <span class="badge">{{batch.BatchNumber}}</span></h4>
+    <button type="button" class="btn pull-right" ng-click="orderAck(batch)" title="Acknowledge Order">
+        <i class="icon-ok"></i> Acknowledge
+    </button>
+</div>
+
+
+<div>partner: {{batch.PartnerID}}</div>
+
+<div class="panel panel-default" ng-repeat="order in batch.Orders">
+    <div class="panel-heading">
+        <div class="row bg-info">
+            <div class="col-md-4">PO: <span class="badge">{{order.PoNumber}}</span></div>
+            <div class="col-md-7">Order ID: <span class="badge">{{order.OrderID}}</span></div>
+            <div class="col-md-1"><span class="badge">{{$index+1}}</span></div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>OrderLineNumber</th>
+                <th>Line ID</th>
+                <th>MerchantLineNumber</th>
+                <th>ShippingCode</th>
+                <th>VendorSKU</th>
+                <th>MerchantSKU</th>
+                <th>QtyOrdered</th>
+                <th>Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="line in order.Lines">
+                <td>{{line.OrderLineNumber}}</td>
+                <td>{{line.ID}}</td>
+                <td>{{line.MerchantLineNumber}}</td>
+                <td>{{line.ShippingCode}}</td>
+                <td>{{line.VendorSKU}}</td>
+                <td>{{line.MerchantSKU}}</td>
+                <td>{{line.QtyOrdered}}</td>
+                <td>{{line.Weight}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    @*batch.Orders.PoNumber
+    batch.Orders.Lines.ID
+    batch.Orders.Lines.OrderLineNumber
+    batch.Orders.Lines.MerchantLineNumber
+    batch.Orders.Lines.ShippingCode
+    batch.Orders.Lines.MerchantSKU
+    batch.Orders.Lines.VendorSKU
+    batch.Orders.Lines.QtyOrdered
+    batch.Orders.Lines.Weight
+
+    batch.Orders.PersPlaces*@
+

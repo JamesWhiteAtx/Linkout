@@ -1,0 +1,51 @@
+﻿<div ng-show="err">err: {{err}}</div>
+<div ng-show="msg">msg: {{msg}}</div>
+
+<table class="table-condensed table-bordered">
+    <thead>
+        <tr>
+            <th>Edit</th>
+            <th>ID</th>
+            <th>Exists</th>
+            <th>Path</th>
+            <th>Name</th>
+            <th>FileDateTime</th>
+            <th>Encrypt</th>
+            <th>Encrypted Exists</th>
+            <th>Encrypted Path</th>
+            <th>Encrypted Name</th>
+            <th>Encrypted FileDateTime</th>
+            <th>Upload</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="f in files">
+            <td>
+                <button class="btn btn-default btn-xs" type="button" ng-show="f.Exists" ng-click="editConfirm(f)" title="edit {{f.Name}} file">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </button>
+            </td>
+            <td>{{f.ID}}</td>
+            <td>{{f.Exists}}</td>
+            <td>{{f.Path}}</td>
+            <td>{{f.Name}}</td>
+            <td>{{f.FileDateTime}}</td>
+            <td>
+                <button class="btn btn-default btn-xs" type="button" ng-show="f.Exists" ng-click="encryptConfirm(f)" title="encrypt {{f.Name}} file">
+                    <span class="glyphicon glyphicon-random"></span>
+                </button>
+            </td>
+            <td>{{f.EncryptExists}}</td>
+            <td>{{f.EncryptPath}}</td>
+            <td>{{f.EncryptName}}</td>
+            <td>{{f.EncryptDateTime}}</td>
+            <td>
+                <button class="btn btn-default btn-xs" type="button" ng-show="f.EncryptExists" ng-click="uploadConfirm(f)" title="upload {{f.EncryptName}} file">
+                    <span class="glyphicon glyphicon-cloud-upload"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+

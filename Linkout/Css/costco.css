@@ -1,0 +1,32 @@
+﻿.loading
+{
+    background:url('/Images/Linkout/loading.gif') no-repeat center center;
+}
+.loading-large
+{
+    background:url('/Images/Linkout/loading-large.gif') no-repeat center center;
+}
+
+span.loading-large {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 2px 2px;
+    position: relative;
+}
+
+span.loading-large:after
+{
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -2px;
+    left: 0px;
+}
+
+button.btn[disabled] 
+{
+    cursor: not-allowed;
+}

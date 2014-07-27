@@ -1,0 +1,171 @@
+﻿@*<h2>Confirm Batch {{batch.FileName}} <span ng-hide="batch.FileName">New</span></h2>*@
+<div ng-show="err">err: {{err}}</div>
+<div ng-show="msg">msg: {{msg}}</div>
+
+<div class="well" ng-hide="batch.FileName">
+    <input type="text" ng-model="batch.NewFileName"> <strong>.xml</strong>
+</div>
+
+<div class="well" ng-repeat="conf in batch.Confirms">
+    <div class="clearfix">
+        <h4 class="pull-left">Confirm</h4>
+        <button type="button" class="btn btn-xs pull-right" ng-click="batch.DelConfirm($index)" title="Delete Confirmation">
+            <span class="glyphicon glyphicon-minus"></span>Delete
+        </button>
+
+    </div>
+    <table class="table-condensed hub-confirm">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>PartnerTrxId</th>
+                <th>PartnerTrxDt</th>
+                <th>PoNumber</th>
+                <th>VendorsInvoiceNumber</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{conf.ID}}</td>
+                <td><input type="text" ng-model="conf.PartnerTrxId"></td>
+                <td><input type="text" ng-model="conf.PartnerTrxDt"></td>
+                <td><input type="text" ng-model="conf.PoNumber"></td>
+                <td><input type="text" ng-model="conf.VendorsInvoiceNumber"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Actions</h4>
+    <table class="table-condensed table-bordered hub-act">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Shipment</th>
+                <th>ActionCode</th>
+                <th>MerchantLineNumber</th>
+                <th>TrxVendorSKU</th>
+                <th>TrxMerchantSKU</th>
+                <th>TrxQty</th>
+                <th>PackageIDs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="act in conf.Actions">
+                <td>{{act.ID}}</td>
+                <td>
+                    <input type="checkbox" ng-model="act.Shipment">
+                    <span ng-show="act.Shipment">Ship</span>
+                    <span ng-hide="act.Shipment">Cancel</span>
+                </td>
+                <td>
+                    <select ng-model="act.ActionCode" ng-hide="act.Shipment">
+                        <option>bad_address</option>
+                        <option>bad_sku</option>
+                        <option>merchant_request</option>
+                        <option>fulfill_time_expired</option>
+                        <option>cant_shipto_country</option>
+                        <option>cannot_shipto_POBOX</option>
+                        <option>cannot_ship_USPS</option>
+                        <option>customer_request</option>
+                        <option>duplicate_order</option>
+                        <option>invalid_item_cost</option>
+                        <option>invalid_ship_method</option>
+                        <option>info_missing</option>
+                        <option>other</option>
+                        <option>out_of_stock</option>
+                        <option>discontinued</option>
+                    </select>
+                </td>
+                <td><input type="text" ng-model="act.MerchantLineNumber"></td>
+                <td><input type="text" ng-model="act.TrxVendorSKU"></td>
+                <td><input type="text" ng-model="act.TrxMerchantSKU"></td>
+                <td><input type="text" ng-model="act.TrxQty"></td>
+                <td>
+                    <button ng-repeat="pkgId in act.PackageIDs"
+                            type="button" class="btn btn-xs pull-left" ng-click="act.RemovePkgIdx($index)" title="Remove Pkg ID">
+                        {{pkgId}}<span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                    <button type="button" class="btn btn-xs pull-right" ng-click="dlgActPkg(act, conf)" title="Assign Package">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </td>
+                
+
+                <td>
+                    <button type="button" class="btn btn-xs" ng-click="conf.DelAction($index)" title="Remove Action">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    @*<button class="btn btn-xs" type="button" ng-click="conf.AddAction()">Add Action</button>*@
+    <button type="button" class="btn btn-xs" ng-click="conf.AddAction()" title="Add Action">
+        <span class="glyphicon glyphicon-plus">
+        </span> Add
+    </button>
+
+    <h4>Packages</h4>
+    <table class="table-condensed table-bordered hub-pkg">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ShipDate</th>
+                <th>ServiceLevel1</th>
+                <th>TrackingNumber</th>
+                <th>Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="pkg in conf.Packages">
+                <td>{{pkg.ID}}</td>
+                <td><input type="text" ng-model="pkg.ShipDate"></td>
+                <td>
+                    <select ng-model="pkg.ServiceLevel1" ng-options="opt.value as opt.label for opt in shipcodes"></select>
+                </td>
+                <td><input type="text" ng-model="pkg.TrackingNumber"></td>
+                <td><input type="text" ng-model="pkg.Weight"></td>
+                <td>
+                    <button type="button" class="btn btn-xs" ng-click="conf.DelPackage($index)" title="Remove Package">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @*<button class="btn btn-xs" type="button" ng-click="conf.AddPackage()">Add Package</button>*@
+    <button type="button" class="btn btn-xs" ng-click="conf.AddPackage()" title="Add Package">
+        <span class="glyphicon glyphicon-plus"></span> Add
+    </button>
+
+</div>
+
+<div class="clearfix">
+    <button type="button" class="btn pull-left" ng-click="batch.AddConfirm()" title="Add Confirmation">
+        <span class="glyphicon glyphicon-plus"></span> Add
+    </button>
+    <button type="button" class="btn pull-right" ng-click="saveBatch()" title="Save Batch">
+        <span class="glyphicon glyphicon-ok"></span> Save
+    </button>
+</div>
+
+<div class="modal fade" id="dlgPkg" tabindex="-1" role="dialog" aria-labelledby="dlgPkgLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="dlgPkgLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <button ng-repeat="id in dlgPackageIDs" type="button" class="btn btn-xs" ng-click="addActPkg(id)" title="Add Package">
+                    <span class="glyphicon glyphicon-plus"></span> {{id}}
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

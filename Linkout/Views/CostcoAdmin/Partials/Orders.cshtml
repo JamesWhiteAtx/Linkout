@@ -1,0 +1,45 @@
+﻿<div ng-show="err">err: {{err}}</div>
+<div ng-show="msg">msg: {{msg}}</div>
+
+<table class="table table-condensed table-bordered">
+    <thead>
+        <tr>
+            <th>View</th>
+            <th>ID</th>
+            <th>Exists</th>
+            <th>Path</th>
+            <th>Name</th>
+            <th>FileDateTime</th>
+            <th>Decrypt</th>
+            <th>Encrypted Exists</th>
+            <th>Encrypted Path</th>
+            <th>Encrypted Name</th>
+            <th>Encrypted FileDateTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="f in files">
+            <td>
+                <button class="btn btn-default btn-mini" type="button" ng-show="f.Exists" ng-click=" viewOrder(f)" title="view {{f.Name}} file">
+                    <i class="icon-eye-open"></i>
+                </button>
+            </td>
+            <td>{{f.ID}}</td>
+            <td>{{f.Exists}}</td>
+            <td>{{f.Path}}</td>
+            <td>{{f.Name}}</td>
+            <td>{{f.FileDateTime}}</td>
+            <td>
+                <button class="btn btn-default btn-mini" type="button" ng-show="f.EncryptExists" ng-click=" decryptOrder(f)" title="decrypt {{f.EncryptName}} file">
+                    <i class="icon-random"></i>
+                </button>
+            </td>
+            <td>{{f.EncryptExists}}</td>
+            <td>{{f.EncryptPath}}</td>
+            <td>{{f.EncryptName}}</td>
+            <td>{{f.EncryptDateTime}}</td>
+        </tr>
+    </tbody>
+</table>
+
+

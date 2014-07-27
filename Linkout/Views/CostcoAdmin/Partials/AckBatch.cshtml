@@ -1,0 +1,67 @@
+﻿<div ng-show="err">err: {{err}}</div>
+<div ng-show="msg">msg: {{msg}}</div>
+
+<div class="well" ng-hide="batch.FileName">
+    <input type="text" ng-model="batch.NewFileName"> <strong>.xml</strong>
+</div>
+
+<div class="panel panel-default" ng-repeat="fa in batch.FAs">
+    <div class="panel-heading">
+        <div class="row bg-info clearfix">
+            <div class="col-md-1"><span class="badge">{{$index+1}}</span></div>
+            <div class="col-md-10">Order Batch#: <span class="badge">{{fa.TrxSetID}}</span></div>
+
+            <div class="col-md-1">
+                <button type="button" class="btn btn-xs" ng-click="batch.DelAck($index)" title="Delete Acknowledgment">
+                    <span class="glyphicon glyphicon-minus"></span>Delete
+                </button>
+            </div>
+        </div>
+    </div>
+    <table class="table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Type</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="msg in fa.AckMsgs">
+                <td>{{msg.TrxID}}</td>
+                <td>
+                    <label>
+                        <input type="radio" data-ng-model="msg.Order" ng-value="true" /> Order
+                    </label>
+                    &nbsp;
+                    <label>
+                        <input type="radio" data-ng-model="msg.Order" ng-value="false" /> Message
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input type="radio" data-ng-model="msg.Accept" ng-value="true" />Accept
+                    </label>
+                    &nbsp;
+                    <label>
+                        <input type="radio" data-ng-model="msg.Accept" ng-value="false" />Reject
+                    </label>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-xs" ng-click="conf.DelAck($index)" title="Remove Acknowledgment">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="clearfix">
+    <button type="button" class="btn pull-left" ng-click="batch.AddAck()" title="Add Acknowledgment">
+        <span class="glyphicon glyphicon-plus"></span> Add
+    </button>
+    <button type="button" class="btn pull-right" ng-click="saveBatch()" title="Save Acknowledgment Batch">
+        <span class="glyphicon glyphicon-ok"></span> Save
+    </button>
+</div>

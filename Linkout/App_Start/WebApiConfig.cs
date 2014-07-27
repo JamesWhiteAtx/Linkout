@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Net.Http.Headers;
 
 namespace Linkout
 {
@@ -9,6 +10,47 @@ namespace Linkout
     {
         public static void Register(HttpConfiguration config)
         {
+            config.Routes.MapHttpRoute(
+                name: "CcDownloadApi",
+                routeTemplate: "ccdownload/{action}",
+                defaults: new { controller = "CcDownload" }
+            );
+            config.Routes.MapHttpRoute(
+                name: "CcUploadApi",
+                routeTemplate: "ccupload/{action}/{id}",
+                defaults: new { controller = "CcUpload", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "CcDecryptApi",
+                routeTemplate: "ccdecrypt/{action}/{id}",
+                defaults: new { controller = "CcDecrypt", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "CcEncryptApi",
+                routeTemplate: "ccencrypt/{action}/{id}",
+                defaults: new { controller = "CcEncrypt", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "CcReadApiId",
+                routeTemplate: "ccread/{action}/{id}",
+                defaults: new { controller = "CcRead" }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "CcReadApi",
+                routeTemplate: "ccread/{action}",
+                defaults: new { controller = "CcRead" }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "CcSaveApi",
+                routeTemplate: "ccsave/{action}/{id}",
+                defaults: new { controller = "CcSave", id = RouteParameter.Optional }
+            );
+
             config.Routes.MapHttpRoute(
                 name: "SlctrMakesApi",
                 routeTemplate: "selector/makes",
@@ -163,6 +205,8 @@ namespace Linkout
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
         }
     }
 }

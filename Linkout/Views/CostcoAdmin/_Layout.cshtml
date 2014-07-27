@@ -1,0 +1,99 @@
+﻿@* Views\CostcoAdmin *@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="SHORTCUT ICON" href="@Url.Content("~/Images/favicon.ico")"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/css/bootstrap-cust")
+    @Styles.Render("~/css/font-awesome")
+    @Styles.Render("~/css/jquery/jqueryuicust")
+    @Styles.Render("~/style/costco")
+
+    @RenderSection("styles", required: false)   
+</head>
+
+<body ng-app="costco">
+    
+    
+    <section class="cc-selector" >
+        <div id="configure-cont" class="container" ng-controller="CostcoCtrl">
+
+            <div id="logo-top" class="container">
+                <div class="pull-left">
+                    <a href="/">
+                        <img src="@Url.Content("~/Images/Linkout/roadwire_cc.png")" alt="Costco"/>
+                    </a>
+                </div>
+            </div>
+
+            <div id="navbar-cont">
+                <div class="navbar">
+                  <div class="navbar-inner">
+
+                      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                      <a class="brand" href="" ng-click="routeMenu()">Costco Admin</a>
+                      <div class="nav-collapse collapse">
+                        <ul class="nav">
+
+                            <li class="dropdown">
+                              <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Download <b class="caret"></b></a>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                <li> <a href="" ng-click="routeDownloadOrders()">Check New For Orders</a></li>
+                              </ul>
+                            </li>
+
+                            <li class="dropdown">
+                              <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Local <b class="caret"></b></a>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                <li> <a href="" ng-click="routeViewOrders()">Costco Orders List</a></li>
+                                
+                                <li role="presentation" class="divider"></li>
+                                <li> <a href="" ng-click="routeLocalConfirms()">Edit Confirmations</a></li>
+                                <li> <a href="" ng-click="routeNewConfirm()">Create New Confirmation</a></li>
+                                
+                                <li role="presentation" class="divider"></li>
+                                <li> <a href="" ng-click="routeLocalAcks()">Edit Acknowledgments</a></li>
+                                <li> <a href="" ng-click="routeNewAck()">Create New Acknowledgment</a></li>
+
+                              </ul>
+                            </li>
+
+                        </ul>
+                   
+                        <div class="nav pull-right">
+                            <div>User: @User.Identity.Name</div>
+                        </div>
+                   
+                      </div> 
+
+                  </div>
+                </div>
+            </div> 
+        
+       
+            @RenderBody()
+
+        </div> 
+    </section>
+    
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryuicust")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angular-resource")
+    @Scripts.Render("~/bundles/bootstrapjs")
+    @Scripts.Render("~/bundles/ui-boots")
+    @Scripts.Render("~/bundles/costco")
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
+

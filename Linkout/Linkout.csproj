@@ -137,6 +137,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigureController.cs" />
+    <Compile Include="Controllers\Costco\CcDecryptController.cs" />
+    <Compile Include="Controllers\Costco\CcDownloadController.cs" />
+    <Compile Include="Controllers\Costco\CcEncryptController.cs" />
+    <Compile Include="Controllers\Costco\CcReadController.cs" />
+    <Compile Include="Controllers\Costco\CcSaveController.cs" />
+    <Compile Include="Controllers\Costco\CcUploadController.cs" />
+    <Compile Include="Controllers\Costco\CostcoAdminController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\EbayController.cs" />
@@ -160,7 +167,12 @@
     <Compile Include="Controllers\UtilController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Models\ComfirmModels.cs" />
+    <Compile Include="Models\FAModels.cs" />
+    <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\WebApiModels.cs" />
+    <Compile Include="Services\ComHubModelService.cs" />
     <Compile Include="Services\HttpRespPassThruService.cs" />
     <Compile Include="Services\JsonHttpResponseService.cs" />
     <Compile Include="Services\NetSuiteConfiguration.cs" />
@@ -179,6 +191,7 @@
     <Content Include="Css\angular\ng-grid.min.css" />
     <Content Include="Css\bootstrap\social-buttons.css" />
     <Content Include="Css\configure.css" />
+    <Content Include="Css\costco.css" />
     <Content Include="Css\Demo.css" />
     <Content Include="Css\tree.css" />
     <Content Include="Css\util.css" />
@@ -335,6 +348,9 @@
     <Content Include="Scripts\configure\directives.js" />
     <Content Include="Scripts\configure\filters.js" />
     <Content Include="Scripts\configure\services.js" />
+    <Content Include="Scripts\Costco\app.js" />
+    <Content Include="Scripts\Costco\controllers.js" />
+    <Content Include="Scripts\Costco\services.js" />
     <Content Include="Scripts\demo\app.js" />
     <Content Include="Scripts\demo\controllers.js" />
     <Content Include="Scripts\linkout\app.js" />
@@ -703,6 +719,10 @@
       <Project>{1FC9489E-9D37-47B7-8DF9-AF65AEBF430F}</Project>
       <Name>NinjectWebApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ComHub\ComHub.csproj">
+      <Project>{9E24D3FA-2452-4D6B-B825-7E002CD8BE40}</Project>
+      <Name>ComHub</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Linkout.Data\Linkout.Data.csproj">
       <Project>{654BBC23-C85A-407E-B339-156342223ADB}</Project>
       <Name>Linkout.Data</Name>
@@ -762,6 +782,18 @@
     <Content Include="Views\Util\Index.cshtml" />
     <Content Include="Views\Util\_ViewStart.cshtml" />
     <Content Include="Views\Util\Partials\Menu.cshtml" />
+    <Content Include="Views\CostcoAdmin\_Layout.cshtml" />
+    <Content Include="Views\CostcoAdmin\Index.cshtml" />
+    <Content Include="Views\CostcoAdmin\_ViewStart.cshtml" />
+    <Content Include="Views\CostcoAdmin\Partials\Menu.cshtml" />
+    <Content Include="Views\CostcoAdmin\Partials\FtpOrders.cshtml" />
+    <Content Include="Views\CostcoAdmin\Partials\Orders.cshtml" />
+    <Content Include="Views\CostcoAdmin\Partials\OrderBatch.cshtml" />
+    <Content Include="Views\CostcoAdmin\Partials\AckBatch.cshtml" />
+    <Content Include="Views\CostcoAdmin\Partials\Confirms.cshtml" />
+    <Content Include="Views\CostcoAdmin\Partials\ConfirmBatch.cshtml" />
+    <Content Include="Views\CostcoAdmin\Partials\Acks.cshtml" />
+    <Content Include="Views\CostcoAdmin\Partials\DownloadedOrder.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

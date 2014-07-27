@@ -100,6 +100,14 @@ namespace Linkout
             bundles.Add(new StyleBundle("~/css/configure").Include(
                         "~/css/configure.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/costco").Include(
+                        "~/Scripts/costco/app.js",
+                        "~/Scripts/costco/services.js",
+                        "~/Scripts/costco/controllers.js"));
+
+            bundles.Add(new StyleBundle("~/style/costco").Include(
+                        "~/css/costco.css"));
+
             bundles.Add(new StyleBundle("~/css/tree").Include(
                         "~/css/tree.css"));
 

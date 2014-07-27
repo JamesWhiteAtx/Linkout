@@ -1,0 +1,31 @@
+﻿<div ng-show="err">err: {{err}}</div>
+<div ng-show="msg">msg: {{msg}}</div>
+
+<table class="table-condensed table-bordered">
+    <thead>
+        <tr>
+            <th>Download</th>
+            <th>Path</th>
+            <th>Filename</th>
+            <th>FileDateTime</th>
+            <th>Size</th>
+            <th>Permission</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="f in files">
+            <td>
+                <button class="btn btn-default btn-xs" type="button" ng-click="downloadFile(f)" title="download {{f.Filename}} file">
+                    <span class="glyphicon glyphicon-cloud-download"></span>
+                </button>
+            </td>
+            <td>{{f.Path}}</td>
+            <td>{{f.Filename}}</td>
+            <td>{{f.FileDateTime}}</td>
+            <td>{{f.Size}}</td>
+            <td>{{f.Permission}}</td>
+        </tr>
+    </tbody>
+</table>
+
+

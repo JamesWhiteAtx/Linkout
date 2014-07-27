@@ -17,6 +17,7 @@ namespace Linkout.App_Start
     using CST.Security.Data;
     using System.Configuration;
 
+    using ComHub;
 
     public static class NinjectWebCommon 
     {
@@ -85,6 +86,12 @@ namespace Linkout.App_Start
                     return nsSect.Uri;
                 }
             );
+
+            kernel.Bind<IAppSettingsService>().To<AppSettingsService>();
+            kernel.Bind<ICHFtpService>().To<CHFtpService>();
+            kernel.Bind<IGnuPGService>().To<GnuPGService>();
+            kernel.Bind<IFileService>().To<FileService>();
+            kernel.Bind<IComHubModelService>().To<ComHubModelService>();
         }        
     }
 }

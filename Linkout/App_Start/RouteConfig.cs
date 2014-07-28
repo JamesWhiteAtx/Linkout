@@ -15,6 +15,12 @@ namespace Linkout
             routes.IgnoreRoute("{file}.js");
 
             routes.MapRoute(
+                name: "Partial",
+                url: "Partial/{controller}/{name}",
+                defaults: new { controller = "Home", action = "Partial" }
+            );
+
+            routes.MapRoute(
                 name: "Partials",
                 url: "{controller}/Partials/{name}",
                 defaults: new { controller = "Linkout", action = "Partials"}

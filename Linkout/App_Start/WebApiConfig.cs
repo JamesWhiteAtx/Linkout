@@ -11,6 +11,12 @@ namespace Linkout
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
+                name: "CcContentApi",
+                routeTemplate: "api/cccontent/{action}/{id}",
+                defaults: new { controller = "CcContent", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "CcDownloadApi",
                 routeTemplate: "ccdownload/{action}",
                 defaults: new { controller = "CcDownload" }

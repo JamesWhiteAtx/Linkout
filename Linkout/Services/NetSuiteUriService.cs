@@ -118,6 +118,7 @@ namespace Linkout
         string ScriptID { get; set; }
         string DeployID { get; set; }
         WebHeaderCollection MakeHeaders();
+        void LoadHeaders(WebHeaderCollection headers);
     }
 
     public class NetSuiteUriRest : NetSuiteUriBase, INetSuiteUriRestService
@@ -173,8 +174,40 @@ namespace Linkout
             
             return headers;
         }
+
+        public void LoadHeaders(WebHeaderCollection headers)
+        {
+            if (NsConfigService.DebugVal)
+            {
+                headers.Add("Cookie", NsConfigService.DebugCookieVal);
+            }
+            else
+            {
+                headers.Add("Authorization", "NLAuth "
+                    + "nlauth_account=" + NsConfigService.CompidVal + ", "
+                    + "nlauth_email=" + NsConfigService.EmailVal + ", "
+                    + "nlauth_signature=" + NsConfigService.PassVal);
+            }
+
+            headers.Add("User-Agent-x", "SuiteScript-Call");
+        }
+
     }
-    
+
+    public interface INetSuiteCcOrderUriService : INetSuiteUriRestService
+    {
+    }
+
+    public class NetSuiteCcOrderUriService : NetSuiteUriRest, INetSuiteCcOrderUriService
+    {
+        public NetSuiteCcOrderUriService(INetSuiteConfigService nsConfigService)
+            : base(nsConfigService)
+        {
+            this.ScriptID = NsConfigService.CcOrderScriptVal;
+            this.DeployID = NsConfigService.CcOrderDeployVal;
+        }
+    }
+
     public class NetSuiteUriSystemBase : NetSuiteUriBase
     {
         public NetSuiteUriSystemBase(INetSuiteConfigService nsConfigService)

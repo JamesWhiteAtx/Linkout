@@ -10,12 +10,15 @@ namespace Linkout.Controllers
     public class NetSuiteController : ApiController
     {
         private INetSuiteUriService _nsService;
+        private INetSuiteUriSelectorService _netSuiteUriSelectorService;
         
         private IJsonHttpResponseService _jsonHttpResponseService;
         
-        public NetSuiteController(INetSuiteUriService nsService, IJsonHttpResponseService jsonHttpResponseService)
+        public NetSuiteController(INetSuiteUriService nsService, INetSuiteUriSelectorService netSuiteUriSelectorService,
+            IJsonHttpResponseService jsonHttpResponseService)
         {
             _nsService = nsService;
+            _netSuiteUriSelectorService = netSuiteUriSelectorService;
             _jsonHttpResponseService = jsonHttpResponseService;
         }
         
@@ -23,8 +26,13 @@ namespace Linkout.Controllers
         public HttpResponseMessage Get(string type)
         {
             string typeStr = type.Trim().ToLower();
-            
-            if (typeStr == "imgbase") 
+
+            if (typeStr == "leaslctr")
+            {
+                return _jsonHttpResponseService.GetStringHttpResponseMessage(_netSuiteUriSelectorService.Uri.AbsoluteUri);
+            }
+
+            else if (typeStr == "imgbase") 
             {
                 return _jsonHttpResponseService.GetStringHttpResponseMessage(_nsService.getUrlImageHost());
             }

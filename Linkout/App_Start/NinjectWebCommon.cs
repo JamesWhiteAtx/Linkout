@@ -76,6 +76,7 @@ namespace Linkout.App_Start
 
             kernel.Bind<INetSuiteUriSelectorService>().To<NetSuiteUriScriptSelector>();
             kernel.Bind<INetSuiteUriFileService>().To<NetSuiteUriScriptFile>();
+            kernel.Bind<INetSuiteCcOrderUriService>().To<NetSuiteCcOrderUriService>();
             kernel.Bind<IHttpRespPassThruService>().To<HttpRespPassThruService>();
 
             kernel.Bind<INetSuiteUriService>().To<NetSuiteUriService>();
@@ -92,6 +93,12 @@ namespace Linkout.App_Start
             kernel.Bind<IGnuPGService>().To<GnuPGService>();
             kernel.Bind<IFileService>().To<FileService>();
             kernel.Bind<IComHubModelService>().To<ComHubModelService>();
+
+            kernel.Bind<IContentService>().To<ContentService>();
+            kernel.Bind<ICcProductService>().To<CcProductService>();
+            kernel.Bind<ICcOrderService>().To<CcOrderService>();
+
+
         }        
     }
 }

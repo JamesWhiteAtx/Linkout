@@ -100,10 +100,10 @@ namespace Linkout
             bundles.Add(new StyleBundle("~/css/configure").Include(
                         "~/css/configure.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/costco").Include(
-                        "~/Scripts/costco/app.js",
-                        "~/Scripts/costco/services.js",
-                        "~/Scripts/costco/controllers.js"));
+            bundles.Add(new ScriptBundle("~/bundles/costcoadmin").Include(
+                        "~/Scripts/costcoadmin/app.js",
+                        "~/Scripts/costcoadmin/services.js",
+                        "~/Scripts/costcoadmin/controllers.js"));
 
             bundles.Add(new StyleBundle("~/style/costco").Include(
                         "~/css/costco.css"));
@@ -137,7 +137,52 @@ namespace Linkout
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
-        
+
+            ////////////////////////////////////////
+            // COSTCO //////////////////////////////
+
+            // Script Bundles
+
+            bundles.Add(new ScriptBundle("~/bundles/cc/jquery").Include(
+                "~/Scripts/costco/jquery/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/cc/bootstrap").Include(
+                "~/Scripts/costco/bootstrap/bootstrap.js",
+                "~/Scripts/costco/bootstrap/respond.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/cc/angular").Include(
+                "~/Scripts/costco/angular/angular-{version}.js",
+                "~/Scripts/costco/angular/angular-route-{version}.js",
+                "~/Scripts/costco/angular/angular-resource-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/cc/ui-boots").Include(
+                "~/Scripts/costco/angular/ui-bootstrap-custom-tpls-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/cc/angstyles").Include(
+                "~/Scripts/costco/angular/route-styles.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/cc/animate").Include(
+                "~/Scripts/costco/angular/angular-animate-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/cc/angstyles").Include(
+                "~/Scripts/costco/angular/route-styles.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/cc/rwutils").Include(
+                "~/Scripts/costco/roadwire/rwservices.js",
+                "~/Scripts/costco/roadwire/rwdirectives.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/cc/costco").Include(
+                "~/Scripts/costco/costco/app.js",
+                "~/Scripts/costco/costco/controllers.js",
+                "~/Scripts/costco/costco/services.js",
+                "~/Scripts/costco/costco/directives.js"));
+
+            // Style Bundles
+            bundles.Add(new StyleBundle("~/styles/cc").Include(
+                "~/css/cc/bootstrap/bootstrap.css",
+                "~/css/cc/site/site.css",
+                "~/css/cc/costco/costco.css"));
+
         }
     }
 }

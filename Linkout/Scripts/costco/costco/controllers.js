@@ -307,12 +307,6 @@ costco
     );
 
     $scope.member = Data.member;
-    
-    Data.member.email = 'member@email.com';
-    Data.member.lastname = 'Smitty';
-    Data.member.postal = '44709';
-    Data.member.phone = '216-493-3303';
-    
 }])
 
 .controller('MapCtrl', ['$scope', 'gglMaps', function ($scope, gglMaps) {

@@ -849,6 +849,9 @@
     <Content Include="Content\Costco\installers.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Costco\Copy of installers.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Css\cc\bootstrap\alerts.less" />
     <None Include="Css\cc\bootstrap\badges.less" />
     <None Include="Css\cc\bootstrap\bootstrap.css.map" />
@@ -974,7 +977,6 @@
     <Content Include="Views\Costco\Index.cshtml" />
     <Content Include="Views\Costco\Partial\Confirm.cshtml" />
     <Content Include="Views\Costco\Partial\Heaters.cshtml" />
-    <Content Include="Views\Costco\Partial\Install.cshtml" />
     <Content Include="Views\Costco\Partial\Leather.cshtml" />
     <Content Include="Views\Costco\Partial\Map.cshtml" />
     <Content Include="Views\Costco\Partial\WhyInstall.cshtml" />

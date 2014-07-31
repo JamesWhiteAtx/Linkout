@@ -178,7 +178,7 @@ namespace Linkout
                 "~/Scripts/costco/costco/directives.js"));
 
             // Style Bundles
-            bundles.Add(new StyleBundle("~/styles/cc").Include(
+            bundles.Add(new StyleBundle("~/css/cc/styles/site").Include(
                 "~/css/cc/bootstrap/bootstrap.css",
                 "~/css/cc/site/site.css",
                 "~/css/cc/costco/costco.css"));

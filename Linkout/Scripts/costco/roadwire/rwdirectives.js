@@ -28,13 +28,13 @@
                 '<div id="map-canvas" map-refresh>map-canvas</div>' +
             '</div>',
 
-        controller: function ($scope) {
+        controller: ['$scope', function ($scope) {
             $scope.deferred = $q.defer();
 
             this.mapQ = function() {
                 return $scope.deferred.promise;
             }
-        },
+        }],
 
         link: function (scope, element) {
             scope.proxs = [];
@@ -80,7 +80,7 @@
     };
 }])
 
-.directive('gglMapCtrl', function ($timeout) {
+.directive('gglMapCtrl', [function () {
     return {
         restrict: 'A',
         require: '^rwInstMap',
@@ -97,9 +97,9 @@
             });
         }
     }
-})
+}])
 
-.directive('mapRefresh', function ($timeout) {
+.directive('mapRefresh', ['$timeout', function ($timeout) {
 	return {
 		restrict: 'A',
 		link: function (scope, elem, attrs) {
@@ -112,6 +112,6 @@
 			});
 		}
 	}
-})
+}])
 
 ;

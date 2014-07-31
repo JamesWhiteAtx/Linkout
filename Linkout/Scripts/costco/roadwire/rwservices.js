@@ -112,7 +112,7 @@ angular.module('roadwire.services', []) // 'ngResource'
                     var latLng = new gglMps.LatLng(location.latitude, location.longitude);
                     var marker = new gglMps.Marker({
                         position: latLng,
-                        title: location.title,
+                        title: location.title + ' ' + location.address,
                         icon: 'http://maps.gstatic.com/mapfiles/markers2/measle.png'
                     });
 
@@ -409,7 +409,7 @@ angular.module('roadwire.services', []) // 'ngResource'
 
 .factory('WhyInstDlg', ['$modal', 'FindInst', function ($modal, FindInst) {
 
-    var whyInstCtrl = function ($scope, $modalInstance, FindInst) {
+    var whyInstCtrl = ['$scope', '$modalInstance', 'FindInst', function ($scope, $modalInstance, FindInst) {
         $scope.close = function () {
             $modalInstance.close();
         };
@@ -439,7 +439,7 @@ angular.module('roadwire.services', []) // 'ngResource'
                 //$scope.$apply();
             });
         };
-    };
+    }];
 
     return function () {
         var modalInstance = $modal.open({

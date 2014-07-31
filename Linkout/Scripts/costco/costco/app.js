@@ -19,12 +19,6 @@ var costco = angular.module('costco', ['ngRoute', 'ngResource', 'routeStyles', '
             controller: "HtrCtrl",
             resolve: { Data: ['DataDeferred', function (DataDeferred) { return DataDeferred(); }] }
         });
-        $routeProvider.when('/install', {
-            title: 'install',
-            templateUrl: '/Partial/Costco/Install',
-            controller: "InstCtrl",
-            resolve: { Data: ['DataDeferred', function (DataDeferred) { return DataDeferred(); }] }
-        });
         $routeProvider.when('/confirm', {
             title: 'confirm',
             templateUrl: '/Partial/Costco/Confirm',

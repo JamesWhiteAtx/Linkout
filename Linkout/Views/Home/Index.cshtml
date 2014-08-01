@@ -7,29 +7,28 @@
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>@Html.ActionLink("Costco Linkout Site", "Index", "Linkout")</h1>
-                <h2>Go to the Costco Linkout site.</h2>
+                @*<h1>@Html.ActionLink("Costco Selector Site", "Index", "Costco")</h1>*@
+                <h1>Roadwire</h1>
             </hgroup>
         </div>
     </section>
 }
-
-<h3>Addional Development Site Optons:</h3>
-
 <ol class="round">
 @if (Request.IsAuthenticated)
 {
     <li class="one">
-        <h5> @Html.ActionLink("Costco Admin", "Index", "CostcoAdmin") </h5>
+        <h5> @Html.ActionLink("Costco Site", "Index", "Costco") </h5>
+        @*<h5> @Html.ActionLink("Costco Admin", "Index", "CostcoAdmin") </h5>*@
         @*<h5> @Html.ActionLink("Util", "Index", "Util") </h5>*@
     </li>
     <li class="two">
+        <h5> @Html.ActionLink("Costco Linkout Site", "Index", "Linkout")</h5> 
+    </li>
+    <li class="three">
         <h5> @Html.ActionLink("Configure", "Index", "Configure") </h5>
+        @*<h5> @Html.ActionLink("Downloads", "Index", "Download") </h5>*@
     </li>
-    @*<li class="three">
-        <h5> @Html.ActionLink("Downloads", "Index", "Download") </h5>
-    </li>
-    <li class="four">
+    @*<li class="four">
         <h5> @Html.ActionLink("Ebay", "Index", "Ebay") </h5>
     </li>*@
     <li class="three">
@@ -43,9 +42,12 @@
 else
 {
     <li class="one">
-        <h5> @Html.ActionLink("Log In", "LogOn", "Account") </h5>
+        <h5> @Html.ActionLink("Costco Site", "Index", "Costco") </h5>
     </li>
     <li class="two">
+        <h5> @Html.ActionLink("Log In", "LogOn", "Account") </h5>
+    </li>
+    <li class="three">
         <h5> @Html.ActionLink("About", "About") </h5>
     </li>
 }

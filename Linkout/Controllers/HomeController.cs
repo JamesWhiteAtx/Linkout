@@ -20,14 +20,14 @@ namespace Linkout.Controllers
 
         public ActionResult Index()
         {
-            //if (configService.GetWebSysCompilationSectionDebug())
-            //{
+            if (configService.GetWebSysCompilationSectionDebug())
+            {
                 return View();
-            //}
-            //else
-            //{
-            //    return Redirect("http://www.roadwire.com");
-            //}
+            }
+            else
+            {
+                return Redirect("http://www.roadwire.com");
+            }
         }
 
         public ActionResult About()

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Linkout.Controllers
 {
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class LinkoutController : Controller
     {
         //

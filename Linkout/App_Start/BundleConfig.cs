@@ -60,7 +60,7 @@ namespace Linkout
                         .Include("~/Scripts/bootstrap/bootstrap.js"));
 
             // font-awesome assets
-            bundles.Add(new StyleBundle("~/css/font-awesome").Include(
+            bundles.Add(new StyleBundle("~/css/fonts/font-awesome").Include(
                         "~/css/fontawesome/font-awesome.css"));
 
             /// angularJS assets
@@ -182,6 +182,8 @@ namespace Linkout
                 "~/css/cc/bootstrap/bootstrap.css",
                 "~/css/cc/site/site.css",
                 "~/css/cc/costco/costco.css"));
+
+            BundleTable.EnableOptimizations = true;
 
         }
     }
